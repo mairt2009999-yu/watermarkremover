@@ -1,0 +1,17 @@
+// This is a dummy Prisma schema file.
+// The project actually uses Drizzle ORM, but some dependencies might require Prisma.
+// This file prevents build errors on platforms like Vercel.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Dummy model to satisfy Prisma requirements
+model Dummy {
+  id String @id @default(cuid())
+}

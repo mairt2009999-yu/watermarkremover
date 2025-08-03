@@ -1,0 +1,59 @@
+# Cloudflare Workers Configuration
+name = "mksaas-template"
+compatibility_date = "2024-07-24"
+
+# 账户 ID（需要替换为你的实际账户 ID）
+# account_id = "your-account-id"
+
+# 主要工作目录
+main = "./.next/standalone/server.js"
+
+# 环境变量
+[vars]
+NODE_ENV = "production"
+
+# 绑定外部资源
+# D1 数据库（如果使用 Cloudflare D1）
+# [[d1_databases]]
+# binding = "DB"
+# database_name = "mksaas-db"
+# database_id = "your-database-id"
+
+# R2 存储桶（用于文件存储）
+[[r2_buckets]]
+binding = "STORAGE"
+bucket_name = "mksaas-storage"
+
+# KV 命名空间（用于缓存）
+[[kv_namespaces]]
+binding = "CACHE"
+id = "your-kv-namespace-id"
+preview_id = "your-preview-kv-namespace-id"
+
+# 路由配置
+[routes]
+# 排除静态资源
+exclude = ["_next/static/*", "*.png", "*.jpg", "*.jpeg", "*.svg", "*.ico"]
+
+# 构建配置
+[build]
+command = "pnpm build"
+
+# 兼容性标志
+compatibility_flags = ["nodejs_compat"]
+
+# Workers 付费计划配置（可选）
+# [limits]
+# cpu_ms = 50  # 免费计划是 10ms，付费计划可以到 50ms
+
+# 环境特定配置
+[env.production]
+vars = { ENVIRONMENT = "production" }
+
+[env.staging]
+vars = { ENVIRONMENT = "staging" }
+
+# 开发服务器配置
+[dev]
+port = 3000
+local_protocol = "http"

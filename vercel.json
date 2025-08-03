@@ -1,0 +1,13 @@
+{
+  "functions": {
+    "app/api/**/*": {
+      "maxDuration": 60
+    }
+  },
+  "buildCommand": "pnpm vercel-build",
+  "installCommand": "pnpm install",
+  "framework": "nextjs",
+  "env": {
+    "PRISMA_GENERATE_SKIP_AUTOINSTALL": "true"
+  }
+}
