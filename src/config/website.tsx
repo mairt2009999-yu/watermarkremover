@@ -112,8 +112,8 @@ export const websiteConfig: WebsiteConfig = {
   },
   mail: {
     provider: 'resend',
-    fromEmail: 'MkSaaS <support@mksaas.com>',
-    supportEmail: 'MkSaaS <support@mksaas.com>',
+    fromEmail: 'WatermarkRemover <support@watermarkremover.io>',
+    supportEmail: 'WatermarkRemover <support@watermarkremover.io>',
   },
   newsletter: {
     provider: 'resend',
@@ -139,14 +139,14 @@ export const websiteConfig: WebsiteConfig = {
           {
             type: PaymentTypes.SUBSCRIPTION,
             priceId: '', // Will be set dynamically
-            amount: 990,
+            amount: 999,
             currency: 'USD',
             interval: PlanIntervals.MONTH,
           },
           {
             type: PaymentTypes.SUBSCRIPTION,
             priceId: '', // Will be set dynamically
-            amount: 9900,
+            amount: 7900,
             currency: 'USD',
             interval: PlanIntervals.YEAR,
           },
@@ -161,7 +161,7 @@ export const websiteConfig: WebsiteConfig = {
           {
             type: PaymentTypes.ONE_TIME,
             priceId: '', // Will be set dynamically
-            amount: 19900,
+            amount: 14900,
             currency: 'USD',
             allowPromotionCode: true,
           },

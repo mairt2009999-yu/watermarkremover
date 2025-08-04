@@ -1,11 +1,21 @@
-import { Ripple } from '@/components/magicui/ripple';
+'use client';
+
 import { AnimatedGroup } from '@/components/tailark/motion/animated-group';
 import { TextEffect } from '@/components/tailark/motion/text-effect';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { LocaleLink } from '@/i18n/navigation';
-import { ArrowRight } from 'lucide-react';
+import { cn } from '@/lib/utils';
+import { 
+  CloudUpload, 
+  Sparkles, 
+  Shield, 
+  Zap,
+  ArrowRight,
+  Check,
+  Image as ImageIcon
+} from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import Image from 'next/image';
+import { useState, useRef, DragEvent } from 'react';
 
 const transitionVariants = {
   item: {
@@ -29,121 +39,111 @@ const transitionVariants = {
 
 export default function HeroSection() {
   const t = useTranslations('HomePage.hero');
-  const linkIntroduction = 'https://x.com/mksaascom';
-  const linkPrimary = '/#pricing';
-  const linkSecondary = 'https://demo.mksaas.com';
+  const [isDragging, setIsDragging] = useState(false);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleDragOver = (e: DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setIsDragging(true);
+  };
+
+  const handleDragLeave = (e: DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setIsDragging(false);
+  };
+
+  const handleDrop = (e: DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setIsDragging(false);
+    
+    const files = e.dataTransfer.files;
+    if (files && files[0]) {
+      const file = files[0];
+      if (file.type.startsWith('image/')) {
+        setSelectedFile(file);
+      }
+    }
+  };
+
+  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (files && files[0]) {
+      setSelectedFile(files[0]);
+    }
+  };
+
+  const handleUploadClick = () => {
+    fileInputRef.current?.click();
+  };
 
   return (
     <>
       <main id="hero" className="overflow-hidden">
-        {/* background, light shadows on top of the hero section */}
-        <div
-          aria-hidden
-          className="absolute inset-0 isolate hidden opacity-65 contain-strict lg:block"
-        >
-          <div className="w-140 h-320 -translate-y-87.5 absolute left-0 top-0 -rotate-45 rounded-full bg-[radial-gradient(68.54%_68.72%_at_55.02%_31.46%,hsla(0,0%,85%,.08)_0,hsla(0,0%,55%,.02)_50%,hsla(0,0%,45%,0)_80%)]" />
-          <div className="h-320 absolute left-0 top-0 w-60 -rotate-45 rounded-full bg-[radial-gradient(50%_50%_at_50%_50%,hsla(0,0%,85%,.06)_0,hsla(0,0%,45%,.02)_80%,transparent_100%)] [translate:5%_-50%]" />
-          <div className="h-320 -translate-y-87.5 absolute left-0 top-0 w-60 -rotate-45 bg-[radial-gradient(50%_50%_at_50%_50%,hsla(0,0%,85%,.04)_0,hsla(0,0%,45%,.02)_80%,transparent_100%)]" />
+        {/* Animated gradient background */}
+        <div className="absolute inset-0 -z-10">
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-primary/10" />
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-primary/20 rounded-full blur-3xl animate-pulse" />
+          <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-primary/15 rounded-full blur-3xl animate-pulse delay-700" />
         </div>
 
-        <section>
-          <div className="relative pt-12">
-            <div className="mx-auto max-w-7xl px-6">
-              <Ripple />
+        <section className="relative">
+          <div className="mx-auto max-w-7xl px-6 pt-16 pb-8">
+            
+            {/* Trust badges */}
+            <AnimatedGroup
+              variants={transitionVariants}
+              className="flex flex-wrap items-center justify-center gap-4 mb-8"
+            >
+              <Badge variant="secondary" className="px-3 py-1.5 text-sm font-medium">
+                <Sparkles className="w-3.5 h-3.5 mr-1.5" />
+                AI-Powered
+              </Badge>
+              <Badge variant="secondary" className="px-3 py-1.5 text-sm font-medium">
+                <Shield className="w-3.5 h-3.5 mr-1.5" />
+                No Sign-up Required
+              </Badge>
+              <Badge variant="secondary" className="px-3 py-1.5 text-sm font-medium">
+                <Zap className="w-3.5 h-3.5 mr-1.5" />
+                100% Free
+              </Badge>
+            </AnimatedGroup>
 
-              <div className="text-center sm:mx-auto lg:mr-auto lg:mt-0">
-                {/* introduction */}
-                <AnimatedGroup variants={transitionVariants}>
-                  <LocaleLink
-                    href={linkIntroduction}
-                    className="hover:bg-background dark:hover:border-t-border bg-muted group mx-auto flex w-fit items-center gap-4 rounded-full border p-1 pl-4 shadow-md shadow-zinc-950/5 transition-colors duration-300 dark:border-t-white/5 dark:shadow-zinc-950"
-                  >
-                    <span className="text-foreground text-sm">
-                      {t('introduction')}
-                    </span>
-                    {/* <span className="dark:border-background block h-4 w-0.5 border-l bg-white dark:bg-zinc-700"></span> */}
+            {/* Title */}
+            <h1 className="text-center text-balance text-5xl font-bricolage-grotesque lg:text-7xl xl:text-8xl">
+              <TextEffect
+                per="word"
+                preset="fade-in-blur"
+                speedSegment={0.3}
+                as="span"
+              >
+                Remove Watermarks
+              </TextEffect>
+              <TextEffect
+                per="word"
+                preset="fade-in-blur"
+                speedSegment={0.3}
+                delay={0.3}
+                as="span"
+                className="block text-primary"
+              >
+                Instantly with AI
+              </TextEffect>
+            </h1>
 
-                    <div className="bg-background group-hover:bg-muted size-6 overflow-hidden rounded-full duration-500">
-                      <div className="flex w-12 -translate-x-1/2 duration-500 ease-in-out group-hover:translate-x-0">
-                        <span className="flex size-6">
-                          <ArrowRight className="m-auto size-3" />
-                        </span>
-                        <span className="flex size-6">
-                          <ArrowRight className="m-auto size-3" />
-                        </span>
-                      </div>
-                    </div>
-                  </LocaleLink>
-                </AnimatedGroup>
+            {/* Description */}
+            <TextEffect
+              per="line"
+              preset="fade-in-blur"
+              speedSegment={0.3}
+              delay={0.5}
+              as="p"
+              className="mx-auto mt-6 max-w-2xl text-center text-balance text-lg text-muted-foreground lg:text-xl"
+            >
+              Upload any image and let our advanced AI technology automatically detect and remove watermarks, logos, and text in seconds. No skills required.
+            </TextEffect>
 
-                {/* title */}
-                <TextEffect
-                  per="line"
-                  preset="fade-in-blur"
-                  speedSegment={0.3}
-                  as="h1"
-                  className="mt-8 text-balance text-5xl font-bricolage-grotesque lg:mt-16 xl:text-[5rem]"
-                >
-                  {t('title')}
-                </TextEffect>
-
-                {/* description */}
-                <TextEffect
-                  per="line"
-                  preset="fade-in-blur"
-                  speedSegment={0.3}
-                  delay={0.5}
-                  as="p"
-                  className="mx-auto mt-8 max-w-4xl text-balance text-lg text-muted-foreground"
-                >
-                  {t('description')}
-                </TextEffect>
-
-                {/* action buttons */}
-                <AnimatedGroup
-                  variants={{
-                    container: {
-                      visible: {
-                        transition: {
-                          staggerChildren: 0.05,
-                          delayChildren: 0.75,
-                        },
-                      },
-                    },
-                    ...transitionVariants,
-                  }}
-                  className="mt-12 flex flex-row items-center justify-center gap-4"
-                >
-                  <div
-                    key={1}
-                    className="bg-foreground/10 rounded-[calc(var(--radius-xl)+0.125rem)] border p-0.5"
-                  >
-                    <Button
-                      asChild
-                      size="lg"
-                      className="rounded-xl px-5 text-base"
-                    >
-                      <LocaleLink href={linkPrimary}>
-                        <span className="text-nowrap">{t('primary')}</span>
-                      </LocaleLink>
-                    </Button>
-                  </div>
-                  <Button
-                    key={2}
-                    asChild
-                    size="lg"
-                    variant="outline"
-                    className="h-10.5 rounded-xl px-5"
-                  >
-                    <LocaleLink href={linkSecondary}>
-                      <span className="text-nowrap">{t('secondary')}</span>
-                    </LocaleLink>
-                  </Button>
-                </AnimatedGroup>
-              </div>
-            </div>
-
-            {/* images */}
+            {/* Upload area */}
             <AnimatedGroup
               variants={{
                 container: {
@@ -156,30 +156,118 @@ export default function HeroSection() {
                 },
                 ...transitionVariants,
               }}
+              className="mt-12 max-w-2xl mx-auto"
             >
-              <div className="relative -mr-56 mt-8 overflow-hidden px-2 sm:mr-0 sm:mt-12 md:mt-20">
-                <div
-                  aria-hidden
-                  className="bg-linear-to-b to-background absolute inset-0 z-10 from-transparent from-35%"
+              <div
+                onDragOver={handleDragOver}
+                onDragLeave={handleDragLeave}
+                onDrop={handleDrop}
+                onClick={handleUploadClick}
+                className={cn(
+                  "relative rounded-2xl border-2 border-dashed transition-all duration-300 cursor-pointer",
+                  "bg-gradient-to-b from-primary/5 to-transparent",
+                  "hover:border-primary/50 hover:bg-primary/10",
+                  isDragging && "border-primary bg-primary/20",
+                  !isDragging && "border-border/50"
+                )}
+              >
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/*"
+                  onChange={handleFileSelect}
+                  className="hidden"
                 />
-                <div className="inset-shadow-2xs ring-background dark:inset-shadow-white/20 bg-background relative mx-auto max-w-6xl overflow-hidden rounded-2xl border p-4 shadow-lg shadow-zinc-950/15 ring-1">
-                  <Image
-                    className="bg-background relative hidden rounded-2xl dark:block"
-                    src="/blocks/music.png"
-                    alt="app screen"
-                    width={2796}
-                    height={2008}
-                  />
-                  <Image
-                    className="z-2 border-border/25 relative rounded-2xl border dark:hidden"
-                    src="/blocks/music-light.png"
-                    alt="app screen"
-                    width={2796}
-                    height={2008}
-                  />
+                
+                <div className="p-12 lg:p-16 text-center">
+                  {selectedFile ? (
+                    <div className="space-y-4">
+                      <ImageIcon className="mx-auto h-16 w-16 text-primary" />
+                      <div>
+                        <p className="text-lg font-medium">{selectedFile.name}</p>
+                        <p className="text-sm text-muted-foreground mt-1">
+                          Ready to remove watermark
+                        </p>
+                      </div>
+                      <Button size="lg" className="mt-4">
+                        <Sparkles className="mr-2 h-4 w-4" />
+                        Remove Watermark Now
+                      </Button>
+                    </div>
+                  ) : (
+                    <>
+                      <CloudUpload className="mx-auto h-16 w-16 text-muted-foreground/50" />
+                      <div className="mt-6 space-y-2">
+                        <p className="text-xl font-medium">
+                          Drop your image here, or click to browse
+                        </p>
+                        <p className="text-sm text-muted-foreground">
+                          Supports JPG, PNG, WEBP up to 50MB
+                        </p>
+                      </div>
+                      <Button
+                        size="lg"
+                        className="mt-6"
+                      >
+                        Select Image
+                        <ArrowRight className="ml-2 h-4 w-4" />
+                      </Button>
+                    </>
+                  )}
                 </div>
               </div>
             </AnimatedGroup>
+
+            {/* Features list */}
+            <AnimatedGroup
+              variants={{
+                container: {
+                  visible: {
+                    transition: {
+                      staggerChildren: 0.05,
+                      delayChildren: 1,
+                    },
+                  },
+                },
+                ...transitionVariants,
+              }}
+              className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-4 max-w-3xl mx-auto"
+            >
+              <div className="flex items-center gap-3 justify-center">
+                <div className="rounded-full bg-primary/10 p-1">
+                  <Check className="h-4 w-4 text-primary" />
+                </div>
+                <span className="text-sm font-medium">Batch Processing</span>
+              </div>
+              <div className="flex items-center gap-3 justify-center">
+                <div className="rounded-full bg-primary/10 p-1">
+                  <Check className="h-4 w-4 text-primary" />
+                </div>
+                <span className="text-sm font-medium">HD Quality Output</span>
+              </div>
+              <div className="flex items-center gap-3 justify-center">
+                <div className="rounded-full bg-primary/10 p-1">
+                  <Check className="h-4 w-4 text-primary" />
+                </div>
+                <span className="text-sm font-medium">5 Second Processing</span>
+              </div>
+            </AnimatedGroup>
+
+            {/* Stats */}
+            <div className="mt-16 grid grid-cols-3 gap-8 max-w-2xl mx-auto">
+              <div className="text-center">
+                <div className="text-3xl font-bold text-primary">10M+</div>
+                <div className="text-sm text-muted-foreground mt-1">Images Processed</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-primary">99.9%</div>
+                <div className="text-sm text-muted-foreground mt-1">Success Rate</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-primary">5s</div>
+                <div className="text-sm text-muted-foreground mt-1">Avg. Time</div>
+              </div>
+            </div>
           </div>
         </section>
       </main>

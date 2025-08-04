@@ -9,20 +9,16 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import {
-  ChartBarIncreasingIcon,
-  Database,
-  Fingerprint,
-  IdCard,
+  Brain,
+  Sparkles,
+  Zap,
+  ImageIcon,
 } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { useState } from 'react';
 
-/**
- * https://nsui.irung.me/features
- * pnpm dlx shadcn@canary add https://nsui.irung.me/r/features-12.json
- */
 export default function FeaturesSection() {
   const t = useTranslations('HomePage.features');
   type ImageKey = 'item-1' | 'item-2' | 'item-3' | 'item-4';
@@ -32,22 +28,22 @@ export default function FeaturesSection() {
     'item-1': {
       image: '/blocks/charts-light.png',
       darkImage: '/blocks/charts.png',
-      alt: 'Product Feature One',
+      alt: 'Smart AI Detection',
     },
     'item-2': {
       image: '/blocks/music-light.png',
       darkImage: '/blocks/music.png',
-      alt: 'Product Feature Two',
+      alt: 'HD Quality Preservation',
     },
     'item-3': {
       image: '/blocks/mail2-light.png',
       darkImage: '/blocks/mail2.png',
-      alt: 'Product Feature Three',
+      alt: 'Batch Processing',
     },
     'item-4': {
       image: '/blocks/payments-light.png',
       darkImage: '/blocks/payments.png',
-      alt: 'Product Feature Four',
+      alt: '5-Second Processing',
     },
   };
 
@@ -80,7 +76,7 @@ export default function FeaturesSection() {
               <AccordionItem value="item-1">
                 <AccordionTrigger>
                   <div className="flex items-center gap-2 text-base">
-                    <Database className="size-4" />
+                    <Brain className="size-4 text-primary" />
                     {t('items.item-1.title')}
                   </div>
                 </AccordionTrigger>
@@ -91,7 +87,7 @@ export default function FeaturesSection() {
               <AccordionItem value="item-2">
                 <AccordionTrigger>
                   <div className="flex items-center gap-2 text-base">
-                    <Fingerprint className="size-4" />
+                    <Sparkles className="size-4 text-primary" />
                     {t('items.item-2.title')}
                   </div>
                 </AccordionTrigger>
@@ -102,7 +98,7 @@ export default function FeaturesSection() {
               <AccordionItem value="item-3">
                 <AccordionTrigger>
                   <div className="flex items-center gap-2 text-base">
-                    <IdCard className="size-4" />
+                    <ImageIcon className="size-4 text-primary" />
                     {t('items.item-3.title')}
                   </div>
                 </AccordionTrigger>
@@ -113,7 +109,7 @@ export default function FeaturesSection() {
               <AccordionItem value="item-4">
                 <AccordionTrigger>
                   <div className="flex items-center gap-2 text-base">
-                    <ChartBarIncreasingIcon className="size-4" />
+                    <Zap className="size-4 text-primary" />
                     {t('items.item-4.title')}
                   </div>
                 </AccordionTrigger>
@@ -155,7 +151,7 @@ export default function FeaturesSection() {
             <BorderBeam
               duration={6}
               size={200}
-              className="from-transparent via-violet-700 to-transparent dark:via-white/50"
+              className="from-transparent via-primary to-transparent dark:via-primary/50"
             />
           </div>
         </div>

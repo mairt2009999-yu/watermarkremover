@@ -1,8 +1,8 @@
 {
   "Metadata": {
-    "name": "MkSaaS Demo",
-    "title": "MkSaaS - The Best AI SaaS Boilerplate",
-    "description": "MkSaaS is the best AI SaaS boilerplate. Make AI SaaS in days, simply and effortlessly"
+    "name": "WatermarkRemover",
+    "title": "AI Watermark Remover - Remove Watermarks from Images Instantly",
+    "description": "Remove watermarks, logos, and text from images instantly with AI. No sign-up required, 100% free, HD quality output."
   },
   "Common": {
     "login": "Log in",
@@ -59,9 +59,9 @@
       "name": "Free",
       "description": "Basic features for personal use",
       "features": {
-        "feature-1": "Up to 3 projects",
-        "feature-2": "1 GB storage",
-        "feature-3": "Basic analytics",
+        "feature-1": "5 images per day",
+        "feature-2": "Basic quality (720p)",
+        "feature-3": "Standard processing speed",
         "feature-4": "Community support"
       },
       "limits": {
@@ -74,11 +74,11 @@
       "name": "Pro",
       "description": "Advanced features for professionals",
       "features": {
-        "feature-1": "Unlimited projects",
-        "feature-2": "10 GB storage",
-        "feature-3": "Advanced analytics",
-        "feature-4": "Priority support",
-        "feature-5": "Custom domains"
+        "feature-1": "Unlimited images",
+        "feature-2": "HD quality (1080p+)",
+        "feature-3": "Priority processing",
+        "feature-4": "Email support",
+        "feature-5": "Batch processing (50 images)"
       },
       "limits": {
         "limit-1": "Custom branding",
@@ -90,11 +90,11 @@
       "description": "Premium features with one-time payment",
       "features": {
         "feature-1": "All Pro features",
-        "feature-2": "100 GB storage",
-        "feature-3": "Dedicated support",
-        "feature-4": "Enterprise-grade security",
-        "feature-5": "Advanced integrations",
-        "feature-6": "Custom branding",
+        "feature-2": "4K quality output",
+        "feature-3": "Priority support",
+        "feature-4": "API access",
+        "feature-5": "Bulk processing (500 images)",
+        "feature-6": "Commercial license",
         "feature-7": "Lifetime updates"
       }
     }
@@ -111,10 +111,10 @@
   },
   "AboutPage": {
     "title": "About",
-    "description": "This is MkSaaS, an AI SaaS template built with modern technologies, helping you build your SaaS faster and better.",
-    "authorName": "MkSaaS",
-    "authorBio": "AI SaaS Boilerplate",
-    "introduction": "👋 Hi there! This is MkSaaS, an AI SaaS template built with modern technologies, helping you build your SaaS faster and better. If you have any questions, welcome to contact me.",
+    "description": "WatermarkRemover is an AI-powered tool that helps you remove watermarks, logos, and text from images instantly.",
+    "authorName": "WatermarkRemover",
+    "authorBio": "AI Image Processing Tool",
+    "introduction": "👋 Hi there! WatermarkRemover uses cutting-edge AI technology to help you clean your images professionally. Our tool is trusted by millions of users worldwide for its accuracy and speed.",
     "talkWithMe": "Talk with me",
     "followMe": "Follow me on X"
   },
@@ -395,7 +395,7 @@
       }
     },
     "footer": {
-      "tagline": "Make AI SaaS in days, simply and effortlessly",
+      "tagline": "Remove watermarks instantly with AI technology",
       "product": {
         "title": "Product",
         "items": {
@@ -647,14 +647,14 @@
     }
   },
   "HomePage": {
-    "title": "MkSaaS",
-    "description": "Make AI SaaS in days, simply and effortlessly",
+    "title": "WatermarkRemover",
+    "description": "Remove watermarks from images instantly with AI",
     "hero": {
-      "title": "Make AI SaaS in days, simply and effortlessly",
-      "description": "The is a demo website built with MkSaaS, a Next.js SaaS boilerplate to help you build your AI SaaS faster and better.",
-      "introduction": "Introducing MkSaaS Boilerplate",
-      "primary": "Get Started",
-      "secondary": "See Demo"
+      "title": "Remove Watermarks Instantly with AI",
+      "description": "Upload any image and let our advanced AI technology automatically detect and remove watermarks, logos, and text in seconds. No skills required.",
+      "introduction": "AI-Powered Watermark Removal",
+      "primary": "Remove Watermark Now",
+      "secondary": "See Examples"
     },
     "logocloud": {
       "title": "Your favorite companies are our partners"
@@ -698,25 +698,25 @@
       "secondaryButton": "See Demo"
     },
     "features": {
-      "title": "Features",
-      "subtitle": "The features of your product",
-      "description": "Write the description of your product here",
+      "title": "Powerful AI Features",
+      "subtitle": "Advanced watermark removal technology",
+      "description": "Our AI-powered tool uses cutting-edge technology to deliver perfect results every time",
       "items": {
         "item-1": {
-          "title": "Product Feature One",
-          "description": "Please write the detailed description of feature one here, make it as detailed as possible, make it more attractive to users"
+          "title": "Smart AI Detection",
+          "description": "Automatically detects and identifies watermarks, logos, dates, and text overlays with 99.9% accuracy using advanced computer vision"
         },
         "item-2": {
-          "title": "Product Feature Two",
-          "description": "Please write the detailed description of feature two here, make it as detailed as possible, make it more attractive to users"
+          "title": "HD Quality Preservation",
+          "description": "Maintains original image quality while removing watermarks. No blur, no quality loss - your images stay crystal clear"
         },
         "item-3": {
-          "title": "Product Feature Three",
-          "description": "Please write the detailed description of feature three here, make it as detailed as possible, make it more attractive to users"
+          "title": "Batch Processing",
+          "description": "Remove watermarks from multiple images at once. Process up to 50 images simultaneously to save time"
         },
         "item-4": {
-          "title": "Product Feature Four",
-          "description": "Please write the detailed description of feature four here, make it as detailed as possible, make it more attractive to users"
+          "title": "5-Second Processing",
+          "description": "Lightning-fast processing powered by optimized AI algorithms. Get your clean images in seconds, not minutes"
         }
       }
     },
