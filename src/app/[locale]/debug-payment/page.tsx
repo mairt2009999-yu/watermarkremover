@@ -1,9 +1,9 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Loader2 } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 export default function DebugPaymentPage() {
   const [loading, setLoading] = useState(false);
@@ -42,7 +42,7 @@ export default function DebugPaymentPage() {
   return (
     <div className="container mx-auto py-10">
       <h1 className="text-3xl font-bold mb-6">Payment Debug Information</h1>
-      
+
       <div className="mb-4">
         <Button onClick={fetchDebugInfo} disabled={loading}>
           {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
@@ -73,7 +73,15 @@ export default function DebugPaymentPage() {
                 {Object.entries(debugData.summary || {}).map(([key, value]) => (
                   <div key={key}>
                     <span className="font-semibold">{key}:</span>{' '}
-                    <span className={typeof value === 'boolean' ? (value ? 'text-green-600' : 'text-red-600') : ''}>
+                    <span
+                      className={
+                        typeof value === 'boolean'
+                          ? value
+                            ? 'text-green-600'
+                            : 'text-red-600'
+                          : ''
+                      }
+                    >
                       {renderValue(value)}
                     </span>
                   </div>

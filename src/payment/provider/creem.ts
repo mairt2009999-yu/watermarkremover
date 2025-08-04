@@ -3,8 +3,8 @@ import { getDb } from '@/db';
 import { payment, user } from '@/db/schema';
 import {
   findServerPlanByPlanId as findPlanByPlanId,
-  findServerPriceInPlan as findPriceInPlan,
   findServerPlanByPriceId as findPlanByPriceId,
+  findServerPriceInPlan as findPriceInPlan,
   getServerPricePlans,
 } from '@/lib/server-price-config';
 import { sendNotification } from '@/notification/notification';
@@ -62,11 +62,11 @@ export class CreemProvider implements PaymentProvider {
     this.apiBaseUrl = isTestKey
       ? 'https://test-api.creem.io/v1'
       : 'https://api.creem.io/v1';
-    
+
     console.log('Creem API initialized:', {
       isTestKey,
       apiBaseUrl: this.apiBaseUrl,
-      keyPrefix: this.apiKey.substring(0, 15) + '...'
+      keyPrefix: this.apiKey.substring(0, 15) + '...',
     });
   }
 
@@ -88,8 +88,8 @@ export class CreemProvider implements PaymentProvider {
     const headers: Record<string, string> = {
       'Content-Type': 'application/json',
       'x-api-key': this.apiKey,
-      'Authorization': `Bearer ${this.apiKey}`, // Try both formats
-      'Accept': 'application/json',
+      Authorization: `Bearer ${this.apiKey}`, // Try both formats
+      Accept: 'application/json',
     };
 
     try {
@@ -109,8 +109,8 @@ export class CreemProvider implements PaymentProvider {
           errorData,
           headers: {
             'Content-Type': 'application/json',
-            'x-api-key': this.apiKey.substring(0, 15) + '...'
-          }
+            'x-api-key': this.apiKey.substring(0, 15) + '...',
+          },
         });
         throw new Error(
           `Creem API error: ${response.status} ${response.statusText}${
@@ -191,7 +191,9 @@ export class CreemProvider implements PaymentProvider {
     try {
       // Check if API key is properly configured
       if (this.apiKey === 'dummy-key-not-configured') {
-        throw new Error('Creem API key is not configured. Please set CREEM_API_KEY environment variable.');
+        throw new Error(
+          'Creem API key is not configured. Please set CREEM_API_KEY environment variable.'
+        );
       }
       // Get plan and price (using server-side config)
       console.log('Creating checkout for plan:', planId, 'price:', priceId);
@@ -334,26 +336,28 @@ export class CreemProvider implements PaymentProvider {
     try {
       console.log('Handling Creem webhook event');
       console.log('Signature received:', signature);
-      
+
       // Verify webhook signature
       const isValid = await this.verifyWebhookSignature(payload, signature);
       console.log('Signature validation result:', isValid);
-      
+
       if (!isValid) {
-        console.error('Invalid webhook signature - processing anyway for debugging');
+        console.error(
+          'Invalid webhook signature - processing anyway for debugging'
+        );
         // For now, continue processing to debug the issue
         // throw new Error('Invalid webhook signature');
       }
 
       const event = JSON.parse(payload);
       console.log('Parsed webhook event:', JSON.stringify(event, null, 2));
-      
+
       const eventType = event.type || event.event_type;
       console.log(`handle webhook event, type: ${eventType}`);
 
       // Handle different event types based on Creem's webhook structure
       console.log(`Processing event type: ${eventType}`);
-      
+
       switch (eventType) {
         // Creem webhook events
         case 'checkout.completed':
@@ -394,7 +398,9 @@ export class CreemProvider implements PaymentProvider {
           // Try to process unknown events as subscription creation if they have required fields
           const data = event.data || event;
           if (data.customer || data.email || data.metadata?.customerEmail) {
-            console.log('Unknown event has customer data, attempting to process as subscription');
+            console.log(
+              'Unknown event has customer data, attempting to process as subscription'
+            );
             await this.onCreateSubscription(event);
           }
         }
@@ -417,44 +423,57 @@ export class CreemProvider implements PaymentProvider {
   ): Promise<boolean> {
     try {
       const crypto = require('crypto');
-      
+
       // Skip validation for test signatures or missing signatures (debugging)
-      if (signature === 'test-signature' || signature === 'missing-signature' || signature === 'debug-signature') {
+      if (
+        signature === 'test-signature' ||
+        signature === 'missing-signature' ||
+        signature === 'debug-signature'
+      ) {
         console.log('Test/debug signature detected, skipping validation');
         return true;
       }
-      
+
       // Try different signature formats that Creem might use
       const signatures = [
         // Standard HMAC-SHA256 hex format
-        crypto.createHmac('sha256', this.webhookSecret).update(payload).digest('hex'),
+        crypto
+          .createHmac('sha256', this.webhookSecret)
+          .update(payload)
+          .digest('hex'),
         // Base64 format
-        crypto.createHmac('sha256', this.webhookSecret).update(payload).digest('base64'),
+        crypto
+          .createHmac('sha256', this.webhookSecret)
+          .update(payload)
+          .digest('base64'),
         // Prefixed format (like GitHub uses)
         `sha256=${crypto.createHmac('sha256', this.webhookSecret).update(payload).digest('hex')}`,
         // Some services include timestamp
-        crypto.createHmac('sha256', `${this.webhookSecret}.${payload}`).update(payload).digest('hex')
+        crypto
+          .createHmac('sha256', `${this.webhookSecret}.${payload}`)
+          .update(payload)
+          .digest('hex'),
       ];
-      
+
       // Log for debugging
       console.log('Trying signature formats:', {
         received: signature,
         expectedFormats: signatures.map((sig, idx) => ({
           format: ['hex', 'base64', 'prefixed', 'timestamped'][idx],
-          value: sig.substring(0, 20) + '...'
-        }))
+          value: sig.substring(0, 20) + '...',
+        })),
       });
-      
+
       // Check if any signature matches
-      const isValid = signatures.some(sig => sig === signature);
-      
+      const isValid = signatures.some((sig) => sig === signature);
+
       if (!isValid) {
         console.log('No signature match found. This might be due to:');
         console.log('1. Wrong webhook secret');
         console.log('2. Different signature algorithm');
         console.log('3. Additional data included in signature');
       }
-      
+
       return isValid;
     } catch (error) {
       console.error('Webhook signature verification error:', error);
@@ -478,37 +497,42 @@ export class CreemProvider implements PaymentProvider {
       data,
       metadata,
       customer: data.customer,
-      customerEmail: data.customer?.email || metadata.customerEmail
+      customerEmail: data.customer?.email || metadata.customerEmail,
     });
 
     // Extract necessary information from the event
-    const customerEmail = data.customer?.email || metadata.customerEmail || data.email;
-    const customerId = metadata.customerId || data.customer_id || data.customer?.id;
+    const customerEmail =
+      data.customer?.email || metadata.customerEmail || data.email;
+    const customerId =
+      metadata.customerId || data.customer_id || data.customer?.id;
     const priceId = metadata.priceId || data.product_id || data.price_id;
-    
+
     // Try multiple ways to get userId
     let userId = metadata.userId;
-    
+
     // If no userId in metadata, try to find by customerId
     if (!userId && customerId) {
       console.log(`Looking up userId by customerId: ${customerId}`);
       userId = await this.findUserIdByCustomerId(customerId);
     }
-    
+
     // If still no userId, try to find by email
     if (!userId && customerEmail) {
       console.log(`Looking up userId by email: ${customerEmail}`);
       userId = await this.findUserIdByEmail(customerEmail);
     }
-    
+
     const subscriptionId = data.subscription_id || data.id || randomUUID();
 
     if (!userId) {
-      console.error(`<< No userId found for subscription ${subscriptionId}. Attempted lookups:`, {
-        customerId,
-        customerEmail,
-        metadata
-      });
+      console.error(
+        `<< No userId found for subscription ${subscriptionId}. Attempted lookups:`,
+        {
+          customerId,
+          customerEmail,
+          metadata,
+        }
+      );
       // Don't return early - we might need to update the user's customerId
       if (customerEmail && customerId) {
         // Try to update user's customerId for future lookups
@@ -525,10 +549,15 @@ export class CreemProvider implements PaymentProvider {
     }
 
     // Determine payment type - check various fields that might indicate subscription
-    const isSubscription = data.recurring || data.subscription || data.type === 'subscription' || 
-                          data.interval || data.billing_cycle || metadata.planId?.includes('monthly') || 
-                          metadata.planId?.includes('yearly');
-    
+    const isSubscription =
+      data.recurring ||
+      data.subscription ||
+      data.type === 'subscription' ||
+      data.interval ||
+      data.billing_cycle ||
+      metadata.planId?.includes('monthly') ||
+      metadata.planId?.includes('yearly');
+
     // For checkout.completed events, determine interval from metadata or price info
     let interval = data.interval || data.billing_cycle;
     if (!interval && metadata.planId) {
@@ -712,7 +741,9 @@ export class CreemProvider implements PaymentProvider {
         .where(eq(user.customerId, customerId))
         .limit(1);
 
-      console.log(`findUserIdByCustomerId: customerId=${customerId}, found=${result.length > 0}`);
+      console.log(
+        `findUserIdByCustomerId: customerId=${customerId}, found=${result.length > 0}`
+      );
       return result.length > 0 ? result[0].id : undefined;
     } catch (error) {
       console.error('Find user by customer ID error:', error);
@@ -725,9 +756,7 @@ export class CreemProvider implements PaymentProvider {
    * @param email User email
    * @returns User ID or undefined
    */
-  private async findUserIdByEmail(
-    email: string
-  ): Promise<string | undefined> {
+  private async findUserIdByEmail(email: string): Promise<string | undefined> {
     if (!email) return undefined;
 
     try {
@@ -738,7 +767,9 @@ export class CreemProvider implements PaymentProvider {
         .where(eq(user.email, email))
         .limit(1);
 
-      console.log(`findUserIdByEmail: email=${email}, found=${result.length > 0}`);
+      console.log(
+        `findUserIdByEmail: email=${email}, found=${result.length > 0}`
+      );
       return result.length > 0 ? result[0].id : undefined;
     } catch (error) {
       console.error('Find user by email error:', error);
@@ -763,13 +794,15 @@ export class CreemProvider implements PaymentProvider {
         .update(user)
         .set({
           customerId,
-          updatedAt: new Date()
+          updatedAt: new Date(),
         })
         .where(eq(user.email, email))
         .returning({ id: user.id });
 
       if (result.length > 0) {
-        console.log(`Updated customerId for user ${result[0].id} to ${customerId}`);
+        console.log(
+          `Updated customerId for user ${result[0].id} to ${customerId}`
+        );
       } else {
         console.log(`No user found with email ${email} to update customerId`);
       }

@@ -35,7 +35,7 @@ export function PricingTableClient({
   // Add translations to server plans
   const plans = Object.values(serverPlans).map((plan) => {
     const translatedPlan = { ...plan };
-    
+
     // Add translations based on plan ID
     if (plan.id === 'free') {
       translatedPlan.name = tPlans('free.name');
@@ -79,7 +79,7 @@ export function PricingTableClient({
       ];
       translatedPlan.limits = [];
     }
-    
+
     return translatedPlan;
   });
 
@@ -125,7 +125,9 @@ export function PricingTableClient({
           <ToggleGroup
             type="single"
             value={interval}
-            onValueChange={(value) => value && setInterval(value as PlanInterval)}
+            onValueChange={(value) =>
+              value && setInterval(value as PlanInterval)
+            }
             className="bg-secondary p-1 rounded-lg"
           >
             {availableIntervals.includes(PlanIntervals.MONTH) && (

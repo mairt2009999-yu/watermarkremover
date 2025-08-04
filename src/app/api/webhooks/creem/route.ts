@@ -23,14 +23,14 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
   // Creem might use different header names
   const possibleSignatureHeaders = [
     'x-creem-signature',
-    'creem-signature', 
+    'creem-signature',
     'x-webhook-signature',
     'x-signature',
     'x-hub-signature',
     'x-hub-signature-256',
-    'webhook-signature'
+    'webhook-signature',
   ];
-  
+
   let signature = '';
   for (const headerName of possibleSignatureHeaders) {
     const value = req.headers.get(headerName);
@@ -57,7 +57,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     console.log('=== Processing Creem Webhook ===');
     console.log('Payload length:', payload.length);
     console.log('Signature found:', !!signature);
-    
+
     // Parse payload to check event type
     try {
       const event = JSON.parse(payload);

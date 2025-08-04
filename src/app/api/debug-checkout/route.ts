@@ -1,8 +1,13 @@
-import { NextResponse } from 'next/server';
-import { getServerPaymentProvider, getServerPriceId, findServerPlanByPlanId, findServerPriceInPlan } from '@/lib/server-price-config';
-import { getPaymentProvider } from '@/payment';
 import { getDb } from '@/db';
+import {
+  findServerPlanByPlanId,
+  findServerPriceInPlan,
+  getServerPaymentProvider,
+  getServerPriceId,
+} from '@/lib/server-price-config';
+import { getPaymentProvider } from '@/payment';
 import { sql } from 'drizzle-orm';
+import { NextResponse } from 'next/server';
 
 async function debugCheckout(request?: Request) {
   const debugInfo: any = {
@@ -38,7 +43,8 @@ async function debugCheckout(request?: Request) {
 
     try {
       const provider = getPaymentProvider();
-      debugInfo.checks.paymentProvider.paymentProviderClass = provider.constructor.name;
+      debugInfo.checks.paymentProvider.paymentProviderClass =
+        provider.constructor.name;
     } catch (error) {
       debugInfo.errors.push({
         location: 'getPaymentProvider',
@@ -54,7 +60,10 @@ async function debugCheckout(request?: Request) {
     };
 
     if (plan && debugInfo.checks.priceIds.monthly) {
-      const price = findServerPriceInPlan('pro', debugInfo.checks.priceIds.monthly);
+      const price = findServerPriceInPlan(
+        'pro',
+        debugInfo.checks.priceIds.monthly
+      );
       debugInfo.checks.priceInPlan = !!price;
     }
 
@@ -72,12 +81,15 @@ async function debugCheckout(request?: Request) {
       debugInfo.checks.database.testResult = result;
     } catch (error) {
       debugInfo.checks.database.connected = false;
-      debugInfo.checks.database.error = error instanceof Error ? {
-        message: error.message,
-        code: (error as any).code,
-        errno: (error as any).errno,
-        syscall: (error as any).syscall,
-      } : 'Unknown error';
+      debugInfo.checks.database.error =
+        error instanceof Error
+          ? {
+              message: error.message,
+              code: (error as any).code,
+              errno: (error as any).errno,
+              syscall: (error as any).syscall,
+            }
+          : 'Unknown error';
       debugInfo.errors.push({
         location: 'database',
         error: error instanceof Error ? error.message : 'Unknown error',
@@ -101,7 +113,7 @@ async function debugCheckout(request?: Request) {
             name: 'Test User',
           },
         };
-        
+
         const response = await fetch('https://test-api.creem.io/v1/checkouts', {
           method: 'POST',
           headers: {
@@ -115,7 +127,8 @@ async function debugCheckout(request?: Request) {
         debugInfo.checks.creemApi.success = response.ok;
         debugInfo.checks.creemApi.status = response.status;
       } catch (error) {
-        debugInfo.checks.creemApi.error = error instanceof Error ? error.message : 'Unknown error';
+        debugInfo.checks.creemApi.error =
+          error instanceof Error ? error.message : 'Unknown error';
         debugInfo.errors.push({
           location: 'creemApi',
           error: error instanceof Error ? error.message : 'Unknown error',
@@ -136,7 +149,8 @@ async function debugCheckout(request?: Request) {
         debugInfo.checks.priceIds.lifetime
       ),
       databaseConnected: debugInfo.checks.database.connected,
-      paymentProviderReady: !!debugInfo.checks.paymentProvider.paymentProviderClass,
+      paymentProviderReady:
+        !!debugInfo.checks.paymentProvider.paymentProviderClass,
       errorsCount: debugInfo.errors.length,
     };
 
@@ -156,15 +170,18 @@ async function debugCheckout(request?: Request) {
       }
     }
 
-    return NextResponse.json(debugInfo, { 
-      status: debugInfo.errors.length > 0 ? 500 : 200 
+    return NextResponse.json(debugInfo, {
+      status: debugInfo.errors.length > 0 ? 500 : 200,
     });
   } catch (error) {
-    return NextResponse.json({
-      error: 'Debug endpoint failed',
-      message: error instanceof Error ? error.message : 'Unknown error',
-      debugInfo,
-    }, { status: 500 });
+    return NextResponse.json(
+      {
+        error: 'Debug endpoint failed',
+        message: error instanceof Error ? error.message : 'Unknown error',
+        debugInfo,
+      },
+      { status: 500 }
+    );
   }
 }
 

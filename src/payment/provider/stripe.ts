@@ -3,8 +3,8 @@ import { getDb } from '@/db';
 import { payment, session, user } from '@/db/schema';
 import {
   findServerPlanByPlanId as findPlanByPlanId,
-  findServerPriceInPlan as findPriceInPlan,
   findServerPlanByPriceId as findPlanByPriceId,
+  findServerPriceInPlan as findPriceInPlan,
 } from '@/lib/server-price-config';
 import { sendNotification } from '@/notification/notification';
 import { desc, eq } from 'drizzle-orm';

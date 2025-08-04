@@ -105,7 +105,7 @@ export default function TestimonialsSection() {
   );
 
   return (
-    <section id="testimonials" className="px-4 py-16">
+    <section id="testimonials">
       <div className="mx-auto max-w-6xl">
         <HeaderSection
           title={t('title')}

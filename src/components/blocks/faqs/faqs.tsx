@@ -55,7 +55,7 @@ export default function FaqSection() {
   ];
 
   return (
-    <section id="faqs" className="px-4 py-16">
+    <section id="faqs">
       <div className="mx-auto max-w-4xl">
         <HeaderSection
           title={t('title')}

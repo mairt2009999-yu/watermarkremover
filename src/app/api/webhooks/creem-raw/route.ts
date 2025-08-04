@@ -1,6 +1,6 @@
-import { NextRequest, NextResponse } from 'next/server';
 import { getDb } from '@/db';
 import { payment } from '@/db/schema';
+import { type NextRequest, NextResponse } from 'next/server';
 
 /**
  * Raw webhook capture endpoint for Creem
@@ -13,10 +13,10 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     req.headers.forEach((value, key) => {
       headers[key] = value;
     });
-    
+
     // Get raw body
     const rawBody = await req.text();
-    
+
     // Try to parse as JSON
     let parsedBody;
     try {
@@ -24,7 +24,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     } catch {
       parsedBody = { parseError: true, rawBody };
     }
-    
+
     // Log everything
     console.log('=== CREEM RAW WEBHOOK DATA ===');
     console.log('Timestamp:', new Date().toISOString());
@@ -33,18 +33,21 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     console.log('Raw Body:', rawBody);
     console.log('Parsed Body:', JSON.stringify(parsedBody, null, 2));
     console.log('==============================');
-    
+
     // If this looks like a real Creem webhook, try to process it
     if (parsedBody && (parsedBody.type || parsedBody.event_type)) {
-      console.log('Detected webhook event type:', parsedBody.type || parsedBody.event_type);
-      
+      console.log(
+        'Detected webhook event type:',
+        parsedBody.type || parsedBody.event_type
+      );
+
       // Check if we have required data
       const data = parsedBody.data || parsedBody;
       const hasRequiredFields = data.customer || data.email || data.metadata;
-      
+
       if (hasRequiredFields) {
         console.log('Webhook has required fields, attempting to process...');
-        
+
         // Import and call the handler
         try {
           const { handleWebhookEvent } = await import('@/payment');
@@ -54,7 +57,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
         } catch (error) {
           console.error('Error processing webhook:', error);
         }
-        
+
         // Check if payment was created
         try {
           const db = await getDb();
@@ -63,31 +66,39 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
             .from(payment)
             .orderBy(payment.createdAt)
             .limit(5);
-          
-          console.log('Recent payments after webhook:', recentPayments.map(p => ({
-            id: p.id,
-            type: p.type,
-            status: p.status,
-            createdAt: p.createdAt
-          })));
+
+          console.log(
+            'Recent payments after webhook:',
+            recentPayments.map((p) => ({
+              id: p.id,
+              type: p.type,
+              status: p.status,
+              createdAt: p.createdAt,
+            }))
+          );
         } catch (error) {
           console.error('Error checking payments:', error);
         }
       }
     }
-    
+
     // Always return success to avoid webhook retries during debugging
-    return NextResponse.json({ 
-      received: true,
-      message: 'Webhook data logged for debugging',
-      timestamp: new Date().toISOString()
-    }, { status: 200 });
-    
+    return NextResponse.json(
+      {
+        received: true,
+        message: 'Webhook data logged for debugging',
+        timestamp: new Date().toISOString(),
+      },
+      { status: 200 }
+    );
   } catch (error) {
     console.error('Error in raw webhook handler:', error);
-    return NextResponse.json({ 
-      error: 'Failed to process webhook',
-      details: error instanceof Error ? error.message : 'Unknown error'
-    }, { status: 500 });
+    return NextResponse.json(
+      {
+        error: 'Failed to process webhook',
+        details: error instanceof Error ? error.message : 'Unknown error',
+      },
+      { status: 500 }
+    );
   }
 }

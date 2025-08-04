@@ -1,5 +1,5 @@
 import { getServerPricePlans } from '@/lib/server-price-config';
-import { type PricePlan } from '@/payment/types';
+import type { PricePlan } from '@/payment/types';
 import { PricingTableClient } from './pricing-table-client';
 
 interface PricingTableServerProps {
@@ -18,7 +18,7 @@ export async function PricingTableServer({
 }: PricingTableServerProps) {
   // Get price plans from server configuration
   const serverPlans = getServerPricePlans();
-  
+
   return (
     <PricingTableClient
       serverPlans={serverPlans}

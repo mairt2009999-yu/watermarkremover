@@ -65,7 +65,7 @@ export const usePaymentStore = create<PaymentState>((set, get) => ({
         console.error('Failed to fetch price plans:', plansResult.error);
         set({
           error: plansResult.error || 'Failed to fetch price plans',
-          isLoading: false
+          isLoading: false,
         });
         return;
       }
@@ -73,11 +73,11 @@ export const usePaymentStore = create<PaymentState>((set, get) => ({
       console.error('Error fetching price plans:', error);
       set({
         error: 'Failed to fetch price plans',
-        isLoading: false
+        isLoading: false,
       });
       return;
     }
-    
+
     const freePlan = plans.find((plan) => plan.isFree);
     const lifetimePlan = plans.find((plan) => plan.isLifetime);
 

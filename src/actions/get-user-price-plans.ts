@@ -15,7 +15,7 @@ export async function getUserPricePlansAction(): Promise<{
   try {
     const plans = getServerPricePlans();
     const planArray = Object.values(plans);
-    
+
     return {
       success: true,
       data: planArray,

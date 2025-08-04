@@ -89,4 +89,3 @@ export const findPriceInPlan = (
   }
   return plan.prices.find((price) => price.priceId === priceId);
 };
-

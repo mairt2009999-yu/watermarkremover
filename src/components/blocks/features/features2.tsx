@@ -16,7 +16,7 @@ export default function Features2Section() {
   const t = useTranslations('HomePage.features2');
 
   return (
-    <section id="features2" className="px-4 py-16">
+    <section id="features2">
       <div className="mx-auto max-w-6xl space-y-8 lg:space-y-20">
         <HeaderSection
           title={t('title')}

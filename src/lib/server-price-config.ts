@@ -3,14 +3,16 @@
  * This ensures price IDs are read from environment variables at runtime on the server
  */
 
-import { PlanIntervals, PaymentTypes } from '@/payment/types';
+import { PaymentTypes, PlanIntervals } from '@/payment/types';
 import type { PricePlan } from '@/payment/types';
 
 /**
  * Get payment provider from environment variable (server-side)
  */
 export const getServerPaymentProvider = (): 'stripe' | 'creem' => {
-  return (process.env.NEXT_PUBLIC_PAYMENT_PROVIDER || 'stripe') as 'stripe' | 'creem';
+  return (process.env.NEXT_PUBLIC_PAYMENT_PROVIDER || 'stripe') as
+    | 'stripe'
+    | 'creem';
 };
 
 /**
@@ -25,9 +27,11 @@ const cleanPriceId = (priceId: string | undefined): string => {
 /**
  * Get price ID from environment variables (server-side)
  */
-export const getServerPriceId = (plan: 'pro_monthly' | 'pro_yearly' | 'lifetime'): string => {
+export const getServerPriceId = (
+  plan: 'pro_monthly' | 'pro_yearly' | 'lifetime'
+): string => {
   const provider = getServerPaymentProvider();
-  
+
   if (provider === 'creem') {
     switch (plan) {
       case 'pro_monthly':
@@ -38,7 +42,7 @@ export const getServerPriceId = (plan: 'pro_monthly' | 'pro_yearly' | 'lifetime'
         return cleanPriceId(process.env.NEXT_PUBLIC_CREEM_PRICE_LIFETIME);
     }
   }
-  
+
   // Default to Stripe
   switch (plan) {
     case 'pro_monthly':
@@ -104,7 +108,9 @@ export const getServerPricePlans = (): Record<string, PricePlan> => {
 /**
  * Find plan by ID (server-side)
  */
-export const findServerPlanByPlanId = (planId: string): PricePlan | undefined => {
+export const findServerPlanByPlanId = (
+  planId: string
+): PricePlan | undefined => {
   const plans = getServerPricePlans();
   return plans[planId];
 };
@@ -126,7 +132,9 @@ export const findServerPriceInPlan = (
 /**
  * Find plan by price ID (server-side)
  */
-export const findServerPlanByPriceId = (priceId: string): PricePlan | undefined => {
+export const findServerPlanByPriceId = (
+  priceId: string
+): PricePlan | undefined => {
   const plans = getServerPricePlans();
   for (const plan of Object.values(plans)) {
     const matchingPrice = plan.prices.find(

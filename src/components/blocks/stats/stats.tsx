@@ -5,7 +5,7 @@ export default function StatsSection() {
   const t = useTranslations('HomePage.stats');
 
   return (
-    <section id="stats" className="px-4 py-16">
+    <section id="stats">
       <div className="mx-auto max-w-5xl px-6 space-y-8 md:space-y-16">
         <HeaderSection
           title={t('title')}

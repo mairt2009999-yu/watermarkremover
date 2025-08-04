@@ -1,22 +1,26 @@
-import { NextResponse } from 'next/server';
-import { getServerPaymentProvider, getServerPriceId, getServerPricePlans } from '@/lib/server-price-config';
+import {
+  getServerPaymentProvider,
+  getServerPriceId,
+  getServerPricePlans,
+} from '@/lib/server-price-config';
 import { getPaymentProvider } from '@/payment';
+import { NextResponse } from 'next/server';
 
 export async function GET() {
   try {
     // Get payment provider
     const provider = getServerPaymentProvider();
-    
+
     // Get price IDs
     const priceIds = {
       pro_monthly: getServerPriceId('pro_monthly'),
       pro_yearly: getServerPriceId('pro_yearly'),
       lifetime: getServerPriceId('lifetime'),
     };
-    
+
     // Get server price plans
     const serverPlans = getServerPricePlans();
-    
+
     // Check Creem configuration
     const creemConfig = {
       apiKey: process.env.CREEM_API_KEY ? 'Set' : 'Not Set',
@@ -26,9 +30,9 @@ export async function GET() {
         pro_monthly: process.env.NEXT_PUBLIC_CREEM_PRICE_PRO_MONTHLY,
         pro_yearly: process.env.NEXT_PUBLIC_CREEM_PRICE_PRO_YEARLY,
         lifetime: process.env.NEXT_PUBLIC_CREEM_PRICE_LIFETIME,
-      }
+      },
     };
-    
+
     // Try to initialize payment provider
     let paymentProviderStatus = 'Not initialized';
     try {
@@ -37,7 +41,7 @@ export async function GET() {
     } catch (error) {
       paymentProviderStatus = `Error: ${error instanceof Error ? error.message : 'Unknown error'}`;
     }
-    
+
     return NextResponse.json({
       provider,
       priceIds,
@@ -46,8 +50,11 @@ export async function GET() {
       paymentProviderStatus,
     });
   } catch (error) {
-    return NextResponse.json({
-      error: error instanceof Error ? error.message : 'Unknown error',
-    }, { status: 500 });
+    return NextResponse.json(
+      {
+        error: error instanceof Error ? error.message : 'Unknown error',
+      },
+      { status: 500 }
+    );
   }
 }

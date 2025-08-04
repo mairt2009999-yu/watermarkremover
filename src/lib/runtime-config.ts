@@ -42,28 +42,32 @@ export async function getRuntimeConfig() {
     }
   }
 
-  return runtimeConfig || {
-    paymentProvider: 'stripe',
-    priceIds: {
-      creem: { monthly: '', yearly: '', lifetime: '' },
-      stripe: { monthly: '', yearly: '', lifetime: '' },
-    },
-  };
+  return (
+    runtimeConfig || {
+      paymentProvider: 'stripe',
+      priceIds: {
+        creem: { monthly: '', yearly: '', lifetime: '' },
+        stripe: { monthly: '', yearly: '', lifetime: '' },
+      },
+    }
+  );
 }
 
 /**
  * Get price ID from runtime config
  */
-export async function getRuntimePriceId(plan: 'pro_monthly' | 'pro_yearly' | 'lifetime'): Promise<string> {
+export async function getRuntimePriceId(
+  plan: 'pro_monthly' | 'pro_yearly' | 'lifetime'
+): Promise<string> {
   const config = await getRuntimeConfig();
   const provider = config.paymentProvider;
-  
+
   const planMap = {
-    'pro_monthly': 'monthly',
-    'pro_yearly': 'yearly',
-    'lifetime': 'lifetime',
+    pro_monthly: 'monthly',
+    pro_yearly: 'yearly',
+    lifetime: 'lifetime',
   } as const;
-  
+
   const planKey = planMap[plan];
   return config.priceIds[provider]?.[planKey] || '';
 }
