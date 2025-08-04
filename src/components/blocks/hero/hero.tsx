@@ -91,21 +91,6 @@ export default function HeroSection() {
         <section className="relative">
           <div className="mx-auto max-w-7xl px-6 pt-16 pb-8">
             
-            {/* Trust badges */}
-            <AnimatedGroup
-              variants={transitionVariants}
-              className="flex flex-wrap items-center justify-center gap-4 mb-8"
-            >
-              <Badge variant="secondary" className="px-3 py-1.5 text-sm font-medium">
-                <Sparkles className="w-3.5 h-3.5 mr-1.5" />
-                AI-Powered
-              </Badge>
-              <Badge variant="secondary" className="px-3 py-1.5 text-sm font-medium">
-                <Shield className="w-3.5 h-3.5 mr-1.5" />
-                No Sign-up Required
-              </Badge>
-            </AnimatedGroup>
-
             {/* Title */}
             <h1 className="text-center text-balance text-5xl font-bricolage-grotesque lg:text-7xl xl:text-8xl">
               <TextEffect
@@ -283,10 +268,10 @@ export default function HeroSection() {
             >
               <div className="text-center mb-8">
                 <h2 className="text-3xl lg:text-4xl font-bold mb-4">
-                  立即轻松去除照片水印
+                  Remove Watermarks Instantly
                 </h2>
                 <p className="text-lg text-muted-foreground">
-                  拖动滑块查看AI去水印的神奇效果
+                  Drag the slider to see the magic of AI watermark removal
                 </p>
               </div>
               
@@ -295,13 +280,13 @@ export default function HeroSection() {
                   itemOne={
                     <ReactCompareSliderImage
                       src="/demo/watermark-before.svg"
-                      alt="带水印的图片"
+                      alt="Image with watermark"
                     />
                   }
                   itemTwo={
                     <ReactCompareSliderImage
                       src="/demo/watermark-after.svg"
-                      alt="去除水印后的图片"
+                      alt="Image after watermark removal"
                     />
                   }
                   position={50}
@@ -321,6 +306,7 @@ export default function HeroSection() {
                 </div>
               </div>
             </AnimatedGroup>
+
           </div>
         </section>
       </main>

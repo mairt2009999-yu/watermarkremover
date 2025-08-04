@@ -102,7 +102,7 @@ export const websiteConfig: WebsiteConfig = {
       },
       zh: {
         flag: '🇨🇳',
-        name: '中文',
+        name: 'Chinese',
       },
     },
   },

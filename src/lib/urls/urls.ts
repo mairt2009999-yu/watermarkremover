@@ -5,17 +5,17 @@ import type { Locale } from 'next-intl';
  * Get the base URL of the application
  */
 export function getBaseUrl(): string {
-  // 在 Vercel 环境下，优先使用 VERCEL_URL
+  // In Vercel environment, prioritize VERCEL_URL
   if (process.env.VERCEL_URL) {
     return `https://${process.env.VERCEL_URL}`;
   }
 
-  // 使用配置的 BASE_URL
+  // Use configured BASE_URL
   if (process.env.NEXT_PUBLIC_BASE_URL) {
     return process.env.NEXT_PUBLIC_BASE_URL;
   }
 
-  // 本地开发环境
+  // Local development environment
   return `http://localhost:${process.env.PORT ?? 3000}`;
 }
 
