@@ -200,57 +200,6 @@ export default function HeroSection() {
               </div>
             </AnimatedGroup>
 
-            {/* Features list */}
-            <AnimatedGroup
-              variants={{
-                container: {
-                  visible: {
-                    transition: {
-                      staggerChildren: 0.05,
-                      delayChildren: 1,
-                    },
-                  },
-                },
-                ...transitionVariants,
-              }}
-              className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-4 max-w-3xl mx-auto"
-            >
-              <div className="flex items-center gap-3 justify-center">
-                <div className="rounded-full bg-primary/10 p-1">
-                  <Check className="h-4 w-4 text-primary" />
-                </div>
-                <span className="text-sm font-medium">Batch Processing</span>
-              </div>
-              <div className="flex items-center gap-3 justify-center">
-                <div className="rounded-full bg-primary/10 p-1">
-                  <Check className="h-4 w-4 text-primary" />
-                </div>
-                <span className="text-sm font-medium">HD Quality Output</span>
-              </div>
-              <div className="flex items-center gap-3 justify-center">
-                <div className="rounded-full bg-primary/10 p-1">
-                  <Check className="h-4 w-4 text-primary" />
-                </div>
-                <span className="text-sm font-medium">5 Second Processing</span>
-              </div>
-            </AnimatedGroup>
-
-            {/* Stats */}
-            <div className="mt-16 grid grid-cols-3 gap-8 max-w-2xl mx-auto">
-              <div className="text-center">
-                <div className="text-3xl font-bold text-primary">10M+</div>
-                <div className="text-sm text-muted-foreground mt-1">Images Processed</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-primary">99.9%</div>
-                <div className="text-sm text-muted-foreground mt-1">Success Rate</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-primary">5s</div>
-                <div className="text-sm text-muted-foreground mt-1">Avg. Time</div>
-              </div>
-            </div>
-
             {/* Watermark Removal Comparison */}
             <AnimatedGroup
               variants={{
@@ -264,7 +213,7 @@ export default function HeroSection() {
                 },
                 ...transitionVariants,
               }}
-              className="mt-20 max-w-4xl mx-auto px-6"
+              className="mt-12 max-w-4xl mx-auto px-6"
             >
               <div className="text-center mb-8">
                 <h2 className="text-3xl lg:text-4xl font-bold mb-4">
@@ -306,6 +255,57 @@ export default function HeroSection() {
                 </div>
               </div>
             </AnimatedGroup>
+
+            {/* Features list */}
+            <AnimatedGroup
+              variants={{
+                container: {
+                  visible: {
+                    transition: {
+                      staggerChildren: 0.05,
+                      delayChildren: 1,
+                    },
+                  },
+                },
+                ...transitionVariants,
+              }}
+              className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-4 max-w-3xl mx-auto"
+            >
+              <div className="flex items-center gap-3 justify-center">
+                <div className="rounded-full bg-primary/10 p-1">
+                  <Check className="h-4 w-4 text-primary" />
+                </div>
+                <span className="text-sm font-medium">Batch Processing</span>
+              </div>
+              <div className="flex items-center gap-3 justify-center">
+                <div className="rounded-full bg-primary/10 p-1">
+                  <Check className="h-4 w-4 text-primary" />
+                </div>
+                <span className="text-sm font-medium">HD Quality Output</span>
+              </div>
+              <div className="flex items-center gap-3 justify-center">
+                <div className="rounded-full bg-primary/10 p-1">
+                  <Check className="h-4 w-4 text-primary" />
+                </div>
+                <span className="text-sm font-medium">5 Second Processing</span>
+              </div>
+            </AnimatedGroup>
+
+            {/* Stats */}
+            <div className="mt-16 grid grid-cols-3 gap-8 max-w-2xl mx-auto">
+              <div className="text-center">
+                <div className="text-3xl font-bold text-primary">10M+</div>
+                <div className="text-sm text-muted-foreground mt-1">Images Processed</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-primary">99.9%</div>
+                <div className="text-sm text-muted-foreground mt-1">Success Rate</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-primary">5s</div>
+                <div className="text-sm text-muted-foreground mt-1">Avg. Time</div>
+              </div>
+            </div>
 
           </div>
         </section>
