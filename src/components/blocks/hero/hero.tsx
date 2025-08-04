@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useState, useRef, DragEvent } from 'react';
+import { ReactCompareSlider, ReactCompareSliderImage } from 'react-compare-slider';
 
 const transitionVariants = {
   item: {
@@ -102,10 +103,6 @@ export default function HeroSection() {
               <Badge variant="secondary" className="px-3 py-1.5 text-sm font-medium">
                 <Shield className="w-3.5 h-3.5 mr-1.5" />
                 No Sign-up Required
-              </Badge>
-              <Badge variant="secondary" className="px-3 py-1.5 text-sm font-medium">
-                <Zap className="w-3.5 h-3.5 mr-1.5" />
-                100% Free
               </Badge>
             </AnimatedGroup>
 
@@ -268,6 +265,62 @@ export default function HeroSection() {
                 <div className="text-sm text-muted-foreground mt-1">Avg. Time</div>
               </div>
             </div>
+
+            {/* Watermark Removal Comparison */}
+            <AnimatedGroup
+              variants={{
+                container: {
+                  visible: {
+                    transition: {
+                      staggerChildren: 0.05,
+                      delayChildren: 1.2,
+                    },
+                  },
+                },
+                ...transitionVariants,
+              }}
+              className="mt-20 max-w-4xl mx-auto px-6"
+            >
+              <div className="text-center mb-8">
+                <h2 className="text-3xl lg:text-4xl font-bold mb-4">
+                  立即轻松去除照片水印
+                </h2>
+                <p className="text-lg text-muted-foreground">
+                  拖动滑块查看AI去水印的神奇效果
+                </p>
+              </div>
+              
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-border/50">
+                <ReactCompareSlider
+                  itemOne={
+                    <ReactCompareSliderImage
+                      src="/demo/watermark-before.svg"
+                      alt="带水印的图片"
+                    />
+                  }
+                  itemTwo={
+                    <ReactCompareSliderImage
+                      src="/demo/watermark-after.svg"
+                      alt="去除水印后的图片"
+                    />
+                  }
+                  position={50}
+                  className="h-[400px] md:h-[500px] lg:h-[600px]"
+                />
+                
+                {/* Labels */}
+                <div className="absolute top-4 left-4 z-10 pointer-events-none">
+                  <Badge variant="secondary" className="bg-background/80 backdrop-blur">
+                    Before
+                  </Badge>
+                </div>
+                <div className="absolute top-4 right-4 z-10 pointer-events-none">
+                  <Badge variant="secondary" className="bg-background/80 backdrop-blur">
+                    After
+                  </Badge>
+                </div>
+              </div>
+            </AnimatedGroup>
           </div>
         </section>
       </main>

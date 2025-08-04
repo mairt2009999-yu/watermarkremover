@@ -1,0 +1,22 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background image placeholder -->
+  <rect width="800" height="600" fill="#f0f0f0"/>
+  
+  <!-- Simulated photo content -->
+  <rect x="100" y="100" width="600" height="400" fill="#e0e0e0" rx="10"/>
+  <circle cx="250" cy="250" r="80" fill="#d0d0d0"/>
+  <rect x="400" y="200" width="250" height="200" fill="#d0d0d0" rx="5"/>
+  
+  <!-- Watermark overlay -->
+  <g opacity="0.7">
+    <rect x="200" y="250" width="400" height="100" fill="white" opacity="0.9"/>
+    <text x="400" y="310" font-family="Arial, sans-serif" font-size="48" font-weight="bold" text-anchor="middle" fill="#333">
+      WATERMARK
+    </text>
+  </g>
+  
+  <!-- Additional watermark elements -->
+  <text x="650" y="550" font-family="Arial, sans-serif" font-size="24" fill="#999" opacity="0.6">
+    © Sample Photo
+  </text>
+</svg>

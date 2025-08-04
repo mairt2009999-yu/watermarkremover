@@ -411,3 +411,35 @@ div[class*="border-t"][class*="bg-fd-secondary"]:not(:has(*)):not(
 [class*="fd-secondary"]:empty:not([data-banner-content]) {
   display: none !important;
 }
+
+/* React Compare Slider Custom Styles */
+/* Custom slider handle styles */
+[data-rcs="handle"] {
+  width: 48px !important;
+  height: 48px !important;
+  background: white !important;
+  border: 3px solid var(--primary) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  transition: transform 0.2s ease !important;
+}
+
+[data-rcs="handle"]:hover {
+  transform: scale(1.1) !important;
+}
+
+/* Custom divider line styles */
+[data-rcs="divider"] {
+  background: var(--primary) !important;
+  width: 3px !important;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Ensure smooth transition */
+[data-rcs="root"] {
+  cursor: col-resize !important;
+}
+
+/* Handle icon styling */
+[data-rcs="handle-icon"] {
+  color: var(--primary) !important;
+}
