@@ -74,7 +74,7 @@ export const getUsersAction = actionClient
         items = items.map((item) => ({
           ...item,
           name: 'Demo User',
-          email: 'example@mksaas.com',
+          email: 'example@watermarkremover.tools',
           customerId: 'cus_abcdef123456',
         }));
       }

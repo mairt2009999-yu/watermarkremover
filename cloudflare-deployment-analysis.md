@@ -47,7 +47,7 @@ pnpm add -D @opennextjs/cloudflare wrangler
 
 ### 2. 创建 wrangler.toml
 ```toml
-name = "mksaas-template"
+name = "watermarkremovertools-template"
 compatibility_date = "2024-07-24"
 
 [vars]
@@ -55,12 +55,12 @@ NEXT_PUBLIC_BASE_URL = "https://your-domain.com"
 
 [[d1_databases]]
 binding = "DB"
-database_name = "mksaas-db"
+database_name = "watermarkremovertools-db"
 database_id = "your-database-id"
 
 [[r2_buckets]]
 binding = "STORAGE"
-bucket_name = "mksaas-storage"
+bucket_name = "watermarkremovertools-storage"
 
 [[kv_namespaces]]
 binding = "CACHE"

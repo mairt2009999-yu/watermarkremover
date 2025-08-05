@@ -1,8 +1,8 @@
 {
   "Metadata": {
-    "name": "MkSaaS Demo",
-    "title": "MkSaaS - 最好的 AI SaaS 模板",
-    "description": "MkSaaS 是构建 AI SaaS 的最佳模板，使用 MkSaaS 可以在几天内轻松构建您的 AI SaaS，简单且毫不费力。"
+    "name": "WatermarkRemover",
+    "title": "AI 水印去除器 - 瞬间去除图片水印",
+    "description": "使用 AI 技术瞬间去除图片中的水印、标志和文字。无需注册，100% 免费，高清质量输出。"
   },
   "Common": {
     "login": "登录",
@@ -112,10 +112,10 @@
   },
   "AboutPage": {
     "title": "关于我们",
-    "description": "MkSaaS 是一个使用最先进的技术栈构建的 AI SaaS 模板，它可以帮助你更快更好地构建你的 SaaS。如果你有任何问题，欢迎联系我。",
-    "authorName": "MkSaaS",
-    "authorBio": "最好的 AI SaaS 模板",
-    "introduction": "👋 你好，这里是 MkSaaS，一个使用最先进的技术栈构建的 AI SaaS 模板，它可以帮助你更快更好地构建你的 SaaS。如果你有任何问题，欢迎联系我。",
+    "description": "WatermarkRemover 是一个基于 AI 技术的工具，可以帮助您瞬间去除图片中的水印、标志和文字。",
+    "authorName": "WatermarkRemover",
+    "authorBio": "AI 图片处理工具",
+    "introduction": "👋 您好！WatermarkRemover 使用尖端 AI 技术帮助您专业清理图片。我们的工具被全球数百万用户信赖，以其准确性和速度著称。",
     "talkWithMe": "联系我",
     "followMe": "关注我"
   },
@@ -259,7 +259,7 @@
     "previousPage": "上一页",
     "nextPage": "下一页",
     "chooseLanguage": "选择语言",
-    "title": "MkSaaS文档",
+    "title": "WatermarkRemoverTools文档",
     "homepage": "首页",
     "blog": "博客"
   },
@@ -396,7 +396,7 @@
       }
     },
     "footer": {
-      "tagline": "使用 MkSaaS 在几天内轻松构建您的 AI SaaS",
+      "tagline": "使用 AI 技术瞬间去除水印",
       "product": {
         "title": "产品",
         "items": {
@@ -648,12 +648,12 @@
     }
   },
   "HomePage": {
-    "title": "MkSaaS",
-    "description": "使用 MkSaaS 在几天内轻松构建您的 AI SaaS 产品",
+    "title": "WatermarkRemover",
+    "description": "使用 AI 技术瞬间去除图片水印",
     "hero": {
-      "title": "使用 MkSaaS 轻松构建您的 AI SaaS 产品",
-      "description": "MkSaaS 是构建 AI SaaS 的最佳模板，内置 AI、身份验证、全球支付、博客、文档、邮件订阅、SEO、多彩主题、丰富组件等。",
-      "introduction": "介绍 MkSaaS 模板",
+      "title": "使用 AI 瞬间去除水印",
+      "description": "上传任何图片，让我们的先进 AI 技术在几秒钟内自动检测并去除水印、标志和文字。无需任何技能。",
+      "introduction": "AI 驱动的水印去除",
       "primary": "开始使用",
       "secondary": "查看演示"
     },
@@ -788,7 +788,7 @@
         },
         "item-5": {
           "question": "找不到您想问的问题？",
-          "answer": "请联系我们的客户支持团队，邮箱地址：support@mksaas.com"
+          "answer": "请联系我们的客户支持团队，邮箱地址：support@watermarkremover.tools"
         }
       }
     },
@@ -800,117 +800,117 @@
           "name": "Jonathan Yombo",
           "role": "软件工程师",
           "image": "https://randomuser.me/api/portraits/men/1.jpg",
-          "quote": "MkSaaS 非常出色且实用，无需费心，一个真正的金矿。"
+          "quote": "WatermarkRemoverTools 非常出色且实用，无需费心，一个真正的金矿。"
         },
         "item-2": {
           "name": "Yves Kalume",
           "role": "Android GDE",
           "image": "https://randomuser.me/api/portraits/men/6.jpg",
-          "quote": "没有网页设计经验，我只需几分钟就可以用 Tailwindcss 重新设计我的整个网站，感谢 MkSaaS。"
+          "quote": "没有网页设计经验，我只需几分钟就可以用 Tailwindcss 重新设计我的整个网站，感谢 WatermarkRemoverTools。"
         },
         "item-3": {
           "name": "Yucel Faruksahan",
           "role": "Tailkits 创建者",
           "image": "https://randomuser.me/api/portraits/men/7.jpg",
-          "quote": "MkSaaS 模板做得很好，这是我见过最好的 SaaS 模板，没有之一 :)"
+          "quote": "WatermarkRemoverTools 模板做得很好，这是我见过最好的 SaaS 模板，没有之一 :)"
         },
         "item-4": {
           "name": "Anonymous author",
           "role": "产品经理",
           "image": "https://randomuser.me/api/portraits/men/8.jpg",
-          "quote": "我不熟悉 Tailwind，我想自己做一些页面，我在网上搜索了很多英雄页面和区块。然而，大多数都没有给我一个清晰的想法，或者需要一些 HTML/CSS 编码背景来从原始文件中做一些更改，或者太贵了。我下载了其中一个 MkSaaS 模板，它非常容易理解，你可以在开始时修改代码/区块以完美地适应你的页面目的。"
+          "quote": "我不熟悉 Tailwind，我想自己做一些页面，我在网上搜索了很多英雄页面和区块。然而，大多数都没有给我一个清晰的想法，或者需要一些 HTML/CSS 编码背景来从原始文件中做一些更改，或者太贵了。我下载了其中一个 WatermarkRemoverTools 模板，它非常容易理解，你可以在开始时修改代码/区块以完美地适应你的页面目的。"
         },
         "item-5": {
           "name": "Shekinah Tshiokufila",
           "role": "高级软件工程师",
           "image": "https://randomuser.me/api/portraits/men/4.jpg",
-          "quote": "MkSaaS 正在重新定义网页设计标准，这些区块为那些喜欢美丽但可能缺乏时间实现它的人提供了简单且高效的方式。我只能推荐这个不可思议的奇迹。"
+          "quote": "WatermarkRemoverTools 正在重新定义网页设计标准，这些区块为那些喜欢美丽但可能缺乏时间实现它的人提供了简单且高效的方式。我只能推荐这个不可思议的奇迹。"
         },
         "item-6": {
           "name": "Oketa Fred",
           "role": "全栈开发工程师",
           "image": "https://randomuser.me/api/portraits/men/2.jpg",
-          "quote": "我绝对喜欢 MkSaaS！这些组件区块设计精美且易于使用，使创建一个出色的网站变得轻而易举。"
+          "quote": "我绝对喜欢 WatermarkRemoverTools！这些组件区块设计精美且易于使用，使创建一个出色的网站变得轻而易举。"
         },
         "item-7": {
           "name": "Zeki",
           "role": "ChatExtend 创始人",
           "image": "https://randomuser.me/api/portraits/men/5.jpg",
-          "quote": "使用 MkSaaS 就像解锁了一个秘密的设计超能力。它是简单性和多功能性的完美融合，使我们能够创建既令人惊叹又用户友好的界面。"
+          "quote": "使用 WatermarkRemoverTools 就像解锁了一个秘密的设计超能力。它是简单性和多功能性的完美融合，使我们能够创建既令人惊叹又用户友好的界面。"
         },
         "item-8": {
           "name": "Joseph Kitheka",
           "role": "全栈开发工程师",
           "image": "https://randomuser.me/api/portraits/men/9.jpg",
-          "quote": "MkSaaS 改变了我的网页开发方式。他们的 UI 组件、区块和模板极大地加速了我的工作流程。定制每个方面的灵活性使我能够创建独特的用户体验。MkSaaS 是现代网页开发的游戏规则改变者！"
+          "quote": "WatermarkRemoverTools 改变了我的网页开发方式。他们的 UI 组件、区块和模板极大地加速了我的工作流程。定制每个方面的灵活性使我能够创建独特的用户体验。WatermarkRemoverTools 是现代网页开发的游戏规则改变者！"
         },
         "item-9": {
           "name": "Khatab Wedaa",
           "role": "MerakiUI 创建者",
           "image": "https://randomuser.me/api/portraits/men/10.jpg",
-          "quote": "MkSaaS 是一个优雅、干净且响应式的 SaaS 模板，它非常有助于快速开始您的项目。"
+          "quote": "WatermarkRemoverTools 是一个优雅、干净且响应式的 SaaS 模板，它非常有助于快速开始您的项目。"
         },
         "item-10": {
           "name": "Rodrigo Aguilar",
           "role": "TailwindAwesome 创建者",
           "image": "https://randomuser.me/api/portraits/men/11.jpg",
-          "quote": "我爱 MkSaaS ❤️。这些组件区块结构良好，易于使用，设计精美。它使创建一个出色的网站变得非常容易。"
+          "quote": "我爱 WatermarkRemoverTools ❤️。这些组件区块结构良好，易于使用，设计精美。它使创建一个出色的网站变得非常容易。"
         },
         "item-11": {
           "name": "Eric Ampire",
           "role": "Google 开发者专家",
           "image": "https://randomuser.me/api/portraits/men/12.jpg",
-          "quote": "MkSaaS 模板是任何想要创建一个美丽且功能齐全的网站但没有网页设计经验的人的完美解决方案。这些模板易于使用，可定制，并且响应迅速。我强烈推荐 MkSaaS 模板给任何想要创建网站的人。"
+          "quote": "WatermarkRemoverTools 模板是任何想要创建一个美丽且功能齐全的网站但没有网页设计经验的人的完美解决方案。这些模板易于使用，可定制，并且响应迅速。我强烈推荐 WatermarkRemoverTools 模板给任何想要创建网站的人。"
         },
         "item-12": {
           "name": "Roland Tubonge",
           "role": "软件工程师",
           "image": "https://randomuser.me/api/portraits/men/13.jpg",
-          "quote": "MkSaaS 设计得如此出色，即使没有网页设计经验，您也可以创造奇迹。让自己被吸引！"
+          "quote": "WatermarkRemoverTools 设计得如此出色，即使没有网页设计经验，您也可以创造奇迹。让自己被吸引！"
         }
       }
     },
     "stats": {
       "title": "统计",
-      "subtitle": "MkSaaS 相关的数字",
-      "description": "MkSaaS 可让您在几天内轻松构建您的 AI SaaS",
+      "subtitle": "WatermarkRemoverTools 相关的数字",
+      "description": "WatermarkRemoverTools 可让您在几天内轻松构建您的 AI SaaS",
       "items": {
         "item-1": {
           "title": "GitHub 上的星星"
         },
         "item-2": {
-          "title": "使用 MkSaaS 的活跃用户"
+          "title": "使用 WatermarkRemoverTools 的活跃用户"
         },
         "item-3": {
-          "title": "使用 MkSaaS 启动的应用"
+          "title": "使用 WatermarkRemoverTools 启动的应用"
         }
       }
     },
     "calltoaction": {
       "title": "开始构建",
-      "description": "MkSaaS 可让您在几天内轻松构建您的 AI SaaS",
+      "description": "WatermarkRemoverTools 可让您在几天内轻松构建您的 AI SaaS",
       "primaryButton": "开始使用",
       "secondaryButton": "查看演示"
     }
   },
   "AITextPage": {
     "title": "AI 文本",
-    "description": "MkSaaS 让您在几天内轻松构建您的 AI SaaS，简单且毫不费力",
+    "description": "WatermarkRemoverTools 让您在几天内轻松构建您的 AI SaaS，简单且毫不费力",
     "content": "正在开发中"
   },
   "AIImagePage": {
     "title": "AI 图片",
-    "description": "MkSaaS 让您在几天内轻松构建您的 AI SaaS，简单且毫不费力",
+    "description": "WatermarkRemoverTools 让您在几天内轻松构建您的 AI SaaS，简单且毫不费力",
     "content": "正在开发中"
   },
   "AIVideoPage": {
     "title": "AI 视频",
-    "description": "MkSaaS 让您在几天内轻松构建您的 AI SaaS，简单且毫不费力",
+    "description": "WatermarkRemoverTools 让您在几天内轻松构建您的 AI SaaS，简单且毫不费力",
     "content": "正在开发中"
   },
   "AIAudioPage": {
     "title": "AI 音频",
-    "description": "MkSaaS 让您在几天内轻松构建您的 AI SaaS，简单且毫不费力",
+    "description": "WatermarkRemoverTools 让您在几天内轻松构建您的 AI SaaS，简单且毫不费力",
     "content": "正在开发中"
   }
 }

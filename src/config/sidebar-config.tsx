@@ -20,7 +20,7 @@ import { useTranslations } from 'next-intl';
  * NOTICE: used in client components only
  *
  * docs:
- * https://mksaas.com/docs/config/sidebar
+ * https://watermarkremover.tools/docs/config/sidebar
  *
  * @returns The sidebar config with translated titles and descriptions
  */

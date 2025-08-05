@@ -1,41 +1,39 @@
-# MkSaaS
+# WatermarkRemoverTools
 
-Make AI SaaS in a weekend.
+Remove watermarks from images instantly with AI.
 
-The complete Next.js boilerplate for building profitable SaaS, with auth, payments, i18n, newsletter, dashboard, blog, docs, blocks, themes, SEO and more.
+The complete watermark removal tool built with Next.js, featuring AI-powered processing, user authentication, subscription management, and more.
 
 ## Author
 
-This project is created by [Fox](https://x.com/indie_maker_fox), the founder of [MkSaaS](https://mksaas.com) and [Mkdirs](https://mkdirs.com). The official X account for [MkSaaS](https://mksaas.com) is [@mksaascom](https://x.com/mksaascom), you can follow this account for the updates about MkSaaS.
+This project is created by the WatermarkRemoverTools team. Visit our website at [watermarkremover.tools](https://watermarkremover.tools) for more information.
 
 ## Documentation
 
-The documentation is available on the [website](https://mksaas.com/docs). It includes guides, tutorials, and detailed explanations of the code. I designed it to be as beginner-friendly as possible, so you can start making money from day one.
+The documentation is available on the [website](https://watermarkremover.tools/docs). It includes guides, tutorials, and detailed explanations of the tool. We designed it to be as user-friendly as possible, so you can start removing watermarks immediately.
 
 If you found anything that could be improved, please let me know.
 
 ## Links
 
-- 🔥 website: [mksaas.com](https://mksaas.com)
-- 🌐 demo: [demo.mksaas.com](https://demo.mksaas.com)
-- 📚 documentation: [mksaas.com/docs](https://mksaas.com/docs)
-- 🗓️ roadmap: [mksaas roadmap](https://mksaas.link/roadmap)
-- 👨‍💻 discord: [mksaas.link/discord](https://mksaas.link/discord)
-- 📹 video (WIP): [mksaas.link/youtube](https://mksaas.link/youtube)
+- 🔥 website: [watermarkremover.tools](https://watermarkremover.tools)
+- 🌐 demo: [demo.watermarkremover.tools](https://demo.watermarkremover.tools)
+- 📚 documentation: [watermarkremover.tools/docs](https://watermarkremover.tools/docs)
+- 🗓️ roadmap: [watermarkremover.tools/roadmap](https://watermarkremover.tools/roadmap)
+- 👨‍💻 discord: [watermarkremover.tools/discord](https://watermarkremover.tools/discord)
+- 📹 video (WIP): [watermarkremover.tools/youtube](https://watermarkremover.tools/youtube)
 
 ## Repositories
 
 By default, you should have access to all 5 repositories. If you find that you’re unable to access any of them, please don’t hesitate to reach out to me, and I’ll assist you in resolving the issue.
 
-- [mksaas-template (ready)](https://github.com/MkSaaSHQ/mksaas-template): https://demo.mksaas.com
-- [mksaas-blog (ready)](https://github.com/MkSaaSHQ/mksaas-blog): https://mksaas.me
-- [mksaas-haitang (ready)](https://github.com/MkSaaSHQ/mksaas-haitang): https://haitang.app
-- [mksaas-outfit (ready)](https://github.com/MkSaaSHQ/mksaas-outfit)
-- [mksaas-app (WIP)](https://github.com/MkSaaSHQ/mksaas-app): https://mksaas.app
+- [watermarkremovertools-template (ready)](https://github.com/WatermarkRemoverToolsHQ/watermarkremovertools-template): https://demo.watermarkremover.tools
+- [watermarkremovertools-blog (ready)](https://github.com/WatermarkRemoverToolsHQ/watermarkremovertools-blog): https://watermarkremover.tools/blog
+- Additional repositories coming soon
 
 ## Notice
 
-> If you have any questions, please [submit an issue](https://github.com/MkSaaSHQ/mksaas-template/issues/new), or contact me at [support@mksaas.com](mailto:support@mksaas.com), or join our [discord community](https://mksaas.link/discord) and ask for help there.
+> If you have any questions, please [submit an issue](https://github.com/WatermarkRemoverToolsHQ/watermarkremovertools-template/issues/new), or contact me at [support@watermarkremover.tools](mailto:support@watermarkremover.tools), or join our [discord community](https://watermarkremover.tools/discord) and ask for help there.
 
 > If you want to receive notifications whenever code changes, please click `Watch` button in the top right.
 

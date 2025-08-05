@@ -55,7 +55,7 @@ export const getPriceId = (
  * website config, without translations
  *
  * docs:
- * https://mksaas.com/docs/config/website
+ * https://watermarkremover.tools/docs/config/website
  */
 export const websiteConfig: WebsiteConfig = {
   metadata: {

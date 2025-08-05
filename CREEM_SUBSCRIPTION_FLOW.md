@@ -1,7 +1,7 @@
 # Creem Subscription Flow Diagram
 
 ## Overview
-This document illustrates the complete data flow for Creem subscription processing in the MKSaaS application.
+This document illustrates the complete data flow for Creem subscription processing in the WATERMARKREMOVERTOOLS application.
 
 ## Sequence Diagram
 

@@ -42,18 +42,26 @@ export const getOAuthCallbackUrl = (provider: 'google' | 'github'): string => {
  */
 export const socialLinks = {
   github:
-    process.env.NEXT_PUBLIC_SOCIAL_GITHUB || 'https://github.com/MkSaaSHQ',
+    process.env.NEXT_PUBLIC_SOCIAL_GITHUB ||
+    'https://github.com/WatermarkRemoverToolsHQ',
   twitter:
-    process.env.NEXT_PUBLIC_SOCIAL_TWITTER || 'https://mksaas.link/twitter',
-  blueSky: process.env.NEXT_PUBLIC_SOCIAL_BLUESKY || 'https://mksaas.link/bsky',
+    process.env.NEXT_PUBLIC_SOCIAL_TWITTER ||
+    'https://watermarkremovertools.link/twitter',
+  blueSky:
+    process.env.NEXT_PUBLIC_SOCIAL_BLUESKY ||
+    'https://watermarkremovertools.link/bsky',
   discord:
-    process.env.NEXT_PUBLIC_SOCIAL_DISCORD || 'https://mksaas.link/discord',
+    process.env.NEXT_PUBLIC_SOCIAL_DISCORD ||
+    'https://watermarkremovertools.link/discord',
   mastodon:
-    process.env.NEXT_PUBLIC_SOCIAL_MASTODON || 'https://mksaas.link/mastodon',
+    process.env.NEXT_PUBLIC_SOCIAL_MASTODON ||
+    'https://watermarkremovertools.link/mastodon',
   linkedin:
-    process.env.NEXT_PUBLIC_SOCIAL_LINKEDIN || 'https://mksaas.link/linkedin',
+    process.env.NEXT_PUBLIC_SOCIAL_LINKEDIN ||
+    'https://watermarkremovertools.link/linkedin',
   youtube:
-    process.env.NEXT_PUBLIC_SOCIAL_YOUTUBE || 'https://mksaas.link/youtube',
+    process.env.NEXT_PUBLIC_SOCIAL_YOUTUBE ||
+    'https://watermarkremovertools.link/youtube',
 };
 
 /**
@@ -61,7 +69,9 @@ export const socialLinks = {
  * This function ensures that environment variables are read at runtime
  */
 export const getExternalLinks = () => ({
-  roadmap: process.env.NEXT_PUBLIC_ROADMAP_URL || 'https://mksaas.link/roadmap',
+  roadmap:
+    process.env.NEXT_PUBLIC_ROADMAP_URL ||
+    'https://watermarkremovertools.link/roadmap',
   documentation: process.env.NEXT_PUBLIC_DOCS_URL || '/docs',
   support: process.env.NEXT_PUBLIC_SUPPORT_URL || '/contact',
 });
@@ -70,7 +80,7 @@ export const getExternalLinks = () => ({
  * Static external links for build time
  */
 export const externalLinks = {
-  roadmap: 'https://mksaas.link/roadmap',
+  roadmap: 'https://watermarkremovertools.link/roadmap',
   documentation: '/docs',
   support: '/contact',
 };

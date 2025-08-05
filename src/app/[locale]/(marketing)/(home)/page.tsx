@@ -1,10 +1,6 @@
 import FaqSection from '@/components/blocks/faqs/faqs';
-import FeaturesSection from '@/components/blocks/features/features';
-import Features2Section from '@/components/blocks/features/features2';
-import Features3Section from '@/components/blocks/features/features3';
 import HeroSection from '@/components/blocks/hero/hero';
 import PricingSection from '@/components/blocks/pricing/pricing-server';
-import StatsSection from '@/components/blocks/stats/stats';
 import TestimonialsSection from '@/components/blocks/testimonials/testimonials';
 import { NewsletterCard } from '@/components/newsletter/newsletter-card';
 import DiscordWidget from '@/components/shared/discord-widget';
@@ -45,14 +41,6 @@ export default async function HomePage(props: HomePageProps) {
     <>
       <div className="flex flex-col">
         <HeroSection />
-
-        <StatsSection />
-
-        <FeaturesSection />
-
-        <Features2Section />
-
-        <Features3Section />
 
         <PricingSection />
 

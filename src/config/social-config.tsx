@@ -21,7 +21,7 @@ import { websiteConfig } from './website';
  * NOTICE: used in client components only
  *
  * docs:
- * https://mksaas.com/docs/config/social
+ * https://watermarkremover.tools/docs/config/social
  *
  * @returns The social config
  */

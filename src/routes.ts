@@ -16,7 +16,7 @@ export enum Routes {
   Contact = '/contact',
   Waitlist = '/waitlist',
   Changelog = '/changelog',
-  Roadmap = 'https://mksaas.link/roadmap', // Use externalLinks.roadmap in runtime if needed
+  Roadmap = 'https://watermarkremovertools.link/roadmap', // Use externalLinks.roadmap in runtime if needed
   CookiePolicy = '/cookie',
   PrivacyPolicy = '/privacy',
   TermsOfService = '/terms',

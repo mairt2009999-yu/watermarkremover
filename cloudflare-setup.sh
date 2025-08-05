@@ -79,7 +79,7 @@ pnpm build
 
 # 使用 wrangler pages 部署
 echo "部署到 Cloudflare Pages..."
-wrangler pages deploy .next/static --project-name=mksaas-template
+wrangler pages deploy .next/static --project-name=watermarkremovertools-template
 
 echo "部署完成！"
 EOF
@@ -91,5 +91,5 @@ echo ""
 echo "设置完成！下一步："
 echo "1. 复制 .env.cloudflare.example 为 .env.cloudflare 并填写配置"
 echo "2. 登录 Cloudflare: wrangler login"
-echo "3. 创建 Pages 项目: wrangler pages project create mksaas-template"
+echo "3. 创建 Pages 项目: wrangler pages project create watermarkremovertools-template"
 echo "4. 运行部署: ./deploy-cloudflare.sh"

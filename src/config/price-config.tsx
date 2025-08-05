@@ -12,7 +12,7 @@ import { useTranslations } from 'next-intl';
  * Use this function when showing the pricing table or the billing card to the user.
  *
  * docs:
- * https://mksaas.com/docs/config/price
+ * https://watermarkremover.tools/docs/config/price
  *
  * @returns The price plans with translated content
  */
