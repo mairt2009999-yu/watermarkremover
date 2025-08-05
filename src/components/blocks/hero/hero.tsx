@@ -2,12 +2,6 @@
 
 import { AnimatedGroup } from '@/components/tailark/motion/animated-group';
 import { TextEffect } from '@/components/tailark/motion/text-effect';
-import {
-  MiniTestimonials,
-  RatingDisplay,
-  StatsCounter,
-  TrustBadges,
-} from '@/components/trust';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
@@ -25,13 +19,11 @@ import {
   Infinity,
   Layers,
   Lock,
-  Shield,
   Sparkles,
   Star,
   Upload,
   Users,
   Wand2,
-  Zap,
 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { type DragEvent, useRef, useState } from 'react';
@@ -235,7 +227,7 @@ export default function HeroSection() {
                 },
                 ...transitionVariants,
               }}
-              className="mt-12 max-w-4xl mx-auto px-6"
+              className="mt-12 mb-8 max-w-4xl mx-auto px-6"
             >
               <div className="text-center mb-8">
                 <h2 className="text-3xl lg:text-4xl font-bold mb-4">
@@ -281,69 +273,6 @@ export default function HeroSection() {
                     After
                   </Badge>
                 </div>
-              </div>
-            </AnimatedGroup>
-
-            {/* Features list */}
-            <AnimatedGroup
-              variants={{
-                container: {
-                  visible: {
-                    transition: {
-                      staggerChildren: 0.05,
-                      delayChildren: 1,
-                    },
-                  },
-                },
-                ...transitionVariants,
-              }}
-              className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-4 max-w-3xl mx-auto"
-            >
-              <div className="flex items-center gap-3 justify-center">
-                <div className="rounded-full bg-primary/10 p-1">
-                  <Check className="h-4 w-4 text-primary" />
-                </div>
-                <span className="text-sm font-medium">Batch Processing</span>
-              </div>
-              <div className="flex items-center gap-3 justify-center">
-                <div className="rounded-full bg-primary/10 p-1">
-                  <Check className="h-4 w-4 text-primary" />
-                </div>
-                <span className="text-sm font-medium">HD Quality Output</span>
-              </div>
-              <div className="flex items-center gap-3 justify-center">
-                <div className="rounded-full bg-primary/10 p-1">
-                  <Check className="h-4 w-4 text-primary" />
-                </div>
-                <span className="text-sm font-medium">5 Second Processing</span>
-              </div>
-            </AnimatedGroup>
-
-            {/* Trust Indicators Section */}
-            <AnimatedGroup
-              variants={{
-                container: {
-                  visible: {
-                    transition: {
-                      staggerChildren: 0.05,
-                      delayChildren: 1.3,
-                    },
-                  },
-                },
-                ...transitionVariants,
-              }}
-              className="mt-16 max-w-6xl mx-auto"
-            >
-              <StatsCounter />
-
-              <div className="mt-12 flex flex-col md:flex-row items-center justify-center gap-8">
-                <RatingDisplay rating={4.9} totalReviews={2500} />
-                <div className="hidden md:block w-px h-16 bg-border" />
-                <TrustBadges />
-              </div>
-
-              <div className="mt-12">
-                <MiniTestimonials />
               </div>
             </AnimatedGroup>
           </div>

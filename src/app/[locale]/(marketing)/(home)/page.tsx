@@ -1,10 +1,11 @@
 import CTASection from '@/components/blocks/cta/cta';
 import FaqSection from '@/components/blocks/faqs/faqs';
+import FeatureGrid from '@/components/blocks/features/feature-grid';
 import HeroSection from '@/components/blocks/hero/hero';
-import HowItWorksSection from '@/components/blocks/how-it-works/how-it-works';
+import EnhancedHowItWorks from '@/components/blocks/how-it-works/enhanced-how-it-works';
 import PricingSection from '@/components/blocks/pricing/pricing-server';
-import TestimonialsSection from '@/components/blocks/testimonials/testimonials';
-import TrustSection from '@/components/blocks/trust/trust';
+import EnhancedTestimonials from '@/components/blocks/testimonials/enhanced-testimonials';
+import EnhancedTrustSection from '@/components/blocks/trust/enhanced-trust';
 import { NewsletterCard } from '@/components/newsletter/newsletter-card';
 import DiscordWidget from '@/components/shared/discord-widget';
 import { constructMetadata } from '@/lib/metadata';
@@ -45,13 +46,15 @@ export default async function HomePage(props: HomePageProps) {
       <div className="flex flex-col space-y-0">
         <HeroSection />
 
-        <HowItWorksSection />
+        <FeatureGrid />
+
+        <EnhancedHowItWorks />
+
+        <EnhancedTestimonials />
+
+        <EnhancedTrustSection />
 
         <PricingSection />
-
-        <TestimonialsSection />
-
-        <TrustSection />
 
         <FaqSection />
 
