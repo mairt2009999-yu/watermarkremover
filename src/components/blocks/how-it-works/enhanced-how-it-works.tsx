@@ -1,10 +1,10 @@
 'use client';
 
-import { motion, AnimatePresence } from 'framer-motion';
-import { useState } from 'react';
-import { Upload, Wand2, Download, Check, ArrowRight } from 'lucide-react';
-import Image from 'next/image';
 import { Button } from '@/components/ui/button';
+import { AnimatePresence, motion } from 'framer-motion';
+import { ArrowRight, Check, Download, Upload, Wand2 } from 'lucide-react';
+import Image from 'next/image';
+import { useState } from 'react';
 
 interface Step {
   id: number;
@@ -21,41 +21,41 @@ export default function EnhancedHowItWorks() {
   const steps: Step[] = [
     {
       id: 1,
-      title: 'Upload Your Image',
-      description: 'Drag and drop or click to upload your watermarked image',
+      title: '上传图片',
+      description: '拖拽或点击上传您需要去除水印的图片',
       icon: <Upload className="h-6 w-6" />,
       image: '/demo/step-upload.svg',
       details: [
-        'Support for JPG, PNG, WEBP, BMP formats',
-        'Files up to 50MB',
-        'Batch upload up to 50 images',
-        'Secure encrypted upload',
+        '支持 JPG、PNG、WEBP、BMP 格式',
+        '文件大小最大 50MB',
+        '支持批量上传 50 张图片',
+        '加密安全上传',
       ],
     },
     {
       id: 2,
-      title: 'AI Processing',
-      description: 'Our advanced AI automatically detects and removes watermarks',
+      title: 'AI 智能处理',
+      description: '先进AI技术自动识别并精准去除各种水印',
       icon: <Wand2 className="h-6 w-6" />,
       image: '/demo/step-process.svg',
       details: [
-        'Smart watermark detection',
-        'Preserves image quality',
-        'Handles complex patterns',
-        'Real-time processing status',
+        '智能水印检测识别',
+        '完美保持图片画质',
+        '处理复杂图案水印',
+        '实时显示处理进度',
       ],
     },
     {
       id: 3,
-      title: 'Download Result',
-      description: 'Get your clean, watermark-free image in seconds',
+      title: '下载结果',
+      description: '几秒钟内获得干净无水印的高质量图片',
       icon: <Download className="h-6 w-6" />,
       image: '/demo/step-download.svg',
       details: [
-        'Original resolution maintained',
-        'Multiple format options',
-        'Batch download available',
-        'Auto-delete for privacy',
+        '保持原始分辨率',
+        '多种格式选择',
+        '支持批量下载',
+        '自动删除保护隐私',
       ],
     },
   ];
@@ -96,13 +96,13 @@ export default function EnhancedHowItWorks() {
             variants={itemVariants}
             className="text-3xl lg:text-4xl font-bold mb-4"
           >
-            How It Works
+            简单三步，轻松去水印
           </motion.h2>
           <motion.p
             variants={itemVariants}
             className="text-lg text-muted-foreground max-w-2xl mx-auto"
           >
-            Remove watermarks from your images in three simple steps
+            上传、处理、下载，AI 帮您快速去除图片水印
           </motion.p>
         </motion.div>
 

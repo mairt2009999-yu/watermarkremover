@@ -1,12 +1,10 @@
-import CTASection from '@/components/blocks/cta/cta';
 import FaqSection from '@/components/blocks/faqs/faqs';
 import FeatureGrid from '@/components/blocks/features/feature-grid';
 import HeroSection from '@/components/blocks/hero/hero';
 import EnhancedHowItWorks from '@/components/blocks/how-it-works/enhanced-how-it-works';
 import PricingSection from '@/components/blocks/pricing/pricing-server';
-import EnhancedTestimonials from '@/components/blocks/testimonials/enhanced-testimonials';
-import EnhancedTrustSection from '@/components/blocks/trust/enhanced-trust';
-import { NewsletterCard } from '@/components/newsletter/newsletter-card';
+import SimpleTestimonials from '@/components/blocks/testimonials/simple-testimonials';
+import WatermarkTypesShowcase from '@/components/blocks/watermark-types/watermark-types-showcase';
 import DiscordWidget from '@/components/shared/discord-widget';
 import { constructMetadata } from '@/lib/metadata';
 import { getUrlWithLocale } from '@/lib/urls/urls';
@@ -46,21 +44,17 @@ export default async function HomePage(props: HomePageProps) {
       <div className="flex flex-col space-y-0">
         <HeroSection />
 
+        <WatermarkTypesShowcase />
+
         <FeatureGrid />
 
         <EnhancedHowItWorks />
 
-        <EnhancedTestimonials />
-
-        <EnhancedTrustSection />
+        <SimpleTestimonials />
 
         <PricingSection />
 
         <FaqSection />
-
-        <CTASection />
-
-        <NewsletterCard />
       </div>
     </>
   );

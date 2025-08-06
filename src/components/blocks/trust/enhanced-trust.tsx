@@ -1,8 +1,8 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { Shield, Lock, CheckCircle, Award, Globe, Zap } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
+import { motion } from 'framer-motion';
+import { Award, CheckCircle, Globe, Lock, Shield, Zap } from 'lucide-react';
 
 interface TrustFeature {
   icon: React.ReactNode;
@@ -92,8 +92,9 @@ export default function EnhancedTrustSection() {
               Your Privacy is Our Top Priority
             </h2>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              We use industry-leading security measures to protect your images and data. 
-              Your content is processed securely and never stored or shared.
+              We use industry-leading security measures to protect your images
+              and data. Your content is processed securely and never stored or
+              shared.
             </p>
           </motion.div>
 
@@ -103,7 +104,7 @@ export default function EnhancedTrustSection() {
             className="relative rounded-3xl bg-gradient-to-br from-primary/10 via-primary/5 to-transparent p-8 md:p-12 mb-12 border border-border/50"
           >
             <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl" />
-            
+
             <div className="relative">
               <div className="grid md:grid-cols-2 gap-8 mb-12">
                 {trustFeatures.map((feature, index) => (

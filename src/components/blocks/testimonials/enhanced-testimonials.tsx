@@ -1,12 +1,12 @@
 'use client';
 
-import { motion, AnimatePresence } from 'framer-motion';
-import { useState, useEffect } from 'react';
-import { Quote, Star, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import { AnimatePresence, motion } from 'framer-motion';
+import { ChevronLeft, ChevronRight, Quote, Star } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import { useEffect, useState } from 'react';
 
 interface Testimonial {
   id: number;
@@ -30,9 +30,11 @@ export default function EnhancedTestimonials() {
       name: 'Sarah Chen',
       role: 'Marketing Director',
       company: 'TechFlow Solutions',
-      content: 'This tool saved us countless hours! We processed over 500 product images in minutes. The AI is incredibly accurate and preserves image quality perfectly.',
+      content:
+        'This tool saved us countless hours! We processed over 500 product images in minutes. The AI is incredibly accurate and preserves image quality perfectly.',
       rating: 5,
-      avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=face',
+      avatar:
+        'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=face',
       highlight: '500+ images processed',
     },
     {
@@ -40,9 +42,11 @@ export default function EnhancedTestimonials() {
       name: 'Marcus Johnson',
       role: 'E-commerce Manager',
       company: 'ShopStyle Inc',
-      content: 'The batch processing feature is a game-changer. We can now update our entire catalog without manual editing. Customer satisfaction increased by 40%.',
+      content:
+        'The batch processing feature is a game-changer. We can now update our entire catalog without manual editing. Customer satisfaction increased by 40%.',
       rating: 5,
-      avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
+      avatar:
+        'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
       highlight: '40% satisfaction boost',
     },
     {
@@ -50,9 +54,11 @@ export default function EnhancedTestimonials() {
       name: 'Emily Rodriguez',
       role: 'Content Creator',
       company: 'Creative Studios',
-      content: 'As a content creator, I need fast and reliable tools. This watermark remover exceeds expectations with its speed and accuracy. Highly recommended!',
+      content:
+        'As a content creator, I need fast and reliable tools. This watermark remover exceeds expectations with its speed and accuracy. Highly recommended!',
       rating: 5,
-      avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face',
+      avatar:
+        'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face',
       highlight: 'Professional results',
     },
     {
@@ -60,9 +66,11 @@ export default function EnhancedTestimonials() {
       name: 'David Kim',
       role: 'Photography Studio Owner',
       company: 'Lens Masters',
-      content: 'We\'ve tried many watermark removal tools, but this is by far the best. The AI technology is impressive and the results are consistently excellent.',
+      content:
+        "We've tried many watermark removal tools, but this is by far the best. The AI technology is impressive and the results are consistently excellent.",
       rating: 5,
-      avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face',
+      avatar:
+        'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face',
       highlight: 'Best in class',
     },
   ];
@@ -125,9 +133,7 @@ export default function EnhancedTestimonials() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl lg:text-4xl font-bold mb-4">
-            {t('title')}
-          </h2>
+          <h2 className="text-3xl lg:text-4xl font-bold mb-4">{t('title')}</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             {t('subtitle')}
           </p>
@@ -272,11 +278,15 @@ export default function EnhancedTestimonials() {
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-primary">2M+</div>
-                <div className="text-sm text-muted-foreground">Images Processed</div>
+                <div className="text-sm text-muted-foreground">
+                  Images Processed
+                </div>
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-primary">4.9/5</div>
-                <div className="text-sm text-muted-foreground">Average Rating</div>
+                <div className="text-sm text-muted-foreground">
+                  Average Rating
+                </div>
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-primary">150+</div>
