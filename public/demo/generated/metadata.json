@@ -1,0 +1,235 @@
+{
+  "generated_files": [
+    {
+      "category": "nature landscape",
+      "type": "text_center",
+      "watermarked": "nature_landscape_text_center.jpg",
+      "clean": "nature_landscape_clean.jpg"
+    },
+    {
+      "category": "nature landscape",
+      "type": "text_corner",
+      "watermarked": "nature_landscape_text_corner.jpg",
+      "clean": "nature_landscape_clean.jpg"
+    },
+    {
+      "category": "nature landscape",
+      "type": "pattern_diagonal",
+      "watermarked": "nature_landscape_pattern_diagonal.jpg",
+      "clean": "nature_landscape_clean.jpg"
+    },
+    {
+      "category": "nature landscape",
+      "type": "pattern_grid",
+      "watermarked": "nature_landscape_pattern_grid.jpg",
+      "clean": "nature_landscape_clean.jpg"
+    },
+    {
+      "category": "nature landscape",
+      "type": "logo",
+      "watermarked": "nature_landscape_logo.jpg",
+      "clean": "nature_landscape_clean.jpg"
+    },
+    {
+      "category": "nature landscape",
+      "type": "embedded",
+      "watermarked": "nature_landscape_embedded.jpg",
+      "clean": "nature_landscape_clean.jpg"
+    },
+    {
+      "category": "architecture building",
+      "type": "text_center",
+      "watermarked": "architecture_building_text_center.jpg",
+      "clean": "architecture_building_clean.jpg"
+    },
+    {
+      "category": "architecture building",
+      "type": "text_corner",
+      "watermarked": "architecture_building_text_corner.jpg",
+      "clean": "architecture_building_clean.jpg"
+    },
+    {
+      "category": "architecture building",
+      "type": "pattern_diagonal",
+      "watermarked": "architecture_building_pattern_diagonal.jpg",
+      "clean": "architecture_building_clean.jpg"
+    },
+    {
+      "category": "architecture building",
+      "type": "pattern_grid",
+      "watermarked": "architecture_building_pattern_grid.jpg",
+      "clean": "architecture_building_clean.jpg"
+    },
+    {
+      "category": "architecture building",
+      "type": "logo",
+      "watermarked": "architecture_building_logo.jpg",
+      "clean": "architecture_building_clean.jpg"
+    },
+    {
+      "category": "architecture building",
+      "type": "embedded",
+      "watermarked": "architecture_building_embedded.jpg",
+      "clean": "architecture_building_clean.jpg"
+    },
+    {
+      "category": "product photography",
+      "type": "text_center",
+      "watermarked": "product_photography_text_center.jpg",
+      "clean": "product_photography_clean.jpg"
+    },
+    {
+      "category": "product photography",
+      "type": "text_corner",
+      "watermarked": "product_photography_text_corner.jpg",
+      "clean": "product_photography_clean.jpg"
+    },
+    {
+      "category": "product photography",
+      "type": "pattern_diagonal",
+      "watermarked": "product_photography_pattern_diagonal.jpg",
+      "clean": "product_photography_clean.jpg"
+    },
+    {
+      "category": "product photography",
+      "type": "pattern_grid",
+      "watermarked": "product_photography_pattern_grid.jpg",
+      "clean": "product_photography_clean.jpg"
+    },
+    {
+      "category": "product photography",
+      "type": "logo",
+      "watermarked": "product_photography_logo.jpg",
+      "clean": "product_photography_clean.jpg"
+    },
+    {
+      "category": "product photography",
+      "type": "embedded",
+      "watermarked": "product_photography_embedded.jpg",
+      "clean": "product_photography_clean.jpg"
+    },
+    {
+      "category": "portrait photography",
+      "type": "text_center",
+      "watermarked": "portrait_photography_text_center.jpg",
+      "clean": "portrait_photography_clean.jpg"
+    },
+    {
+      "category": "portrait photography",
+      "type": "text_corner",
+      "watermarked": "portrait_photography_text_corner.jpg",
+      "clean": "portrait_photography_clean.jpg"
+    },
+    {
+      "category": "portrait photography",
+      "type": "pattern_diagonal",
+      "watermarked": "portrait_photography_pattern_diagonal.jpg",
+      "clean": "portrait_photography_clean.jpg"
+    },
+    {
+      "category": "portrait photography",
+      "type": "pattern_grid",
+      "watermarked": "portrait_photography_pattern_grid.jpg",
+      "clean": "portrait_photography_clean.jpg"
+    },
+    {
+      "category": "portrait photography",
+      "type": "logo",
+      "watermarked": "portrait_photography_logo.jpg",
+      "clean": "portrait_photography_clean.jpg"
+    },
+    {
+      "category": "portrait photography",
+      "type": "embedded",
+      "watermarked": "portrait_photography_embedded.jpg",
+      "clean": "portrait_photography_clean.jpg"
+    },
+    {
+      "category": "abstract art",
+      "type": "text_center",
+      "watermarked": "abstract_art_text_center.jpg",
+      "clean": "abstract_art_clean.jpg"
+    },
+    {
+      "category": "abstract art",
+      "type": "text_corner",
+      "watermarked": "abstract_art_text_corner.jpg",
+      "clean": "abstract_art_clean.jpg"
+    },
+    {
+      "category": "abstract art",
+      "type": "pattern_diagonal",
+      "watermarked": "abstract_art_pattern_diagonal.jpg",
+      "clean": "abstract_art_clean.jpg"
+    },
+    {
+      "category": "abstract art",
+      "type": "pattern_grid",
+      "watermarked": "abstract_art_pattern_grid.jpg",
+      "clean": "abstract_art_clean.jpg"
+    },
+    {
+      "category": "abstract art",
+      "type": "logo",
+      "watermarked": "abstract_art_logo.jpg",
+      "clean": "abstract_art_clean.jpg"
+    },
+    {
+      "category": "abstract art",
+      "type": "embedded",
+      "watermarked": "abstract_art_embedded.jpg",
+      "clean": "abstract_art_clean.jpg"
+    },
+    {
+      "category": "food photography",
+      "type": "text_center",
+      "watermarked": "food_photography_text_center.jpg",
+      "clean": "food_photography_clean.jpg"
+    },
+    {
+      "category": "food photography",
+      "type": "text_corner",
+      "watermarked": "food_photography_text_corner.jpg",
+      "clean": "food_photography_clean.jpg"
+    },
+    {
+      "category": "food photography",
+      "type": "pattern_diagonal",
+      "watermarked": "food_photography_pattern_diagonal.jpg",
+      "clean": "food_photography_clean.jpg"
+    },
+    {
+      "category": "food photography",
+      "type": "pattern_grid",
+      "watermarked": "food_photography_pattern_grid.jpg",
+      "clean": "food_photography_clean.jpg"
+    },
+    {
+      "category": "food photography",
+      "type": "logo",
+      "watermarked": "food_photography_logo.jpg",
+      "clean": "food_photography_clean.jpg"
+    },
+    {
+      "category": "food photography",
+      "type": "embedded",
+      "watermarked": "food_photography_embedded.jpg",
+      "clean": "food_photography_clean.jpg"
+    }
+  ],
+  "watermark_types": [
+    "text_overlay",
+    "logo_pattern",
+    "corner_mark",
+    "subtle_embed",
+    "grid_pattern"
+  ],
+  "categories": [
+    "nature landscape",
+    "architecture building",
+    "product photography",
+    "portrait photography",
+    "abstract art",
+    "food photography"
+  ]
+}

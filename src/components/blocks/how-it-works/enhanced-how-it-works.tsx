@@ -21,41 +21,41 @@ export default function EnhancedHowItWorks() {
   const steps: Step[] = [
     {
       id: 1,
-      title: '上传图片',
-      description: '拖拽或点击上传您需要去除水印的图片',
+      title: 'Upload Your Image',
+      description: 'Drag and drop or click to upload your watermarked image',
       icon: <Upload className="h-6 w-6" />,
       image: '/demo/step-upload.svg',
       details: [
-        '支持 JPG、PNG、WEBP、BMP 格式',
-        '文件大小最大 50MB',
-        '支持批量上传 50 张图片',
-        '加密安全上传',
+        'JPG, PNG, WEBP, BMP formats',
+        'Max file size: 50MB',
+        'Batch upload up to 50 images',
+        'Secure encrypted upload',
       ],
     },
     {
       id: 2,
-      title: 'AI 智能处理',
-      description: '先进AI技术自动识别并精准去除各种水印',
+      title: 'AI Processing',
+      description: 'Advanced AI automatically detects and removes watermarks',
       icon: <Wand2 className="h-6 w-6" />,
       image: '/demo/step-process.svg',
       details: [
-        '智能水印检测识别',
-        '完美保持图片画质',
-        '处理复杂图案水印',
-        '实时显示处理进度',
+        'Smart watermark detection',
+        'Preserves image quality',
+        'Handles complex watermarks',
+        'Real-time progress tracking',
       ],
     },
     {
       id: 3,
-      title: '下载结果',
-      description: '几秒钟内获得干净无水印的高质量图片',
+      title: 'Download Result',
+      description: 'Get your clean, watermark-free image in seconds',
       icon: <Download className="h-6 w-6" />,
       image: '/demo/step-download.svg',
       details: [
-        '保持原始分辨率',
-        '多种格式选择',
-        '支持批量下载',
-        '自动删除保护隐私',
+        'Original resolution kept',
+        'Multiple format options',
+        'Batch download support',
+        'Auto-delete for privacy',
       ],
     },
   ];
@@ -96,13 +96,14 @@ export default function EnhancedHowItWorks() {
             variants={itemVariants}
             className="text-3xl lg:text-4xl font-bold mb-4"
           >
-            简单三步，轻松去水印
+            Remove Watermarks with Our AI Watermark Remover in Three Simple
+            Steps
           </motion.h2>
           <motion.p
             variants={itemVariants}
             className="text-lg text-muted-foreground max-w-2xl mx-auto"
           >
-            上传、处理、下载，AI 帮您快速去除图片水印
+            Upload, process, and download - get clean images instantly
           </motion.p>
         </motion.div>
 

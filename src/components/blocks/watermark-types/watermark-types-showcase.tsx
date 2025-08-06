@@ -35,42 +35,65 @@ export default function WatermarkTypesShowcase() {
   const watermarkTypes: WatermarkType[] = [
     {
       id: 'visible-text-logo',
-      title: '可见水印（文字、Logo、图案）',
-      description: '清晰可见的文字、品牌Logo或装饰图案水印',
+      title: 'Visible Watermarks (Text, Logo, Pattern)',
+      description:
+        'Clearly visible text, brand logos, or decorative pattern watermarks',
       icon: <FileImage className="h-5 w-5" />,
-      beforeImage: '/demo/watermark-before.svg',
-      afterImage: '/demo/watermark-after.svg',
-      features: ['文字水印去除', 'Logo清理', '装饰图案移除', '版权标识清除'],
+      beforeImage: '/demo/visible-text-before.webp',
+      afterImage: '/demo/visible-text-after.webp',
+      features: [
+        'Text watermark removal',
+        'Logo cleanup',
+        'Pattern removal',
+        'Copyright mark clearing',
+      ],
       difficulty: 'Easy',
     },
     {
       id: 'semi-transparent',
-      title: '半透明水印',
-      description: '半透明覆盖层或背景水印，通常具有一定透明度',
+      title: 'Semi-Transparent Watermarks',
+      description:
+        'Semi-transparent overlays or background watermarks with varying opacity',
       icon: <Layers className="h-5 w-5" />,
-      beforeImage: '/demo/watermark-before.svg',
-      afterImage: '/demo/watermark-after.svg',
-      features: ['透明度检测', '背景重建', '色彩还原', '细节保护'],
+      beforeImage: '/demo/semi-transparent-before.webp',
+      afterImage: '/demo/semi-transparent-after.webp',
+      features: [
+        'Transparency detection',
+        'Background reconstruction',
+        'Color restoration',
+        'Detail protection',
+      ],
       difficulty: 'Medium',
     },
     {
       id: 'embedded-digital',
-      title: '嵌入式数字水印',
-      description: '隐藏在图像数据中的不可见数字标识',
+      title: 'Embedded Digital Watermarks',
+      description: 'Invisible digital identifiers hidden within image data',
       icon: <Eye className="h-5 w-5" />,
-      beforeImage: '/demo/watermark-before.svg',
-      afterImage: '/demo/watermark-after.svg',
-      features: ['深度AI检测', '频域分析', '隐形标识清除', '数据完整性保护'],
+      beforeImage: '/demo/embedded-digital-before.webp',
+      afterImage: '/demo/embedded-digital-after.webp',
+      features: [
+        'Deep AI detection',
+        'Frequency domain analysis',
+        'Invisible mark removal',
+        'Data integrity protection',
+      ],
       difficulty: 'Expert',
     },
     {
       id: 'repetitive-pattern',
-      title: '重复图案水印',
-      description: '重复的Logo图案、纹理或几何形状水印',
+      title: 'Repetitive Pattern Watermarks',
+      description:
+        'Repeating logo patterns, textures, or geometric shape watermarks',
       icon: <RotateCcw className="h-5 w-5" />,
-      beforeImage: '/demo/watermark-before.svg',
-      afterImage: '/demo/watermark-after.svg',
-      features: ['图案识别', '重复元素检测', '智能填充', '纹理重建'],
+      beforeImage: '/demo/repetitive-pattern-before.webp',
+      afterImage: '/demo/repetitive-pattern-after.webp',
+      features: [
+        'Pattern recognition',
+        'Repetitive element detection',
+        'Smart fill',
+        'Texture reconstruction',
+      ],
       difficulty: 'Hard',
     },
   ];
@@ -111,10 +134,12 @@ export default function WatermarkTypesShowcase() {
             AI Technology
           </Badge>
           <h2 className="text-3xl lg:text-4xl font-bold mb-4">
-            四种水印类型，AI 精准识别
+            Four Watermark Types – AI-Powered Watermark Remover
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            我们的先进AI技术能够精确识别和去除各种类型的水印，无论是可见的文字Logo，还是隐藏的数字标识
+            Our advanced AI technology precisely identifies and removes various
+            types of watermarks, whether visible text logos or hidden digital
+            identifiers
           </p>
         </motion.div>
 
@@ -227,13 +252,13 @@ export default function WatermarkTypesShowcase() {
                       itemOne={
                         <ReactCompareSliderImage
                           src={watermarkTypes[activeType].beforeImage}
-                          alt={`${watermarkTypes[activeType].title} - 处理前`}
+                          alt={`${watermarkTypes[activeType].title} - Before`}
                         />
                       }
                       itemTwo={
                         <ReactCompareSliderImage
                           src={watermarkTypes[activeType].afterImage}
-                          alt={`${watermarkTypes[activeType].title} - 处理后`}
+                          alt={`${watermarkTypes[activeType].title} - After`}
                         />
                       }
                       position={50}
@@ -248,7 +273,7 @@ export default function WatermarkTypesShowcase() {
                     variant="secondary"
                     className="bg-background/80 backdrop-blur"
                   >
-                    处理前
+                    Before
                   </Badge>
                 </div>
                 <div className="absolute top-4 right-4 z-10">
@@ -256,7 +281,7 @@ export default function WatermarkTypesShowcase() {
                     variant="secondary"
                     className="bg-background/80 backdrop-blur"
                   >
-                    处理后
+                    After
                   </Badge>
                 </div>
 
@@ -267,7 +292,7 @@ export default function WatermarkTypesShowcase() {
                     className="bg-background/90 backdrop-blur"
                   >
                     <Play className="h-3 w-3 mr-1" />
-                    拖拽滑杆查看效果
+                    Drag slider to compare
                   </Badge>
                 </div>
               </div>
@@ -291,7 +316,7 @@ export default function WatermarkTypesShowcase() {
               {/* CTA */}
               <div className="text-center pt-4">
                 <Button size="lg" className="group">
-                  立即体验 {watermarkTypes[activeType].title.split('（')[0]}
+                  Try Now {watermarkTypes[activeType].title.split('(')[0]}
                   <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </div>

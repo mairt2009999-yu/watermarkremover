@@ -28,30 +28,33 @@ export default function FeatureGrid() {
   const features: FeatureCard[] = [
     {
       icon: Sparkles,
-      title: 'AI 智能识别',
+      title: 'AI-Powered Detection',
       description:
-        '先进AI技术精准识别各种水印类型，包括文字、Logo、图案和隐藏水印',
+        'Advanced AI technology accurately identifies all watermark types including text, logos, patterns, and hidden watermarks',
       gradient: 'from-primary/30 to-primary/20',
       stats: '98%',
     },
     {
       icon: Zap,
-      title: '极速处理',
-      description: '5秒内完成图片处理，支持批量上传，大幅提升工作效率',
+      title: 'Lightning Fast',
+      description:
+        'Process images in under 5 seconds with batch upload support for maximum efficiency',
       gradient: 'from-primary/20 to-primary/10',
       stats: '5s',
     },
     {
       icon: Image,
-      title: '无损画质',
-      description: '保持原始分辨率和画质，支持4K高分辨率图片处理',
+      title: 'Lossless Quality',
+      description:
+        'Maintains original resolution and quality, supports 4K high-resolution image processing',
       gradient: 'from-primary/25 to-primary/15',
       stats: '4K',
     },
     {
       icon: Shield,
-      title: '隐私保护',
-      description: '图片加密传输，处理完成后自动删除，保护您的隐私安全',
+      title: 'Privacy Protected',
+      description:
+        'Encrypted image transmission with automatic deletion after processing to ensure your privacy',
       gradient: 'from-muted-foreground/10 to-muted-foreground/5',
       stats: '100%',
     },
@@ -94,13 +97,14 @@ export default function FeatureGrid() {
             variants={itemVariants}
             className="text-3xl lg:text-4xl font-bold mb-4"
           >
-            专业水印去除，AI 驱动
+            Professional Watermark Removal, AI-Driven
           </motion.h2>
           <motion.p
             variants={itemVariants}
             className="text-lg text-muted-foreground max-w-2xl mx-auto"
           >
-            基于先进AI技术的专业水印去除工具，快速、精准、安全
+            A professional watermark remover powered by advanced AI technology -
+            fast, precise, and secure
           </motion.p>
         </motion.div>
 

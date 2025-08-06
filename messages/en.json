@@ -698,27 +698,32 @@
       "secondaryButton": "See Demo"
     },
     "features": {
-      "title": "Powerful AI Features",
+      "title": "Professional Watermark Removal, AI-Driven",
       "subtitle": "Advanced watermark removal technology",
-      "description": "Our AI-powered tool uses cutting-edge technology to deliver perfect results every time",
+      "description": "A professional watermark remover powered by advanced AI technology - fast, precise, and secure",
       "items": {
         "item-1": {
-          "title": "Smart AI Detection",
-          "description": "Automatically detects and identifies watermarks, logos, dates, and text overlays with 99.9% accuracy using advanced computer vision"
+          "title": "AI-Powered Detection",
+          "description": "Advanced AI technology accurately identifies all watermark types including text, logos, patterns, and hidden watermarks",
+          "stats": "98%"
         },
         "item-2": {
-          "title": "HD Quality Preservation",
-          "description": "Maintains original image quality while removing watermarks. No blur, no quality loss - your images stay crystal clear"
+          "title": "Lightning Fast",
+          "description": "Process images in under 5 seconds with batch upload support for maximum efficiency",
+          "stats": "5s"
         },
         "item-3": {
-          "title": "Batch Processing",
-          "description": "Remove watermarks from multiple images at once. Process up to 50 images simultaneously to save time"
+          "title": "Lossless Quality",
+          "description": "Maintains original resolution and quality, supports 4K high-resolution image processing",
+          "stats": "4K"
         },
         "item-4": {
-          "title": "5-Second Processing",
-          "description": "Lightning-fast processing powered by optimized AI algorithms. Get your clean images in seconds, not minutes"
+          "title": "Privacy Protected",
+          "description": "Encrypted image transmission with automatic deletion after processing to ensure your privacy",
+          "stats": "100%"
         }
-      }
+      },
+      "learnMore": "Learn more"
     },
     "pricing": {
       "title": "Pricing",
@@ -730,24 +735,24 @@
       "subtitle": "Frequently Asked Questions",
       "items": {
         "item-1": {
-          "question": "Do you offer a free trial?",
-          "answer": "Yes, we offer a 7-day free trial."
+          "question": "How accurate is the watermark removal?",
+          "answer": "Our AI technology achieves 98% accuracy in detecting and removing watermarks, logos, and text overlays from images."
         },
         "item-2": {
-          "question": "How do I cancel my subscription?",
-          "answer": "You can cancel your subscription by visiting the billing page."
+          "question": "Will my images lose quality?",
+          "answer": "No, our tool preserves the original quality of your images. We support up to 4K resolution without any quality loss."
         },
         "item-3": {
-          "question": "Can I change my plan?",
-          "answer": "Yes, you can change your plan at any time by visiting the billing page."
+          "question": "Can I process multiple images at once?",
+          "answer": "Yes, our batch processing feature allows you to remove watermarks from up to 50 images simultaneously."
         },
         "item-4": {
-          "question": "What is the refund policy?",
-          "answer": "We offer a 30-day money-back guarantee if you are not happy with our product."
+          "question": "Is my data secure?",
+          "answer": "Absolutely. All images are encrypted during transmission and automatically deleted from our servers after processing."
         },
         "item-5": {
-          "question": "Can't find what you're looking for?",
-          "answer": "Please contact our customer support team at support@watermarkremover.tools"
+          "question": "What types of watermarks can be removed?",
+          "answer": "We can remove text watermarks, logos, dates, stamps, signatures, and semi-transparent overlays from any image."
         }
       }
     },
