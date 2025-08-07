@@ -39,8 +39,8 @@ export default function WatermarkTypesShowcase() {
       description:
         'Clearly visible text, brand logos, or decorative pattern watermarks',
       icon: <FileImage className="h-5 w-5" />,
-      beforeImage: '/demo/visible-text-before.webp',
-      afterImage: '/demo/visible-text-after.webp',
+      beforeImage: '/demo/generated/product_photography_text_center.jpg',
+      afterImage: '/demo/generated/product_photography_clean.jpg',
       features: [
         'Text watermark removal',
         'Logo cleanup',
@@ -55,8 +55,8 @@ export default function WatermarkTypesShowcase() {
       description:
         'Semi-transparent overlays or background watermarks with varying opacity',
       icon: <Layers className="h-5 w-5" />,
-      beforeImage: '/demo/semi-transparent-before.webp',
-      afterImage: '/demo/semi-transparent-after.webp',
+      beforeImage: '/demo/generated/nature_landscape_logo.jpg',
+      afterImage: '/demo/generated/nature_landscape_clean.jpg',
       features: [
         'Transparency detection',
         'Background reconstruction',
@@ -70,8 +70,8 @@ export default function WatermarkTypesShowcase() {
       title: 'Embedded Digital Watermarks',
       description: 'Invisible digital identifiers hidden within image data',
       icon: <Eye className="h-5 w-5" />,
-      beforeImage: '/demo/embedded-digital-before.webp',
-      afterImage: '/demo/embedded-digital-after.webp',
+      beforeImage: '/demo/generated/portrait_photography_embedded.jpg',
+      afterImage: '/demo/generated/portrait_photography_clean.jpg',
       features: [
         'Deep AI detection',
         'Frequency domain analysis',
@@ -86,8 +86,8 @@ export default function WatermarkTypesShowcase() {
       description:
         'Repeating logo patterns, textures, or geometric shape watermarks',
       icon: <RotateCcw className="h-5 w-5" />,
-      beforeImage: '/demo/repetitive-pattern-before.webp',
-      afterImage: '/demo/repetitive-pattern-after.webp',
+      beforeImage: '/demo/generated/architecture_building_pattern_grid.jpg',
+      afterImage: '/demo/generated/architecture_building_clean.jpg',
       features: [
         'Pattern recognition',
         'Repetitive element detection',
