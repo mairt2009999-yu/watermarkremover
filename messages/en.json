@@ -1,8 +1,8 @@
 {
   "Metadata": {
     "name": "WatermarkRemover",
-    "title": "AI Watermark Remover - Remove Watermarks from Images Instantly",
-    "description": "Remove watermarks, logos, and text from images instantly with AI. No sign-up required, 100% free, HD quality output."
+    "title": "Free AI Watermark Remover Online Tool - Remove Watermarks Instantly",
+    "description": "Professional online watermark remover tool. Remove text, logos, and patterns from images instantly with AI. Free, fast, HD quality - no registration required."
   },
   "Common": {
     "login": "Log in",
@@ -753,6 +753,38 @@
         "item-5": {
           "question": "What types of watermarks can be removed?",
           "answer": "We can remove text watermarks, logos, dates, stamps, signatures, and semi-transparent overlays from any image."
+        },
+        "item-6": {
+          "question": "Can I remove watermarks from Shutterstock, Getty Images, and stock photos?",
+          "answer": "Yes, our AI watermark remover can technically remove watermarks from stock photos including Shutterstock and Getty Images. However, please ensure you have proper licensing rights before using copyrighted images commercially."
+        },
+        "item-7": {
+          "question": "How do I bulk remove watermarks from multiple photos at once?",
+          "answer": "Our batch watermark removal tool allows you to upload up to 50 images simultaneously. Simply drag and drop multiple photos or use the bulk upload feature to process all your images with watermarks in one go."
+        },
+        "item-8": {
+          "question": "Does the watermark remover work on mobile phones and tablets?",
+          "answer": "Absolutely! Our online watermark removal tool is fully responsive and works perfectly on mobile phones, tablets, and all devices. No app download required - just use your mobile browser to remove watermarks instantly."
+        },
+        "item-9": {
+          "question": "Can I use this free watermark remover for commercial purposes?",
+          "answer": "Yes, you can use our watermark removal tool for commercial and business purposes. However, always ensure you have legal rights to the images you're processing and respect copyright laws when using the cleaned images."
+        },
+        "item-10": {
+          "question": "What image formats are supported for watermark removal?",
+          "answer": "We support all major image formats including PNG watermark removal, JPEG, WEBP, BMP, and GIF. Our tool maintains the original format and quality while removing unwanted watermarks from your photos."
+        },
+        "item-11": {
+          "question": "How to remove transparent and semi-transparent watermarks?",
+          "answer": "Our advanced AI technology excels at removing transparent watermarks and semi-transparent overlays. The AI analyzes opacity levels and color blending to perfectly restore the original image underneath the transparent watermark."
+        },
+        "item-12": {
+          "question": "Is there a file size limit for watermark removal?",
+          "answer": "You can upload high-resolution images up to 50MB per file. Our tool handles large image files and 4K photos while maintaining full quality during the watermark removal process."
+        },
+        "item-13": {
+          "question": "Can the AI detect and remove invisible or embedded watermarks?",
+          "answer": "Our AI watermark detector focuses on visible watermarks like text, logos, and overlays. For invisible or embedded digital watermarks, the tool works best with clearly visible watermark elements that can be visually identified and removed."
         }
       }
     },

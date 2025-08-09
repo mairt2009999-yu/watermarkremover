@@ -28,33 +28,33 @@ export default function FeatureGrid() {
   const features: FeatureCard[] = [
     {
       icon: Sparkles,
-      title: 'AI-Powered Detection',
+      title: 'Free AI Online Tool',
       description:
-        'Advanced AI technology accurately identifies all watermark types including text, logos, patterns, and hidden watermarks',
+        'Advanced AI watermark remover online tool that accurately identifies all watermark types including text, logos, patterns, and hidden watermarks',
       gradient: 'from-primary/30 to-primary/20',
       stats: '98%',
     },
     {
       icon: Zap,
-      title: 'Lightning Fast',
+      title: 'Instant Processing',
       description:
-        'Process images in under 5 seconds with batch upload support for maximum efficiency',
+        'Remove watermarks instantly in under 5 seconds with batch upload support for maximum efficiency. No sign-up required.',
       gradient: 'from-primary/20 to-primary/10',
       stats: '5s',
     },
     {
       icon: Image,
-      title: 'Lossless Quality',
+      title: 'Original Quality Preserved',
       description:
-        'Maintains original resolution and quality, supports 4K high-resolution image processing',
+        'Professional watermark removal maintains original resolution and quality, supports 4K high-resolution image processing',
       gradient: 'from-primary/25 to-primary/15',
       stats: '4K',
     },
     {
       icon: Shield,
-      title: 'Privacy Protected',
+      title: 'No Registration Required',
       description:
-        'Encrypted image transmission with automatic deletion after processing to ensure your privacy',
+        'Free online watermark eraser with encrypted image transmission and automatic deletion after processing to protect your privacy',
       gradient: 'from-muted-foreground/10 to-muted-foreground/5',
       stats: '100%',
     },
