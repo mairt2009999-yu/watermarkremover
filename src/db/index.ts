@@ -1,18 +1,17 @@
 /**
- * Connect to PostgreSQL Database (Supabase/Neon/Local PostgreSQL)
- * https://orm.drizzle.team/docs/tutorials/drizzle-with-supabase
+ * Connect to Database (PostgreSQL or SQLite)
  */
-import { drizzle } from 'drizzle-orm/postgres-js';
+import { drizzle as drizzlePg } from 'drizzle-orm/postgres-js';
+import { drizzle as drizzleSqlite } from 'drizzle-orm/better-sqlite3';
 import postgres from 'postgres';
+import Database from 'better-sqlite3';
 import * as schema from './schema';
 
-let db: ReturnType<typeof drizzle> | null = null;
+const connectionString = process.env.DATABASE_URL!;
+const client = postgres(connectionString, { prepare: false });
+export const db = drizzlePg(client, { schema });
 
 export async function getDb() {
-  if (db) return db;
-  const connectionString = process.env.DATABASE_URL!;
-  const client = postgres(connectionString, { prepare: false });
-  db = drizzle(client, { schema });
   return db;
 }
 

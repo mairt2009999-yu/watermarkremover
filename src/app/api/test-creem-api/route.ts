@@ -31,13 +31,21 @@ export async function GET() {
 
     for (const method of authMethods) {
       try {
+        const headers: Record<string, string> = {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        };
+        
+        // Add method-specific headers
+        Object.entries(method.headers).forEach(([key, value]) => {
+          if (value !== undefined) {
+            headers[key] = value;
+          }
+        });
+
         const response = await fetch(`${apiBaseUrl}/products`, {
           method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json',
-            ...method.headers,
-          },
+          headers,
         });
 
         const data = await response.json().catch(() => null);

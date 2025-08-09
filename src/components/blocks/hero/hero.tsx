@@ -242,13 +242,13 @@ export default function HeroSection() {
                 <ReactCompareSlider
                   itemOne={
                     <ReactCompareSliderImage
-                      src="/demo/generated/food_photography_text_center.jpg"
+                      src="/demo/generated/food_photography_text_center.webp"
                       alt="Image with watermark"
                     />
                   }
                   itemTwo={
                     <ReactCompareSliderImage
-                      src="/demo/generated/food_photography_clean.jpg"
+                      src="/demo/generated/food_photography_clean.webp"
                       alt="Image after watermark removal"
                     />
                   }

@@ -1,4 +1,4 @@
-import { boolean, pgTable, text, timestamp } from "drizzle-orm/pg-core";
+import { pgTable, text, timestamp, boolean, integer, jsonb } from 'drizzle-orm/pg-core';
 
 export const user = pgTable("user", {
 	id: text("id").primaryKey(),
@@ -66,6 +66,64 @@ export const payment = pgTable("payment", {
 	cancelAtPeriodEnd: boolean('cancel_at_period_end'),
 	trialStart: timestamp('trial_start'),
 	trialEnd: timestamp('trial_end'),
+	createdAt: timestamp('created_at').notNull().defaultNow(),
+	updatedAt: timestamp('updated_at').notNull().defaultNow(),
+});
+
+// Credit System Tables (Simplified - Subscription Only)
+export const userCredits = pgTable("user_credits", {
+	id: text("id").primaryKey(),
+	userId: text('user_id').notNull().references(() => user.id, { onDelete: 'cascade' }).unique(),
+	balance: integer('balance').notNull().default(0),
+	monthlyAllocation: integer('monthly_allocation').notNull().default(0),
+	lastResetDate: timestamp('last_reset_date'),
+	totalEarned: integer('total_earned').notNull().default(0),
+	totalSpent: integer('total_spent').notNull().default(0),
+	createdAt: timestamp('created_at').notNull().defaultNow(),
+	updatedAt: timestamp('updated_at').notNull().defaultNow(),
+});
+
+export const creditTransactions = pgTable("credit_transactions", {
+	id: text("id").primaryKey(),
+	userId: text('user_id').notNull().references(() => user.id, { onDelete: 'cascade' }),
+	amount: integer('amount').notNull(),
+	balanceAfter: integer('balance_after').notNull(),
+	type: text('type').notNull(), // 'earned', 'spent', 'expired', 'refunded', 'bonus'
+	reason: text('reason').notNull(),
+	featureUsed: text('feature_used'), // 'watermark_removal', 'batch_process', etc.
+	metadata: jsonb('metadata'),
+	createdAt: timestamp('created_at').notNull().defaultNow(),
+});
+
+export const subscriptionCreditConfig = pgTable("subscription_credit_config", {
+	id: text("id").primaryKey(),
+	planId: text('plan_id').notNull().unique(),
+	monthlyCredits: integer('monthly_credits').notNull(),
+	rolloverEnabled: boolean('rollover_enabled').default(false),
+	createdAt: timestamp('created_at').notNull().defaultNow(),
+});
+
+export const creditPackages = pgTable("credit_packages", {
+	id: text("id").primaryKey(),
+	name: text('name').notNull(),
+	credits: integer('credits').notNull(),
+	price: integer('price').notNull(), // in cents
+	currency: text('currency').notNull().default('usd'),
+	active: boolean('active').notNull().default(true),
+	sortOrder: integer('sort_order').notNull().default(0),
+	createdAt: timestamp('created_at').notNull().defaultNow(),
+	updatedAt: timestamp('updated_at').notNull().defaultNow(),
+});
+
+export const creditPurchases = pgTable("credit_purchases", {
+	id: text("id").primaryKey(),
+	userId: text('user_id').notNull().references(() => user.id, { onDelete: 'cascade' }),
+	packageId: text('package_id').notNull().references(() => creditPackages.id),
+	credits: integer('credits').notNull(),
+	amount: integer('amount').notNull(), // in cents
+	currency: text('currency').notNull(),
+	stripePaymentId: text('stripe_payment_id'),
+	status: text('status').notNull().default('pending'),
 	createdAt: timestamp('created_at').notNull().defaultNow(),
 	updatedAt: timestamp('updated_at').notNull().defaultNow(),
 });

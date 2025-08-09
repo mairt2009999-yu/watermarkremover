@@ -3,114 +3,44 @@
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { AnimatePresence, motion } from 'framer-motion';
 import {
-  ArrowRight,
-  Eye,
-  FileImage,
-  Layers,
-  Play,
-  RotateCcw,
-} from 'lucide-react';
-import { useState } from 'react';
+  WATERMARK_TYPES,
+  watermarkTypesConfig,
+} from '@/config/watermark-types.config';
+import { DIFFICULTY_COLORS } from '@/types/watermark.types';
+import { AnimatePresence, motion } from 'framer-motion';
+import { ArrowRight, Clock, Play, TrendingUp } from 'lucide-react';
+import { useLocale } from 'next-intl';
+import { useEffect, useState } from 'react';
 import {
   ReactCompareSlider,
   ReactCompareSliderImage,
 } from 'react-compare-slider';
 
-interface WatermarkType {
-  id: string;
-  title: string;
-  description: string;
-  icon: React.ReactNode;
-  beforeImage: string;
-  afterImage: string;
-  features: string[];
-  difficulty: 'Easy' | 'Medium' | 'Hard' | 'Expert';
-}
-
 export default function WatermarkTypesShowcase() {
   const [activeType, setActiveType] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
+  const locale = useLocale() as 'en' | 'zh';
 
-  const watermarkTypes: WatermarkType[] = [
-    {
-      id: 'visible-text-logo',
-      title: 'Visible Watermarks (Text, Logo, Pattern)',
-      description:
-        'Clearly visible text, brand logos, or decorative pattern watermarks',
-      icon: <FileImage className="h-5 w-5" />,
-      beforeImage: '/demo/generated/product_photography_text_center.jpg',
-      afterImage: '/demo/generated/product_photography_clean.jpg',
-      features: [
-        'Text watermark removal',
-        'Logo cleanup',
-        'Pattern removal',
-        'Copyright mark clearing',
-      ],
-      difficulty: 'Easy',
-    },
-    {
-      id: 'semi-transparent',
-      title: 'Semi-Transparent Watermarks',
-      description:
-        'Semi-transparent overlays or background watermarks with varying opacity',
-      icon: <Layers className="h-5 w-5" />,
-      beforeImage: '/demo/generated/nature_landscape_logo.jpg',
-      afterImage: '/demo/generated/nature_landscape_clean.jpg',
-      features: [
-        'Transparency detection',
-        'Background reconstruction',
-        'Color restoration',
-        'Detail protection',
-      ],
-      difficulty: 'Medium',
-    },
-    {
-      id: 'embedded-digital',
-      title: 'Embedded Digital Watermarks',
-      description: 'Invisible digital identifiers hidden within image data',
-      icon: <Eye className="h-5 w-5" />,
-      beforeImage: '/demo/generated/portrait_photography_embedded.jpg',
-      afterImage: '/demo/generated/portrait_photography_clean.jpg',
-      features: [
-        'Deep AI detection',
-        'Frequency domain analysis',
-        'Invisible mark removal',
-        'Data integrity protection',
-      ],
-      difficulty: 'Expert',
-    },
-    {
-      id: 'repetitive-pattern',
-      title: 'Repetitive Pattern Watermarks',
-      description:
-        'Repeating logo patterns, textures, or geometric shape watermarks',
-      icon: <RotateCcw className="h-5 w-5" />,
-      beforeImage: '/demo/generated/architecture_building_pattern_grid.jpg',
-      afterImage: '/demo/generated/architecture_building_clean.jpg',
-      features: [
-        'Pattern recognition',
-        'Repetitive element detection',
-        'Smart fill',
-        'Texture reconstruction',
-      ],
-      difficulty: 'Hard',
-    },
-  ];
+  // Use configuration data
+  const watermarkTypes = watermarkTypesConfig.types;
 
-  const getDifficultyColor = (difficulty: string) => {
-    switch (difficulty) {
-      case 'Easy':
-        return 'bg-green-500/10 text-green-700 border-green-500/20';
-      case 'Medium':
-        return 'bg-yellow-500/10 text-yellow-700 border-yellow-500/20';
-      case 'Hard':
-        return 'bg-orange-500/10 text-orange-700 border-orange-500/20';
-      case 'Expert':
-        return 'bg-red-500/10 text-red-700 border-red-500/20';
-      default:
-        return 'bg-gray-500/10 text-gray-700 border-gray-500/20';
-    }
+  // Preload images for better performance
+  useEffect(() => {
+    watermarkTypes.forEach((type) => {
+      const img1 = new Image();
+      const img2 = new Image();
+      img1.src = type.examples.before;
+      img2.src = type.examples.after;
+    });
+  }, [watermarkTypes]);
+
+  // Handle type change with loading state
+  const handleTypeChange = (index: number) => {
+    if (index === activeType) return;
+    setIsLoading(true);
+    setActiveType(index);
+    setTimeout(() => setIsLoading(false), 300);
   };
 
   return (
@@ -131,15 +61,17 @@ export default function WatermarkTypesShowcase() {
           className="text-center mb-12"
         >
           <Badge className="mb-4" variant="secondary">
-            AI Technology
+            {locale === 'zh' ? 'AI 技术' : 'AI Technology'}
           </Badge>
           <h2 className="text-3xl lg:text-4xl font-bold mb-4">
-            Four Watermark Types – AI-Powered Watermark Remover
+            {locale === 'zh'
+              ? '四种水印类型 – AI驱动的水印去除'
+              : 'Four Watermark Types – AI-Powered Watermark Remover'}
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            Our advanced AI technology precisely identifies and removes various
-            types of watermarks, whether visible text logos or hidden digital
-            identifiers
+            {locale === 'zh'
+              ? '我们的先进AI技术可精确识别和去除各种类型的水印，从可见文字标志到复杂图案'
+              : 'Our advanced AI technology precisely identifies and removes various types of watermarks, from visible text and logos to complex patterns'}
           </p>
         </motion.div>
 
@@ -160,7 +92,7 @@ export default function WatermarkTypesShowcase() {
                     ? 'border-primary bg-primary/5 shadow-lg'
                     : 'border-border/50 hover:border-primary/50'
                 }`}
-                onClick={() => setActiveType(index)}
+                onClick={() => handleTypeChange(index)}
               >
                 <CardContent className="p-4">
                   <div className="flex items-start gap-3">
@@ -176,17 +108,17 @@ export default function WatermarkTypesShowcase() {
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 mb-2">
                         <h3 className="font-semibold text-sm leading-tight">
-                          {type.title}
+                          {type.title[locale]}
                         </h3>
                         <Badge
                           variant="outline"
-                          className={`text-xs ${getDifficultyColor(type.difficulty)}`}
+                          className={`text-xs ${DIFFICULTY_COLORS[type.difficulty]}`}
                         >
                           {type.difficulty}
                         </Badge>
                       </div>
                       <p className="text-xs text-muted-foreground leading-relaxed">
-                        {type.description}
+                        {type.description[locale]}
                       </p>
                       {activeType === index && (
                         <motion.div
@@ -195,8 +127,23 @@ export default function WatermarkTypesShowcase() {
                           transition={{ duration: 0.3 }}
                           className="mt-3 pt-3 border-t border-border/50"
                         >
+                          {/* Processing metrics */}
+                          <div className="flex items-center gap-4 mb-2 text-xs">
+                            <div className="flex items-center gap-1">
+                              <Clock className="h-3 w-3 text-primary" />
+                              <span>{type.processingTime}</span>
+                            </div>
+                            <div className="flex items-center gap-1">
+                              <TrendingUp className="h-3 w-3 text-green-600" />
+                              <span>
+                                {type.successRate}%{' '}
+                                {locale === 'zh' ? '成功率' : 'success'}
+                              </span>
+                            </div>
+                          </div>
+                          {/* Features */}
                           <div className="space-y-1">
-                            {type.features.map((feature, i) => (
+                            {type.features[locale].map((feature, i) => (
                               <div
                                 key={i}
                                 className="flex items-center gap-2 text-xs"
@@ -230,11 +177,23 @@ export default function WatermarkTypesShowcase() {
               {/* Active Type Info */}
               <div className="text-center">
                 <h3 className="text-xl font-semibold mb-2">
-                  {watermarkTypes[activeType].title}
+                  {watermarkTypes[activeType].title[locale]}
                 </h3>
                 <p className="text-muted-foreground">
-                  {watermarkTypes[activeType].description}
+                  {watermarkTypes[activeType].description[locale]}
                 </p>
+                {/* Processing info badges */}
+                <div className="flex items-center justify-center gap-3 mt-3">
+                  <Badge variant="secondary" className="gap-1">
+                    <Clock className="h-3 w-3" />
+                    {watermarkTypes[activeType].processingTime}
+                  </Badge>
+                  <Badge variant="secondary" className="gap-1">
+                    <TrendingUp className="h-3 w-3" />
+                    {watermarkTypes[activeType].successRate}%{' '}
+                    {locale === 'zh' ? '成功率' : 'Success Rate'}
+                  </Badge>
+                </div>
               </div>
 
               {/* Comparison Slider */}
@@ -251,14 +210,14 @@ export default function WatermarkTypesShowcase() {
                     <ReactCompareSlider
                       itemOne={
                         <ReactCompareSliderImage
-                          src={watermarkTypes[activeType].beforeImage}
-                          alt={`${watermarkTypes[activeType].title} - Before`}
+                          src={watermarkTypes[activeType].examples.before}
+                          alt={`${watermarkTypes[activeType].title[locale]} - Before`}
                         />
                       }
                       itemTwo={
                         <ReactCompareSliderImage
-                          src={watermarkTypes[activeType].afterImage}
-                          alt={`${watermarkTypes[activeType].title} - After`}
+                          src={watermarkTypes[activeType].examples.after}
+                          alt={`${watermarkTypes[activeType].title[locale]} - After`}
                         />
                       }
                       position={50}
@@ -273,7 +232,7 @@ export default function WatermarkTypesShowcase() {
                     variant="secondary"
                     className="bg-background/80 backdrop-blur"
                   >
-                    Before
+                    {locale === 'zh' ? '处理前' : 'Before'}
                   </Badge>
                 </div>
                 <div className="absolute top-4 right-4 z-10">
@@ -281,7 +240,7 @@ export default function WatermarkTypesShowcase() {
                     variant="secondary"
                     className="bg-background/80 backdrop-blur"
                   >
-                    After
+                    {locale === 'zh' ? '处理后' : 'After'}
                   </Badge>
                 </div>
 
@@ -292,31 +251,59 @@ export default function WatermarkTypesShowcase() {
                     className="bg-background/90 backdrop-blur"
                   >
                     <Play className="h-3 w-3 mr-1" />
-                    Drag slider to compare
+                    {locale === 'zh'
+                      ? '拖动滑块对比'
+                      : 'Drag slider to compare'}
                   </Badge>
                 </div>
               </div>
 
               {/* Features */}
               <div className="grid grid-cols-2 gap-3">
-                {watermarkTypes[activeType].features.map((feature, index) => (
-                  <motion.div
-                    key={feature}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.1 * index }}
-                    className="flex items-center gap-2 p-3 rounded-lg bg-primary/5 border border-primary/10"
-                  >
-                    <div className="w-2 h-2 rounded-full bg-primary" />
-                    <span className="text-sm font-medium">{feature}</span>
-                  </motion.div>
-                ))}
+                {watermarkTypes[activeType].features[locale].map(
+                  (feature, index) => (
+                    <motion.div
+                      key={feature}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.1 * index }}
+                      className="flex items-center gap-2 p-3 rounded-lg bg-primary/5 border border-primary/10"
+                    >
+                      <div className="w-2 h-2 rounded-full bg-primary" />
+                      <span className="text-sm font-medium">{feature}</span>
+                    </motion.div>
+                  )
+                )}
               </div>
+
+              {/* Use Cases */}
+              {watermarkTypes[activeType].useCases && (
+                <div className="p-4 rounded-lg bg-muted/50">
+                  <h4 className="text-sm font-semibold mb-2">
+                    {locale === 'zh' ? '常见用途' : 'Common Use Cases'}
+                  </h4>
+                  <div className="flex flex-wrap gap-2">
+                    {watermarkTypes[activeType].useCases.map(
+                      (useCase, index) => (
+                        <Badge
+                          key={index}
+                          variant="outline"
+                          className="text-xs"
+                        >
+                          {useCase}
+                        </Badge>
+                      )
+                    )}
+                  </div>
+                </div>
+              )}
 
               {/* CTA */}
               <div className="text-center pt-4">
                 <Button size="lg" className="group">
-                  Try Now {watermarkTypes[activeType].title.split('(')[0]}
+                  {locale === 'zh'
+                    ? `立即尝试 ${watermarkTypes[activeType].title.zh}`
+                    : `Try ${watermarkTypes[activeType].title.en} Now`}
                   <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </div>
