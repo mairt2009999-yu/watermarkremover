@@ -1,6 +1,6 @@
 import BlogGridWithPagination from '@/components/blog/blog-grid-with-pagination';
 import Container from '@/components/layout/container';
-import { blogSource } from '@/lib/blog-source';
+import { blogSource } from '@/lib/source';
 import { constructMetadata } from '@/lib/metadata';
 import { getUrlWithLocale } from '@/lib/urls/urls';
 import type { Metadata } from 'next';
@@ -49,14 +49,14 @@ export default async function BlogPage({
           : !post.slugs[0].endsWith('.zh');
 
       // Filter by published status
-      const isPublished = post.data.published !== false;
+      const isPublished = (post.data as any).published !== false;
 
       return isCorrectLocale && isPublished;
     })
     .sort((a, b) => {
       // Sort by date, newest first
-      const dateA = new Date(a.data.date || 0).getTime();
-      const dateB = new Date(b.data.date || 0).getTime();
+      const dateA = new Date((a.data as any).date || 0).getTime();
+      const dateB = new Date((b.data as any).date || 0).getTime();
       return dateB - dateA;
     });
 

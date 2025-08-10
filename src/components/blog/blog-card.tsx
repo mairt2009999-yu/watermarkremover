@@ -1,6 +1,6 @@
 import { Skeleton } from '@/components/ui/skeleton';
 import { LocaleLink } from '@/i18n/navigation';
-import { type BlogType, authorSource, categorySource } from '@/lib/blog-source';
+import { type BlogType, authorSource, categorySource } from '@/lib/source';
 import { PLACEHOLDER_IMAGE } from '@/lib/constants';
 import { formatDate } from '@/lib/formatter';
 import Image from 'next/image';

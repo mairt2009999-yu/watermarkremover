@@ -1,6 +1,6 @@
 import { CustomPage } from '@/components/page/custom-page';
 import { constructMetadata } from '@/lib/metadata';
-import { pagesSource } from '@/lib/pages-source';
+import { staticLegalPagesSource } from '@/lib/legal-pages';
 import { getUrlWithLocale } from '@/lib/urls/urls';
 import type { NextPageProps } from '@/types/next-page-props';
 import type { Metadata } from 'next';
@@ -16,7 +16,10 @@ export async function generateMetadata({
   try {
     const { locale } = await params;
     const t = await getTranslations({ locale, namespace: 'Metadata' });
-    const page = pagesSource.getPage(['cookie-policy'], locale);
+    const page = (() => {
+    const pageSlug = locale === 'zh' ? 'cookie-policy.zh' : 'cookie-policy';
+    return staticLegalPagesSource.getPage([pageSlug]);
+  })();
 
     return constructMetadata({
       title: page?.data.title || 'Cookie Policy' + ' | ' + t('title'),
@@ -36,7 +39,10 @@ export default async function CookiePolicyPage(props: NextPageProps) {
     ? params.locale[0]
     : params?.locale || 'en';
 
-  const page = pagesSource.getPage(['cookie-policy'], locale);
+  const page = (() => {
+    const pageSlug = locale === 'zh' ? 'cookie-policy.zh' : 'cookie-policy';
+    return staticLegalPagesSource.getPage([pageSlug]);
+  })();
 
   if (!page) {
     notFound();

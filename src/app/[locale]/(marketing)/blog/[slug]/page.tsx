@@ -2,7 +2,7 @@ import { getMDXComponents } from '@/components/docs/mdx-components';
 import Container from '@/components/layout/container';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
-import { authorSource, blogSource, categorySource } from '@/lib/blog-source';
+import { authorSource, blogSource, categorySource } from '@/lib/source';
 import { formatDate } from '@/lib/formatter';
 import { constructMetadata } from '@/lib/metadata';
 import { getUrlWithLocale } from '@/lib/urls/urls';
@@ -34,7 +34,7 @@ export async function generateMetadata({
   return constructMetadata({
     title: `${post.data.title} | ${t('title')}`,
     description: post.data.description || '',
-    image: post.data.image,
+    image: (post.data as any).image,
     canonicalUrl: getUrlWithLocale(`/blog/${slug}`, locale),
   });
 }
@@ -63,13 +63,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   }
 
   // Get author data
-  const authorSlug = post.data.author || 'watermarkremovertools';
+  const authorSlug = (post.data as any).author || 'watermarkremovertools';
   const author =
     authorSource.getPage([authorSlug]) ||
     authorSource.getPage([`${authorSlug}.${locale}`]);
 
   // Get category data
-  const categories = post.data.categories || [];
+  const categories = (post.data as any).categories || [];
 
   // Calculate reading time (rough estimate: 200 words per minute)
   const content = post.data.description || '';
@@ -77,7 +77,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const readingTime = Math.ceil(wordCount / 200);
 
   // Get the MDX component from the body
-  const MDX = post.data.body;
+  const MDX = (post.data as any).body;
 
   return (
     <article className="flex flex-col min-h-screen">
@@ -125,9 +125,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               )}
 
               {/* Date */}
-              {post.data.date && (
-                <time dateTime={post.data.date}>
-                  {formatDate(new Date(post.data.date))}
+              {(post.data as any).date && (
+                <time dateTime={(post.data as any).date}>
+                  {formatDate(new Date((post.data as any).date))}
                 </time>
               )}
 
@@ -137,10 +137,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           </header>
 
           {/* Featured Image */}
-          {post.data.image && (
+          {(post.data as any).image && (
             <div className="relative w-full h-[400px] mb-8 rounded-lg overflow-hidden">
               <Image
-                src={post.data.image}
+                src={(post.data as any).image}
                 alt={post.data.title || ''}
                 fill
                 className="object-cover"

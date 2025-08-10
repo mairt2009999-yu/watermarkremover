@@ -38,69 +38,62 @@ export const changelogSource = loader({
 });
 
 /**
- * Simple pages access for legal pages
+ * Pages source - simplified to avoid fumadocs internal processing issues
  */
 export const pagesSource = {
-  getPage(slug: string[], locale?: string) {
-    console.log('pagesSource.getPage called with:', { slug, locale });
-    console.log('pages type:', typeof pages);
-    console.log('pages is array:', Array.isArray(pages));
-    console.log('pages length:', pages?.length);
-
+  getPage(slugs: string[], locale?: string) {
+    const slug = slugs[0];
     if (!pages || !Array.isArray(pages)) {
-      console.error('pages is not an array:', pages);
       return null;
     }
 
-    const pageSlug = slug[0];
-    const targetPath = locale ? `${pageSlug}.${locale}.mdx` : `${pageSlug}.mdx`;
-
-    // Find the page in the pages collection - adjust for the actual fumadocs structure
-    const page = pages.find((p) => {
-      const filePath = p._file?.path || '';
-      return (
-        filePath === `${pageSlug}.mdx` ||
-        filePath === `${pageSlug}.${locale}.mdx`
-      );
+    // Find the page by slug
+    const page = (pages as any[]).find((p: any) => {
+      const filePath = p.info?.path?.replace('.mdx', '') || '';
+      return filePath === slug;
     });
-
-    console.log('Found page:', page);
 
     if (!page) {
       return null;
     }
 
     return {
+      slugs: [page.info?.path?.replace('.mdx', '') || ''],
       data: {
-        title: page.title,
-        description: page.description,
-        date: page.date,
-        body: page.body,
+        title: page.data?.title,
+        description: page.data?.description,
+        date: page.data?.date,
+        body: page.data?.body,
       },
-      body: page.body,
-      url: `/${pageSlug}`,
+      url: `/pages/${page.info?.path?.replace('.mdx', '').replace('.zh', '')}`,
     };
   },
 
   getPages(locale?: string) {
-    console.log('getPages called with locale:', locale);
-    console.log('pages available:', pages?.length);
-
     if (!pages || !Array.isArray(pages)) {
-      console.error('pages is not available in getPages:', pages);
       return [];
     }
 
-    return pages.map((p) => ({
-      data: {
-        title: p.title,
-        description: p.description,
-        date: p.date,
-        body: p.body,
-      },
-      body: p.body,
-      url: `/${(p._file?.path || '').replace('.mdx', '').replace('.zh', '')}`,
-    }));
+    return (pages as any[])
+      .filter((p: any) => {
+        if (!locale) return true;
+        const filePath = p.info?.path || '';
+        const isLocalized =
+          locale === 'zh'
+            ? filePath.includes('.zh')
+            : !filePath.includes('.zh');
+        return isLocalized;
+      })
+      .map((p: any) => ({
+        slugs: [p.info?.path?.replace('.mdx', '').replace('.zh', '') || ''],
+        data: {
+          title: p.data?.title,
+          description: p.data?.description,
+          date: p.data?.date,
+          body: p.data?.body,
+        },
+        url: `/pages/${p.info?.path?.replace('.mdx', '').replace('.zh', '')}`,
+      }));
   },
 };
 
@@ -254,118 +247,75 @@ export const categorySource = {
 };
 
 /**
- * Blog posts source - simplified for collections without i18n
+ * Blog source - simplified to avoid fumadocs internal processing issues
  */
 export const blogSource = {
-  getPages() {
-    // The blog import from .source may be wrapped by fumadocs runtime
-    // Let's check what type it is and handle it appropriately
-    try {
-      // If blog is a function (from _runtime.doc wrapper), we need to call it
-      const blogData = typeof blog === 'function' ? (blog as any)() : blog;
-
-      if (!blogData) {
-        console.warn('blogSource.getPages: No blog data available');
-        return [];
-      }
-
-      // If blogData has a special structure from fumadocs, extract the actual array
-      const posts = Array.isArray(blogData)
-        ? blogData
-        : blogData?.docs
-          ? blogData.docs
-          : blogData?.data
-            ? blogData.data
-            : [];
-
-      if (!Array.isArray(posts)) {
-        console.warn(
-          'blogSource.getPages: Blog data is not an array',
-          typeof posts
-        );
-        return [];
-      }
-
-      return posts.map((post) => ({
-        slugs: [
-          post._file?.path?.replace('.mdx', '') ||
-            post.path?.replace('.mdx', '') ||
-            '',
-        ],
-        data: {
-          title: post.title,
-          description: post.description,
-          image: post.image,
-          date: post.date,
-          published: post.published,
-          categories: post.categories || [],
-          author: post.author,
-          body: post.body,
-        },
-        url: `/blog/${(post._file?.path || post.path || '').replace('.mdx', '').replace('.zh', '')}`,
-      }));
-    } catch (error) {
-      console.error('blogSource.getPages error:', error);
-      return [];
-    }
-  },
-
-  getPage(slugs: string[]) {
-    try {
-      const slug = slugs[0];
-
-      // Similar handling as getPages
-      const blogData = typeof blog === 'function' ? (blog as any)() : blog;
-
-      if (!blogData) {
-        return null;
-      }
-
-      const posts = Array.isArray(blogData)
-        ? blogData
-        : blogData?.docs
-          ? blogData.docs
-          : blogData?.data
-            ? blogData.data
-            : [];
-
-      if (!Array.isArray(posts)) {
-        return null;
-      }
-
-      const post = posts.find((p) => {
-        const filePath = (p._file?.path || p.path || '').replace('.mdx', '');
-        return filePath === slug;
-      });
-
-      if (!post) {
-        return null;
-      }
-
-      return {
-        slugs: [(post._file?.path || post.path || '').replace('.mdx', '')],
-        data: {
-          title: post.title,
-          description: post.description,
-          image: post.image,
-          date: post.date,
-          published: post.published,
-          categories: post.categories || [],
-          author: post.author,
-          body: post.body,
-        },
-        url: `/blog/${(post._file?.path || post.path || '').replace('.mdx', '').replace('.zh', '')}`,
-      };
-    } catch (error) {
-      console.error('blogSource.getPage error:', error);
+  getPage(slugs: string[], locale?: string) {
+    const slug = slugs[0];
+    if (!blog || !Array.isArray(blog)) {
       return null;
     }
+
+    // Find the blog post by slug
+    const post = (blog as any[]).find((p: any) => {
+      const filePath = p.info?.path?.replace('.mdx', '') || '';
+      return filePath === slug;
+    });
+
+    if (!post) {
+      return null;
+    }
+
+    return {
+      slugs: [post.info?.path?.replace('.mdx', '') || ''],
+      data: {
+        title: post.data?.title,
+        description: post.data?.description,
+        date: post.data?.date,
+        published: post.data?.published,
+        author: post.data?.author,
+        categories: post.data?.categories,
+        image: post.data?.image,
+        body: post.data?.body,
+      },
+      url: `/blog/${post.info?.path?.replace('.mdx', '').replace('.zh', '')}`,
+    };
+  },
+
+  getPages(locale?: string) {
+    if (!blog || !Array.isArray(blog)) {
+      return [];
+    }
+
+    return (blog as any[])
+      .filter((p: any) => {
+        if (!locale) return true;
+        const filePath = p.info?.path || '';
+        const isLocalized =
+          locale === 'zh'
+            ? filePath.includes('.zh')
+            : !filePath.includes('.zh');
+        return isLocalized;
+      })
+      .map((p: any) => ({
+        slugs: [p.info?.path?.replace('.mdx', '').replace('.zh', '') || ''],
+        data: {
+          title: p.data?.title,
+          description: p.data?.description,
+          date: p.data?.date,
+          published: p.data?.published,
+          author: p.data?.author,
+          categories: p.data?.categories,
+          image: p.data?.image,
+          body: p.data?.body,
+        },
+        url: `/blog/${p.info?.path?.replace('.mdx', '').replace('.zh', '')}`,
+      }));
   },
 };
 
 export type ChangelogType = InferPageType<typeof changelogSource>;
-// pagesSource doesn't conform to LoaderOutput type, using a simpler type
 export type PagesType = ReturnType<typeof pagesSource.getPage>;
+export type BlogType = ReturnType<typeof blogSource.getPage>;
 export type AuthorType = ReturnType<typeof authorSource.getPage>;
 export type CategoryType = ReturnType<typeof categorySource.getPage>;
-export type BlogType = ReturnType<typeof blogSource.getPage>;
