@@ -4,10 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "fumadocs-mdx && next build",
     "start": "next start",
     "postinstall": "prisma generate || true",
-    "vercel-build": "prisma generate && next build",
+    "vercel-build": "fumadocs-mdx && prisma generate && next build",
     "lint": "biome check --write .",
     "lint:fix": "biome check --fix --unsafe .",
     "format": "biome format --write .",
