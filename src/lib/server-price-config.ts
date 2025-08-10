@@ -28,29 +28,29 @@ const cleanPriceId = (priceId: string | undefined): string => {
  * Get price ID from environment variables (server-side)
  */
 export const getServerPriceId = (
-  plan: 'pro_monthly' | 'pro_yearly' | 'lifetime'
+  plan: 'starter' | 'pro_monthly' | 'pro_yearly'
 ): string => {
   const provider = getServerPaymentProvider();
 
   if (provider === 'creem') {
     switch (plan) {
+      case 'starter':
+        return cleanPriceId(process.env.NEXT_PUBLIC_CREEM_PRICE_STARTER);
       case 'pro_monthly':
         return cleanPriceId(process.env.NEXT_PUBLIC_CREEM_PRICE_PRO_MONTHLY);
       case 'pro_yearly':
         return cleanPriceId(process.env.NEXT_PUBLIC_CREEM_PRICE_PRO_YEARLY);
-      case 'lifetime':
-        return cleanPriceId(process.env.NEXT_PUBLIC_CREEM_PRICE_LIFETIME);
     }
   }
 
   // Default to Stripe
   switch (plan) {
+    case 'starter':
+      return cleanPriceId(process.env.NEXT_PUBLIC_STRIPE_PRICE_STARTER);
     case 'pro_monthly':
       return cleanPriceId(process.env.NEXT_PUBLIC_STRIPE_PRICE_PRO_MONTHLY);
     case 'pro_yearly':
       return cleanPriceId(process.env.NEXT_PUBLIC_STRIPE_PRICE_PRO_YEARLY);
-    case 'lifetime':
-      return cleanPriceId(process.env.NEXT_PUBLIC_STRIPE_PRICE_LIFETIME);
   }
 };
 
@@ -66,20 +66,34 @@ export const getServerPricePlans = (): Record<string, PricePlan> => {
       isFree: true,
       isLifetime: false,
     },
+    starter: {
+      id: 'starter',
+      prices: [
+        {
+          type: PaymentTypes.SUBSCRIPTION,
+          priceId: getServerPriceId('starter'),
+          amount: 499,
+          currency: 'USD',
+          interval: PlanIntervals.MONTH,
+        },
+      ],
+      isFree: false,
+      isLifetime: false,
+    },
     pro: {
       id: 'pro',
       prices: [
         {
           type: PaymentTypes.SUBSCRIPTION,
           priceId: getServerPriceId('pro_monthly'),
-          amount: 990,
+          amount: 999,
           currency: 'USD',
           interval: PlanIntervals.MONTH,
         },
         {
           type: PaymentTypes.SUBSCRIPTION,
           priceId: getServerPriceId('pro_yearly'),
-          amount: 9900,
+          amount: 7900,
           currency: 'USD',
           interval: PlanIntervals.YEAR,
         },
@@ -87,20 +101,6 @@ export const getServerPricePlans = (): Record<string, PricePlan> => {
       isFree: false,
       isLifetime: false,
       recommended: true,
-    },
-    lifetime: {
-      id: 'lifetime',
-      prices: [
-        {
-          type: PaymentTypes.ONE_TIME,
-          priceId: getServerPriceId('lifetime'),
-          amount: 19900,
-          currency: 'USD',
-          allowPromotionCode: true,
-        },
-      ],
-      isFree: false,
-      isLifetime: true,
     },
   };
 };

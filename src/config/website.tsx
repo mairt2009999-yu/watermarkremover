@@ -25,29 +25,29 @@ const cleanPriceId = (priceId: string | undefined): string => {
  * This function should be called at runtime, not at build time
  */
 export const getPriceId = (
-  plan: 'pro_monthly' | 'pro_yearly' | 'lifetime'
+  plan: 'starter' | 'pro_monthly' | 'pro_yearly'
 ): string => {
   const paymentProvider = getPaymentProvider();
 
   if (paymentProvider === 'creem') {
     switch (plan) {
+      case 'starter':
+        return cleanPriceId(process.env.NEXT_PUBLIC_CREEM_PRICE_STARTER);
       case 'pro_monthly':
         return cleanPriceId(process.env.NEXT_PUBLIC_CREEM_PRICE_PRO_MONTHLY);
       case 'pro_yearly':
         return cleanPriceId(process.env.NEXT_PUBLIC_CREEM_PRICE_PRO_YEARLY);
-      case 'lifetime':
-        return cleanPriceId(process.env.NEXT_PUBLIC_CREEM_PRICE_LIFETIME);
     }
   }
 
   // Default to Stripe
   switch (plan) {
+    case 'starter':
+      return cleanPriceId(process.env.NEXT_PUBLIC_STRIPE_PRICE_STARTER);
     case 'pro_monthly':
       return cleanPriceId(process.env.NEXT_PUBLIC_STRIPE_PRICE_PRO_MONTHLY);
     case 'pro_yearly':
       return cleanPriceId(process.env.NEXT_PUBLIC_STRIPE_PRICE_PRO_YEARLY);
-    case 'lifetime':
-      return cleanPriceId(process.env.NEXT_PUBLIC_STRIPE_PRICE_LIFETIME);
   }
 };
 
@@ -133,6 +133,20 @@ export const websiteConfig: WebsiteConfig = {
         isFree: true,
         isLifetime: false,
       },
+      starter: {
+        id: 'starter',
+        prices: [
+          {
+            type: PaymentTypes.SUBSCRIPTION,
+            priceId: '', // Will be set dynamically
+            amount: 499,
+            currency: 'USD',
+            interval: PlanIntervals.MONTH,
+          },
+        ],
+        isFree: false,
+        isLifetime: false,
+      },
       pro: {
         id: 'pro',
         prices: [
@@ -154,20 +168,6 @@ export const websiteConfig: WebsiteConfig = {
         isFree: false,
         isLifetime: false,
         recommended: true,
-      },
-      lifetime: {
-        id: 'lifetime',
-        prices: [
-          {
-            type: PaymentTypes.ONE_TIME,
-            priceId: '', // Will be set dynamically
-            amount: 14900,
-            currency: 'USD',
-            allowPromotionCode: true,
-          },
-        ],
-        isFree: false,
-        isLifetime: true,
       },
     },
   },

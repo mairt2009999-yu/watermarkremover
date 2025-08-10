@@ -10,10 +10,19 @@ interface ReleaseCardProps {
   releaseItem: ChangelogType;
 }
 
+type ChangelogFrontmatter = {
+  title: string;
+  description?: string;
+  date: string;
+  version: string;
+  body: any;
+};
+
 export function ReleaseCard({ releaseItem }: ReleaseCardProps) {
-  const { title, description, date, version } = releaseItem.data;
+  const data = releaseItem.data as unknown as ChangelogFrontmatter;
+  const { title, description, date, version } = data;
   const formattedDate = formatDate(new Date(date));
-  const MDX = releaseItem.data.body;
+  const MDX = data.body;
 
   return (
     <Card className="mb-8">

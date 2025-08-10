@@ -46,21 +46,21 @@ export function getFooterLinks(): NestedMenuItem[] {
           href: Routes.Blog,
           external: false,
         },
-        {
-          title: t('resources.items.docs'),
-          href: Routes.Docs,
-          external: false,
-        },
-        {
-          title: t('resources.items.changelog'),
-          href: Routes.Changelog,
-          external: false,
-        },
-        {
-          title: t('resources.items.roadmap'),
-          href: Routes.Roadmap,
-          external: true,
-        },
+        // {
+        //   title: t('resources.items.docs'),
+        //   href: Routes.Docs,
+        //   external: false,
+        // },
+        // {
+        //   title: t('resources.items.changelog'),
+        //   href: Routes.Changelog,
+        //   external: false,
+        // },
+        // {
+        //   title: t('resources.items.roadmap'),
+        //   href: Routes.Roadmap,
+        //   external: true,
+        // },
       ],
     },
     {

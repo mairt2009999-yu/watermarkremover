@@ -1,0 +1,118 @@
+<svg width="192" height="192" viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Gradient Definitions matching Landing page okLCH colors -->
+  <defs>
+    <!-- Primary gradient for light theme -->
+    <linearGradient id="primaryGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#059669"/>
+      <stop offset="100%" style="stop-color:#10B981"/>
+    </linearGradient>
+    
+    <!-- Primary gradient for dark theme -->
+    <linearGradient id="primaryGradientDark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#10B981"/>
+      <stop offset="100%" style="stop-color:#34D399"/>
+    </linearGradient>
+    
+    <!-- Sparkle gradient -->
+    <radialGradient id="sparkleGradient" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#34D399" stop-opacity="1"/>
+      <stop offset="70%" style="stop-color:#10B981" stop-opacity="0.8"/>
+      <stop offset="100%" style="stop-color:#059669" stop-opacity="0.3"/>
+    </radialGradient>
+    
+    <!-- Background glow effect -->
+    <radialGradient id="backgroundGlow" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" style="stop-color:#10B981" stop-opacity="0.05"/>
+      <stop offset="50%" style="stop-color:#059669" stop-opacity="0.03"/>
+      <stop offset="100%" style="stop-color:#059669" stop-opacity="0.0"/>
+    </radialGradient>
+    
+    <!-- Eraser trail gradient -->
+    <linearGradient id="eraserTrail" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#10B981" stop-opacity="0.8"/>
+      <stop offset="50%" style="stop-color:#34D399" stop-opacity="0.4"/>
+      <stop offset="100%" style="stop-color:#10B981" stop-opacity="0.1"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background glow effect -->
+  <circle cx="96" cy="96" r="80" fill="url(#backgroundGlow)"/>
+  
+  <!-- Main Image Frame - Modern card style with 8px radius (matching CSS --radius) -->
+  <rect x="54" y="64" width="84" height="64" rx="8" ry="8" 
+        fill="none" 
+        stroke="url(#primaryGradient)" 
+        stroke-width="2.5" 
+        opacity="0.9"/>
+  
+  <!-- Inner image placeholder area -->
+  <rect x="58" y="68" width="76" height="56" rx="6" ry="6" 
+        fill="url(#primaryGradient)" 
+        opacity="0.08"/>
+  
+  <!-- Stylized image content - mountain landscape icon -->
+  <g opacity="0.6">
+    <!-- Background mountain -->
+    <path d="M65 108 L75 96 L85 104 L95 92 L105 100 L115 88 L125 96 L130 108 L65 108 Z" 
+          fill="url(#primaryGradient)" 
+          opacity="0.3"/>
+    <!-- Foreground mountain -->
+    <path d="M70 110 L80 100 L90 106 L100 94 L110 102 L120 90 L125 100 L125 110 L70 110 Z" 
+          fill="url(#primaryGradient)" 
+          opacity="0.4"/>
+    <!-- Sun/moon circle -->
+    <circle cx="110" cy="78" r="5" fill="url(#primaryGradient)" opacity="0.5"/>
+  </g>
+  
+  <!-- AI Sparkles Effect - Multiple sparkles in Lucide style -->
+  <!-- Large primary sparkle (top-right) -->
+  <g transform="translate(135, 52)">
+    <path d="M0,-8 L2.4,-2.4 L8,0 L2.4,2.4 L0,8 L-2.4,2.4 L-8,0 L-2.4,-2.4 Z" 
+          fill="url(#sparkleGradient)" 
+          opacity="0.95"/>
+  </g>
+  
+  <!-- Medium sparkle (right side) -->
+  <g transform="translate(148, 85)">
+    <path d="M0,-6 L1.8,-1.8 L6,0 L1.8,1.8 L0,6 L-1.8,1.8 L-6,0 L-1.8,-1.8 Z" 
+          fill="#10B981" 
+          opacity="0.8"/>
+  </g>
+  
+  <!-- Small sparkles around -->
+  <g transform="translate(42, 58)">
+    <path d="M0,-4 L1.2,-1.2 L4,0 L1.2,1.2 L0,4 L-1.2,1.2 L-4,0 L-1.2,-1.2 Z" 
+          fill="#34D399" 
+          opacity="0.7"/>
+  </g>
+  
+  <g transform="translate(152, 112)">
+    <path d="M0,-4 L1.2,-1.2 L4,0 L1.2,1.2 L0,4 L-1.2,1.2 L-4,0 L-1.2,-1.2 Z" 
+          fill="#059669" 
+          opacity="0.6"/>
+  </g>
+  
+  <!-- Tiny accent sparkles -->
+  <circle cx="46" cy="88" r="1.5" fill="#34D399" opacity="0.8"/>
+  <circle cx="145" cy="125" r="1.2" fill="#10B981" opacity="0.7"/>
+  <circle cx="65" cy="138" r="1" fill="#059669" opacity="0.6"/>
+  <circle cx="35" cy="105" r="1" fill="#10B981" opacity="0.5"/>
+  
+  <!-- AI Processing Trail - Magic cleaning line -->
+  <g opacity="0.7">
+    <!-- Magic wand/cursor path -->
+    <path d="M130 65 L140 55" stroke="url(#primaryGradient)" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
+    <circle cx="142" cy="53" r="2" fill="#34D399" opacity="0.9"/>
+    
+    <!-- Erasing effect trail -->
+    <path d="M85 98 L110 98" stroke="url(#eraserTrail)" stroke-width="3" stroke-linecap="round" stroke-dasharray="2,3" opacity="0.6"/>
+    <path d="M70 104 L95 104" stroke="url(#eraserTrail)" stroke-width="2" stroke-linecap="round" stroke-dasharray="1,4" opacity="0.4"/>
+  </g>
+  
+  <!-- Watermark removal effect - fading watermark text -->
+  <g opacity="0.3">
+    <text x="96" y="96" text-anchor="middle" font-family="monospace" font-size="8" 
+          fill="url(#primaryGradient)" 
+          opacity="0.4">SAMPLE</text>
+  </g>
+</svg>

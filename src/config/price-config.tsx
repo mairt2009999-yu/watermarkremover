@@ -41,6 +41,19 @@ export function getPricePlans(): Record<string, PricePlan> {
           t('free.limits.limit-3'),
         ],
       };
+    } else if (plan.id === 'starter') {
+      plans.starter = {
+        ...plan,
+        name: t('starter.name'),
+        description: t('starter.description'),
+        features: [
+          t('starter.features.feature-1'),
+          t('starter.features.feature-2'),
+          t('starter.features.feature-3'),
+          t('starter.features.feature-4'),
+        ],
+        limits: [t('starter.limits.limit-1')],
+      };
     } else if (plan.id === 'pro') {
       plans.pro = {
         ...plan,
@@ -54,22 +67,6 @@ export function getPricePlans(): Record<string, PricePlan> {
           t('pro.features.feature-5'),
         ],
         limits: [t('pro.limits.limit-1'), t('pro.limits.limit-2')],
-      };
-    } else if (plan.id === 'lifetime') {
-      plans.lifetime = {
-        ...plan,
-        name: t('lifetime.name'),
-        description: t('lifetime.description'),
-        features: [
-          t('lifetime.features.feature-1'),
-          t('lifetime.features.feature-2'),
-          t('lifetime.features.feature-3'),
-          t('lifetime.features.feature-4'),
-          t('lifetime.features.feature-5'),
-          t('lifetime.features.feature-6'),
-          t('lifetime.features.feature-7'),
-        ],
-        limits: [],
       };
     }
   });

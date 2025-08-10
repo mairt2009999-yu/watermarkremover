@@ -19,7 +19,8 @@ export async function GET() {
     // Get price IDs
     const monthlyPriceId = getPriceId('pro_monthly');
     const yearlyPriceId = getPriceId('pro_yearly');
-    const lifetimePriceId = getPriceId('lifetime');
+    // Note: lifetime plan doesn't exist in getPriceId, commenting out
+    // const lifetimePriceId = getPriceId('lifetime');
 
     // Test finding plan and price
     const proPlan = findPlanByPlanId('pro');
@@ -44,7 +45,7 @@ export async function GET() {
         priceIds: {
           monthly: monthlyPriceId,
           yearly: yearlyPriceId,
-          lifetime: lifetimePriceId,
+          // lifetime: lifetimePriceId,
         },
       },
       plans: plans.map((plan) => ({

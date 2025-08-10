@@ -1,6 +1,6 @@
 import BlogCard, { BlogCardSkeleton } from '@/components/blog/blog-card';
 import { websiteConfig } from '@/config/website';
-import type { BlogType } from '@/lib/source';
+import type { BlogType } from '@/lib/blog-source';
 
 interface BlogGridProps {
   locale: string;
@@ -13,9 +13,15 @@ export default function BlogGrid({ locale, posts }: BlogGridProps) {
     <div>
       {posts?.length > 0 && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {posts.map((post) => (
-            <BlogCard key={post.slugs.join('/')} locale={locale} post={post} />
-          ))}
+          {posts.map((post) =>
+            post ? (
+              <BlogCard
+                key={post.slugs.join('/')}
+                locale={locale}
+                post={post}
+              />
+            ) : null
+          )}
         </div>
       )}
     </div>

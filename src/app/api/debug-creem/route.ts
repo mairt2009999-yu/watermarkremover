@@ -15,7 +15,8 @@ export async function GET() {
     const priceIds = {
       pro_monthly: getServerPriceId('pro_monthly'),
       pro_yearly: getServerPriceId('pro_yearly'),
-      lifetime: getServerPriceId('lifetime'),
+      // Note: lifetime plan doesn't exist in getServerPriceId, commenting out
+      // lifetime: getServerPriceId('lifetime'),
     };
 
     // Get server price plans

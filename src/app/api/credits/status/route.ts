@@ -1,5 +1,5 @@
-import { creditService } from '@/credits';
 import { isSimplifiedCreditSystem } from '@/config/features';
+import { creditService } from '@/credits';
 import { getSession } from '@/lib/server';
 import { NextResponse } from 'next/server';
 
@@ -20,14 +20,14 @@ export async function GET() {
 
     // Try to get user balance if authenticated
     let userBalance = null;
-    let userPlan = null;
-    
+    const userPlan = null;
+
     try {
       const session = await getSession();
       if (session?.user?.id) {
         const balance = await creditService.getBalance(session.user.id);
         userBalance = balance;
-        
+
         // Get user's subscription plan if available
         // This would require looking up the user's active subscription
         // For now, we'll just return the balance
@@ -40,10 +40,13 @@ export async function GET() {
     const response = {
       status: 'ok',
       system: features,
-      user: userBalance !== null ? {
-        balance: userBalance,
-        plan: userPlan,
-      } : null,
+      user:
+        userBalance !== null
+          ? {
+              balance: userBalance,
+              plan: userPlan,
+            }
+          : null,
       timestamp: new Date().toISOString(),
     };
 
@@ -69,7 +72,7 @@ export async function HEAD() {
   try {
     // Quick health check - just verify the service is accessible
     const systemVersion = isSimplifiedCreditSystem() ? 'v2' : 'v1';
-    
+
     return new NextResponse(null, {
       status: 200,
       headers: {

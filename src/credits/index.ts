@@ -14,11 +14,16 @@ import * as typesV2 from './types.simplified';
 // Export types based on version
 export type TransactionType = typesV1.TransactionType | typesV2.TransactionType;
 export type FeatureType = typesV1.FeatureType | typesV2.FeatureType;
-export type CreditTransaction = typesV1.CreditTransaction | typesV2.CreditTransaction;
+export type CreditTransaction =
+  | typesV1.CreditTransaction
+  | typesV2.CreditTransaction;
 export type UserCredits = typesV1.UserCredits | typesV2.UserCredits;
 
 // Export service-specific types
-export type { PaginationOptions, MonthlyUsageStats } from './credit.service.simplified';
+export type {
+  PaginationOptions,
+  MonthlyUsageStats,
+} from './credit.service.simplified';
 
 // Export V2-specific types
 export type { PlanUpgradeBenefit } from './types.simplified';
@@ -47,10 +52,7 @@ export function formatCredits(credits: number): string {
   return typesV1.formatCredits(credits);
 }
 
-export function calculateCreditCost(
-  feature: string,
-  param?: any
-): number {
+export function calculateCreditCost(feature: string, param?: any): number {
   if (isSimplifiedCreditSystem()) {
     return typesV2.calculateCreditCost(feature as any, param);
   }
@@ -65,7 +67,10 @@ export function getDaysUntilReset(lastResetDate: Date | null): number {
 }
 
 // V2-specific helper functions
-export function getUsagePercentage(balance: number, allocation: number): number {
+export function getUsagePercentage(
+  balance: number,
+  allocation: number
+): number {
   if (isSimplifiedCreditSystem()) {
     return typesV2.getUsagePercentage(balance, allocation);
   }
@@ -104,9 +109,13 @@ export function getCreditCosts() {
 // Export subscription credits based on version
 export function getSubscriptionCredits(planId: string): number {
   if (isSimplifiedCreditSystem()) {
-    return typesV2.SUBSCRIPTION_CREDITS[planId as keyof typeof typesV2.SUBSCRIPTION_CREDITS] || 0;
+    return (
+      typesV2.SUBSCRIPTION_CREDITS[
+        planId as keyof typeof typesV2.SUBSCRIPTION_CREDITS
+      ] || 0
+    );
   }
-  
+
   // V1 subscription credits (fallback values since V1 doesn't have a constant)
   const v1Config = {
     free: 10,
@@ -115,7 +124,7 @@ export function getSubscriptionCredits(planId: string): number {
     pro_yearly: 400,
     lifetime: 1000,
   };
-  
+
   return v1Config[planId as keyof typeof v1Config] || 0;
 }
 
@@ -124,7 +133,7 @@ export function getSubscriptionCreditsConfig() {
   if (isSimplifiedCreditSystem()) {
     return typesV2.SUBSCRIPTION_CREDITS;
   }
-  
+
   return {
     free: 10,
     pro: 300,

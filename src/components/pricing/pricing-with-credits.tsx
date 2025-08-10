@@ -2,8 +2,18 @@
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { getCreditSystemConfig, isSimplifiedCreditSystem } from '@/config/features';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import {
+  getCreditSystemConfig,
+  isSimplifiedCreditSystem,
+} from '@/config/features';
 import { Check, Sparkles, TrendingUp } from 'lucide-react';
 import Link from 'next/link';
 
@@ -21,7 +31,7 @@ interface PricingPlan {
 export function PricingWithCredits() {
   const config = getCreditSystemConfig();
   const isV2 = isSimplifiedCreditSystem();
-  
+
   const plans: PricingPlan[] = [
     {
       id: 'free',
@@ -69,9 +79,9 @@ export function PricingWithCredits() {
       id: 'lifetime',
       name: 'Lifetime',
       price: '$149',
-      credits: config.subscriptionCredits.lifetime,
+      credits: 500, // Fixed amount for lifetime plan
       features: [
-        `${config.subscriptionCredits.lifetime} credits per month forever`,
+        `500 credits per month forever`,
         'Best value for power users',
         'All features unlocked',
         'Premium support',
@@ -84,11 +94,9 @@ export function PricingWithCredits() {
   return (
     <div className="py-12">
       <div className="text-center mb-12">
-        <h2 className="text-3xl font-bold mb-4">
-          Choose Your Plan
-        </h2>
+        <h2 className="text-3xl font-bold mb-4">Choose Your Plan</h2>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-          {isV2 
+          {isV2
             ? 'All plans include monthly credits. No hidden fees, no separate purchases needed.'
             : 'Get started with our flexible pricing plans. Purchase additional credits anytime.'}
         </p>
@@ -96,7 +104,7 @@ export function PricingWithCredits() {
 
       <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto px-4">
         {plans.map((plan) => (
-          <Card 
+          <Card
             key={plan.id}
             className={`relative ${plan.recommended ? 'border-primary shadow-lg scale-105' : ''}`}
           >
@@ -105,14 +113,16 @@ export function PricingWithCredits() {
                 Most Popular
               </Badge>
             )}
-            
+
             <CardHeader>
               <CardTitle className="text-xl">{plan.name}</CardTitle>
               <CardDescription>
                 <div className="mt-4">
                   <span className="text-3xl font-bold">{plan.price}</span>
                   {plan.interval && (
-                    <span className="text-muted-foreground">{plan.interval}</span>
+                    <span className="text-muted-foreground">
+                      {plan.interval}
+                    </span>
                   )}
                 </div>
                 {plan.savings && (
@@ -122,7 +132,7 @@ export function PricingWithCredits() {
                 )}
               </CardDescription>
             </CardHeader>
-            
+
             <CardContent>
               <div className="mb-6 p-4 bg-primary/5 rounded-lg">
                 <div className="flex items-center gap-2 mb-2">
@@ -132,10 +142,11 @@ export function PricingWithCredits() {
                   </span>
                 </div>
                 <p className="text-sm text-muted-foreground">
-                  ≈ {Math.floor(plan.credits / 5)}-{Math.floor(plan.credits / 3)} operations/month
+                  ≈ {Math.floor(plan.credits / 5)}-
+                  {Math.floor(plan.credits / 3)} operations/month
                 </p>
               </div>
-              
+
               <ul className="space-y-3">
                 {plan.features.map((feature, index) => (
                   <li key={index} className="flex items-start gap-2">
@@ -145,11 +156,11 @@ export function PricingWithCredits() {
                 ))}
               </ul>
             </CardContent>
-            
+
             <CardFooter>
               <Link href={`/signup?plan=${plan.id}`} className="w-full">
-                <Button 
-                  className="w-full" 
+                <Button
+                  className="w-full"
                   variant={plan.recommended ? 'default' : 'outline'}
                 >
                   {plan.id === 'free' ? 'Start Free' : 'Get Started'}
@@ -173,33 +184,39 @@ export function PricingWithCredits() {
             <div className="grid md:grid-cols-3 gap-6">
               <div className="text-center">
                 <div className="text-2xl font-bold mb-2">Light User</div>
-                <div className="text-muted-foreground mb-4">1-20 images/month</div>
+                <div className="text-muted-foreground mb-4">
+                  5-50 images/month
+                </div>
                 <div className="p-3 bg-muted rounded-lg">
-                  <div className="font-semibold">Free or Pro Monthly</div>
+                  <div className="font-semibold">Free or Starter</div>
                   <div className="text-sm text-muted-foreground mt-1">
-                    5-100 credits needed
+                    10-100 credits needed
                   </div>
                 </div>
               </div>
-              
+
               <div className="text-center">
                 <div className="text-2xl font-bold mb-2">Regular User</div>
-                <div className="text-muted-foreground mb-4">20-30 images/month</div>
+                <div className="text-muted-foreground mb-4">
+                  100-200 images/month
+                </div>
+                <div className="p-3 bg-muted rounded-lg">
+                  <div className="font-semibold">Pro Monthly</div>
+                  <div className="text-sm text-muted-foreground mt-1">
+                    300 credits included
+                  </div>
+                </div>
+              </div>
+
+              <div className="text-center">
+                <div className="text-2xl font-bold mb-2">Power User</div>
+                <div className="text-muted-foreground mb-4">
+                  200+ images/month
+                </div>
                 <div className="p-3 bg-primary/10 rounded-lg">
                   <div className="font-semibold">Pro Yearly</div>
                   <div className="text-sm text-muted-foreground mt-1">
-                    100-150 credits needed
-                  </div>
-                </div>
-              </div>
-              
-              <div className="text-center">
-                <div className="text-2xl font-bold mb-2">Power User</div>
-                <div className="text-muted-foreground mb-4">50+ images/month</div>
-                <div className="p-3 bg-muted rounded-lg">
-                  <div className="font-semibold">Lifetime</div>
-                  <div className="text-sm text-muted-foreground mt-1">
-                    250+ credits needed
+                    400 credits/month - Best value!
                   </div>
                 </div>
               </div>
@@ -214,10 +231,13 @@ export function PricingWithCredits() {
           <Card className="bg-primary/5 border-primary/20">
             <CardContent className="pt-6">
               <TrendingUp className="h-8 w-8 text-primary mx-auto mb-4" />
-              <h3 className="font-semibold mb-2">Simple, Transparent Pricing</h3>
+              <h3 className="font-semibold mb-2">
+                Simple, Transparent Pricing
+              </h3>
               <p className="text-sm text-muted-foreground">
-                All credits are included in your subscription. No need to buy extra credits - 
-                just upgrade your plan when you need more. Credits refresh automatically every month.
+                All credits are included in your subscription. No need to buy
+                extra credits - just upgrade your plan when you need more.
+                Credits refresh automatically every month.
               </p>
             </CardContent>
           </Card>

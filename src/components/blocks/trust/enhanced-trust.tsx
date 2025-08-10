@@ -1,7 +1,7 @@
 'use client';
 
 import { Badge } from '@/components/ui/badge';
-import { motion } from 'framer-motion';
+import { type Variants, motion } from 'framer-motion';
 import { Award, CheckCircle, Globe, Lock, Shield, Zap } from 'lucide-react';
 
 interface TrustFeature {
@@ -46,7 +46,7 @@ export default function EnhancedTrustSection() {
     { name: 'CCPA', icon: <Globe className="h-8 w-8" /> },
   ];
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -57,7 +57,7 @@ export default function EnhancedTrustSection() {
     },
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,

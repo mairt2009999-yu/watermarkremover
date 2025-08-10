@@ -32,7 +32,15 @@ export function CreditBalance() {
       setLoading(true);
       const result = await getUserCredits();
       if (result.success && result.data) {
-        setCredits(result.data);
+        const data = result.data as any; // Type assertion to handle type mismatch
+        setCredits({
+          balance: data.balance || 0,
+          monthlyAllocation: data.monthlyAllocation || 0,
+          purchasedCredits: data.purchasedCredits || 0,
+          totalSpent: data.totalSpent || 0,
+          totalEarned: data.totalEarned || 0,
+          daysUntilReset: data.daysUntilReset || getDaysUntilReset(null),
+        });
       } else {
         setError(result.error || 'Failed to load credits');
       }

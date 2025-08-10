@@ -1,9 +1,12 @@
+import { CustomPage } from '@/components/page/custom-page';
 import { constructMetadata } from '@/lib/metadata';
+import { pagesSource } from '@/lib/pages-source';
 import { getUrlWithLocale } from '@/lib/urls/urls';
 import type { NextPageProps } from '@/types/next-page-props';
 import type { Metadata } from 'next';
 import type { Locale } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
+import { notFound } from 'next/navigation';
 
 export async function generateMetadata({
   params,
@@ -13,10 +16,12 @@ export async function generateMetadata({
   try {
     const { locale } = await params;
     const t = await getTranslations({ locale, namespace: 'Metadata' });
+    const page = pagesSource.getPage(['terms-of-service'], locale);
 
     return constructMetadata({
-      title: 'Terms of Service | ' + t('title'),
-      description: 'Terms of Service',
+      title: page?.data.title || 'Terms of Service' + ' | ' + t('title'),
+      description:
+        page?.data.description || 'Terms and conditions for our service',
       canonicalUrl: getUrlWithLocale('/terms', locale),
     });
   } catch (error) {
@@ -27,21 +32,15 @@ export async function generateMetadata({
 
 export default async function TermsOfServicePage(props: NextPageProps) {
   const params = await props.params;
-  const locale = params?.locale || 'en';
+  const locale = Array.isArray(params?.locale)
+    ? params.locale[0]
+    : params?.locale || 'en';
 
-  return (
-    <div className="max-w-4xl mx-auto space-y-8 p-8">
-      <div className="space-y-4">
-        <h1 className="text-center text-3xl font-bold tracking-tight">
-          Terms of Service
-        </h1>
-        <p className="text-center text-lg text-muted-foreground">
-          Please review our terms of service carefully.
-        </p>
-      </div>
-      <div className="prose prose-neutral dark:prose-invert max-w-none">
-        <p>Terms of Service content will be loaded here.</p>
-      </div>
-    </div>
-  );
+  const page = pagesSource.getPage(['terms-of-service'], locale);
+
+  if (!page) {
+    notFound();
+  }
+
+  return <CustomPage page={page} />;
 }

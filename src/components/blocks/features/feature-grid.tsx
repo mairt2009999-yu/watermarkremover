@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { type Variants, motion } from 'framer-motion';
 import {
   Clock,
   Download,
@@ -28,39 +28,39 @@ export default function FeatureGrid() {
   const features: FeatureCard[] = [
     {
       icon: Sparkles,
-      title: 'Free AI Online Tool',
+      title: 'Free AI Watermark Remover Online',
       description:
-        'Advanced AI watermark remover online tool that accurately identifies all watermark types including text, logos, patterns, and hidden watermarks',
+        'Professional watermark remover powered by advanced AI technology. Remove watermarks from photos instantly - text watermarks, logos, stamps, and transparent overlays with 98% accuracy',
       gradient: 'from-primary/30 to-primary/20',
       stats: '98%',
     },
     {
       icon: Zap,
-      title: 'Instant Processing',
+      title: 'Instant Watermark Removal',
       description:
-        'Remove watermarks instantly in under 5 seconds with batch upload support for maximum efficiency. No sign-up required.',
+        'Remove watermarks from images in under 5 seconds. Batch watermark remover supports multiple photos at once. Free online tool with no sign-up required.',
       gradient: 'from-primary/20 to-primary/10',
       stats: '5s',
     },
     {
       icon: Image,
-      title: 'Original Quality Preserved',
+      title: 'HD Quality Watermark Eraser',
       description:
-        'Professional watermark removal maintains original resolution and quality, supports 4K high-resolution image processing',
+        'Professional watermark removal tool preserves original image quality. Remove watermarks from 4K photos without blur or artifacts. Perfect for high-resolution images.',
       gradient: 'from-primary/25 to-primary/15',
       stats: '4K',
     },
     {
       icon: Shield,
-      title: 'No Registration Required',
+      title: 'Secure & Private Watermark Remover',
       description:
-        'Free online watermark eraser with encrypted image transmission and automatic deletion after processing to protect your privacy',
+        'Free watermark remover online with encrypted transmission. Remove watermarks safely - images auto-deleted after processing. No registration, no data collection.',
       gradient: 'from-muted-foreground/10 to-muted-foreground/5',
       stats: '100%',
     },
   ];
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -71,14 +71,14 @@ export default function FeatureGrid() {
     },
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
         duration: 0.5,
-        ease: [0.22, 1, 0.36, 1], // easeOut
+        ease: 'easeOut',
       },
     },
   };
@@ -97,14 +97,15 @@ export default function FeatureGrid() {
             variants={itemVariants}
             className="text-3xl lg:text-4xl font-bold mb-4"
           >
-            Professional Watermark Removal, AI-Driven
+            Professional AI Watermark Remover Features
           </motion.h2>
           <motion.p
             variants={itemVariants}
             className="text-lg text-muted-foreground max-w-2xl mx-auto"
           >
-            A professional watermark remover powered by advanced AI technology -
-            fast, precise, and secure
+            Remove watermarks from photos instantly with our free online
+            watermark remover tool. Advanced AI technology for text, logo, and
+            transparent watermark removal.
           </motion.p>
         </motion.div>
 

@@ -8,7 +8,12 @@ import { and, desc, eq, gte, sql } from 'drizzle-orm';
 import { nanoid } from 'nanoid';
 
 // Simplified transaction types - no 'purchased' type
-export type TransactionType = 'earned' | 'spent' | 'expired' | 'refunded' | 'bonus';
+export type TransactionType =
+  | 'earned'
+  | 'spent'
+  | 'expired'
+  | 'refunded'
+  | 'bonus';
 
 export interface PaginationOptions {
   page?: number;
@@ -49,6 +54,7 @@ export class SimplifiedCreditService {
    * Get user's current credit balance
    */
   async getBalance(userId: string): Promise<number> {
+    const db = await getDb();
     const credits = await db
       .select()
       .from(userCredits)
@@ -91,6 +97,7 @@ export class SimplifiedCreditService {
   ): Promise<{ transactions: CreditTransaction[]; total: number }> {
     const { page = 1, limit = 20 } = options;
     const offset = (page - 1) * limit;
+    const db = await this.getDatabase();
 
     const [transactions, totalResult] = await Promise.all([
       db
@@ -116,6 +123,7 @@ export class SimplifiedCreditService {
    * Get monthly usage statistics (simplified without purchased credits)
    */
   async getMonthlyUsage(userId: string): Promise<MonthlyUsageStats> {
+    const db = await this.getDatabase();
     const credits = await db
       .select()
       .from(userCredits)
@@ -146,9 +154,10 @@ export class SimplifiedCreditService {
 
     // Calculate usage percentage
     const usedCredits = credit.monthlyAllocation - credit.balance;
-    const usagePercentage = credit.monthlyAllocation > 0
-      ? (usedCredits / credit.monthlyAllocation) * 100
-      : 0;
+    const usagePercentage =
+      credit.monthlyAllocation > 0
+        ? (usedCredits / credit.monthlyAllocation) * 100
+        : 0;
 
     // Get monthly transactions count
     const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
@@ -190,6 +199,7 @@ export class SimplifiedCreditService {
     feature: string,
     metadata?: any
   ): Promise<{ success: boolean; newBalance: number; error?: string }> {
+    const db = await this.getDatabase();
     return await db.transaction(async (tx) => {
       // Get current balance with lock
       const credits = await tx
@@ -254,6 +264,7 @@ export class SimplifiedCreditService {
     type: TransactionType = 'earned',
     metadata?: any
   ): Promise<{ success: boolean; newBalance: number }> {
+    const db = await this.getDatabase();
     return await db.transaction(async (tx) => {
       // Get or create user credits
       const credits = await tx
@@ -319,6 +330,7 @@ export class SimplifiedCreditService {
    */
   async allocateMonthlyCredits(userId: string, planId: string): Promise<void> {
     // Get plan configuration
+    const db = await this.getDatabase();
     const configs = await db
       .select()
       .from(subscriptionCreditConfig)
@@ -386,6 +398,7 @@ export class SimplifiedCreditService {
     const now = new Date();
     const oneMonthAgo = new Date(now);
     oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
+    const db = await this.getDatabase();
 
     // Get all users whose credits need resetting
     const usersToReset = await db
@@ -445,6 +458,7 @@ export class SimplifiedCreditService {
     newPlanId: string
   ): Promise<void> {
     // Get new plan configuration
+    const db = await this.getDatabase();
     const configs = await db
       .select()
       .from(subscriptionCreditConfig)
@@ -473,7 +487,7 @@ export class SimplifiedCreditService {
     }
 
     const current = currentCredits[0];
-    
+
     // Calculate pro-rated credits for the remaining month
     const now = new Date();
     const lastReset = current.lastResetDate || now;
@@ -522,6 +536,7 @@ export class SimplifiedCreditService {
   async handleSubscriptionCancellation(userId: string): Promise<void> {
     // Credits remain active until subscription period ends
     // Just log the cancellation
+    const db = await this.getDatabase();
     const credits = await db
       .select()
       .from(userCredits)
@@ -545,6 +560,7 @@ export class SimplifiedCreditService {
    * Expire user credits (when subscription ends)
    */
   async expireUserCredits(userId: string): Promise<void> {
+    const db = await this.getDatabase();
     const credits = await db
       .select()
       .from(userCredits)
@@ -613,6 +629,7 @@ export class SimplifiedCreditService {
    * Generate usage report
    */
   async generateUsageReport(userId: string, startDate: Date, endDate: Date) {
+    const db = await this.getDatabase();
     const transactions = await db
       .select()
       .from(creditTransactions)
@@ -664,6 +681,7 @@ export class SimplifiedCreditService {
    * Get subscription credit configuration
    */
   async getSubscriptionCredits(planId: string): Promise<number> {
+    const db = await this.getDatabase();
     const configs = await db
       .select()
       .from(subscriptionCreditConfig)

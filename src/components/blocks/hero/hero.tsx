@@ -135,8 +135,9 @@ export default function HeroSection() {
               as="p"
               className="mx-auto mt-6 max-w-2xl text-center text-balance text-lg text-muted-foreground lg:text-xl"
             >
-              Professional online watermark remover tool. Remove text, logos, and patterns from images instantly with AI. 
-              Free, fast, HD quality - no registration required.
+              Professional online watermark remover tool. Remove text, logos,
+              and patterns from images instantly with AI. Free, fast, HD quality
+              - no registration required.
             </TextEffect>
 
             {/* Upload area */}
@@ -239,7 +240,8 @@ export default function HeroSection() {
                   AI Watermark Removal - Instant Results
                 </h2>
                 <p className="text-base text-muted-foreground max-w-xl mx-auto">
-                  Drag the slider to see how our AI instantly removes watermarks while preserving image quality
+                  Drag the slider to see how our AI instantly removes watermarks
+                  while preserving image quality
                 </p>
               </div>
 
@@ -295,15 +297,21 @@ export default function HeroSection() {
               <div className="grid grid-cols-3 gap-6 mt-8 max-w-md mx-auto">
                 <div className="text-center">
                   <div className="text-2xl font-bold text-primary">3s</div>
-                  <div className="text-xs text-muted-foreground">Processing Time</div>
+                  <div className="text-xs text-muted-foreground">
+                    Processing Time
+                  </div>
                 </div>
                 <div className="text-center">
                   <div className="text-2xl font-bold text-primary">98%</div>
-                  <div className="text-xs text-muted-foreground">Success Rate</div>
+                  <div className="text-xs text-muted-foreground">
+                    Success Rate
+                  </div>
                 </div>
                 <div className="text-center">
                   <div className="text-2xl font-bold text-primary">HD</div>
-                  <div className="text-xs text-muted-foreground">Quality Preserved</div>
+                  <div className="text-xs text-muted-foreground">
+                    Quality Preserved
+                  </div>
                 </div>
               </div>
             </AnimatedGroup>
@@ -328,25 +336,40 @@ export default function HeroSection() {
                   Why Choose Our Free Online Watermark Remover?
                 </h2>
                 <p className="text-base text-muted-foreground">
-                  Professional-grade AI technology with instant results - no registration required
+                  Professional-grade AI technology with instant results - no
+                  registration required
                 </p>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div className="text-center p-6 rounded-2xl bg-gradient-to-b from-primary/5 to-transparent border border-border/50">
-                  <Badge className="mb-4" variant="secondary">Free Online Tool</Badge>
+                  <Badge className="mb-4" variant="secondary">
+                    Free Online Tool
+                  </Badge>
                   <h3 className="font-semibold mb-2">No Sign-up Required</h3>
-                  <p className="text-sm text-muted-foreground">Start removing watermarks instantly - completely free</p>
+                  <p className="text-sm text-muted-foreground">
+                    Start removing watermarks instantly - completely free
+                  </p>
                 </div>
                 <div className="text-center p-6 rounded-2xl bg-gradient-to-b from-primary/5 to-transparent border border-border/50">
-                  <Badge className="mb-4" variant="secondary">Batch Processing</Badge>
+                  <Badge className="mb-4" variant="secondary">
+                    Batch Processing
+                  </Badge>
                   <h3 className="font-semibold mb-2">Upload Multiple Images</h3>
-                  <p className="text-sm text-muted-foreground">Process up to 10 images at once for maximum efficiency</p>
+                  <p className="text-sm text-muted-foreground">
+                    Process up to 10 images at once for maximum efficiency
+                  </p>
                 </div>
                 <div className="text-center p-6 rounded-2xl bg-gradient-to-b from-primary/5 to-transparent border border-border/50">
-                  <Badge className="mb-4" variant="secondary">HD Quality</Badge>
-                  <h3 className="font-semibold mb-2">Original Quality Preserved</h3>
-                  <p className="text-sm text-muted-foreground">No blur, no artifacts - maintain perfect image quality</p>
+                  <Badge className="mb-4" variant="secondary">
+                    HD Quality
+                  </Badge>
+                  <h3 className="font-semibold mb-2">
+                    Original Quality Preserved
+                  </h3>
+                  <p className="text-sm text-muted-foreground">
+                    No blur, no artifacts - maintain perfect image quality
+                  </p>
                 </div>
               </div>
             </AnimatedGroup>

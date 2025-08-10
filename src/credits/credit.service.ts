@@ -28,7 +28,6 @@ export interface MonthlyUsageStats {
   totalEarned: number;
   currentBalance: number;
   monthlyAllocation: number;
-  purchasedCredits: number;
   daysUntilReset: number;
   transactions: number;
 }
@@ -75,7 +74,6 @@ export class CreditService {
       userId,
       balance: initialBalance,
       monthlyAllocation: 0,
-      purchasedCredits: 0,
       totalEarned: initialBalance,
       totalSpent: 0,
       lastResetDate: new Date(),
@@ -130,7 +128,6 @@ export class CreditService {
         totalEarned: 0,
         currentBalance: 0,
         monthlyAllocation: 0,
-        purchasedCredits: 0,
         daysUntilReset: 30,
         transactions: 0,
       };
@@ -162,7 +159,6 @@ export class CreditService {
       totalEarned: credit.totalEarned,
       currentBalance: credit.balance,
       monthlyAllocation: credit.monthlyAllocation,
-      purchasedCredits: credit.purchasedCredits,
       daysUntilReset,
       transactions: Number(transactionCount[0]?.count || 0),
     };
@@ -265,7 +261,6 @@ export class CreditService {
           userId,
           balance: amount,
           monthlyAllocation: 0,
-          purchasedCredits: type === 'purchased' ? amount : 0,
           totalEarned: amount,
           totalSpent: 0,
           lastResetDate: new Date(),
@@ -292,7 +287,6 @@ export class CreditService {
       };
 
       if (type === 'purchased') {
-        updates.purchasedCredits = credits[0].purchasedCredits + amount;
       }
 
       // Update balance
@@ -443,7 +437,7 @@ export class CreditService {
       credits: pkg.credits,
       amount: pkg.price,
       currency: pkg.currency || 'USD',
-      stripePaymentIntentId: paymentIntentId,
+      stripePaymentId: paymentIntentId,
       status: 'completed',
     });
 

@@ -51,6 +51,16 @@ export function PricingTableClient({
         tPlans('free.limits.limit-2'),
         tPlans('free.limits.limit-3'),
       ];
+    } else if (plan.id === 'starter') {
+      translatedPlan.name = tPlans('starter.name');
+      translatedPlan.description = tPlans('starter.description');
+      translatedPlan.features = [
+        tPlans('starter.features.feature-1'),
+        tPlans('starter.features.feature-2'),
+        tPlans('starter.features.feature-3'),
+        tPlans('starter.features.feature-4'),
+      ];
+      translatedPlan.limits = [tPlans('starter.limits.limit-1')];
     } else if (plan.id === 'pro') {
       translatedPlan.name = tPlans('pro.name');
       translatedPlan.description = tPlans('pro.description');
@@ -65,19 +75,6 @@ export function PricingTableClient({
         tPlans('pro.limits.limit-1'),
         tPlans('pro.limits.limit-2'),
       ];
-    } else if (plan.id === 'lifetime') {
-      translatedPlan.name = tPlans('lifetime.name');
-      translatedPlan.description = tPlans('lifetime.description');
-      translatedPlan.features = [
-        tPlans('lifetime.features.feature-1'),
-        tPlans('lifetime.features.feature-2'),
-        tPlans('lifetime.features.feature-3'),
-        tPlans('lifetime.features.feature-4'),
-        tPlans('lifetime.features.feature-5'),
-        tPlans('lifetime.features.feature-6'),
-        tPlans('lifetime.features.feature-7'),
-      ];
-      translatedPlan.limits = [];
     }
 
     return translatedPlan;

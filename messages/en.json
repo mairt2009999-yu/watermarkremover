@@ -31,9 +31,9 @@
     "logoutFailed": "Failed to log out"
   },
   "PricingPage": {
-    "title": "Pricing",
-    "description": "Choose the plan that works best for you",
-    "subtitle": "Choose the plan that works best for you",
+    "title": "Watermark Remover Pricing",
+    "description": "Choose the best watermark removal plan for your needs - Free, Pro, or Lifetime access",
+    "subtitle": "Choose the perfect watermark remover plan for your needs",
     "monthly": "Monthly",
     "yearly": "Yearly",
     "PricingCard": {
@@ -57,45 +57,45 @@
   "PricePlans": {
     "free": {
       "name": "Free",
-      "description": "Basic features for personal use",
+      "description": "Free watermark remover for personal use",
       "features": {
-        "feature-1": "5 images per day",
-        "feature-2": "Basic quality (720p)",
-        "feature-3": "Standard processing speed",
-        "feature-4": "Community support"
+        "feature-1": "10 credits per month",
+        "feature-2": "Basic watermark removal (720p quality)",
+        "feature-3": "Standard watermark detection AI",
+        "feature-4": "Remove text watermarks & logos"
       },
       "limits": {
-        "limit-1": "Custom domains",
-        "limit-2": "Custom branding",
-        "limit-3": "Lifetime updates"
+        "limit-1": "Batch watermark removal",
+        "limit-2": "4K watermark removal",
+        "limit-3": "Priority watermark processing"
+      }
+    },
+    "starter": {
+      "name": "Starter",
+      "description": "Perfect for light users getting started",
+      "features": {
+        "feature-1": "100 credits per month",
+        "feature-2": "HD watermark removal (1080p quality)",
+        "feature-3": "Priority processing",
+        "feature-4": "Email support"
+      },
+      "limits": {
+        "limit-1": "Advanced AI features"
       }
     },
     "pro": {
       "name": "Pro",
-      "description": "Advanced features for professionals",
+      "description": "Professional watermark remover for businesses",
       "features": {
-        "feature-1": "Unlimited images",
-        "feature-2": "HD quality (1080p+)",
-        "feature-3": "Priority processing",
-        "feature-4": "Email support",
-        "feature-5": "Batch processing (50 images)"
+        "feature-1": "300+ credits per month",
+        "feature-2": "Advanced HD watermark remover (1080p+)",
+        "feature-3": "Priority AI watermark processing",
+        "feature-4": "Remove transparent watermarks",
+        "feature-5": "Batch remove watermarks (50 images)"
       },
       "limits": {
-        "limit-1": "Custom branding",
-        "limit-2": "Lifetime updates"
-      }
-    },
-    "lifetime": {
-      "name": "Lifetime",
-      "description": "Premium features with one-time payment",
-      "features": {
-        "feature-1": "All Pro features",
-        "feature-2": "4K quality output",
-        "feature-3": "Priority support",
-        "feature-4": "API access",
-        "feature-5": "Bulk processing (500 images)",
-        "feature-6": "Commercial license",
-        "feature-7": "Lifetime updates"
+        "limit-1": "API watermark removal",
+        "limit-2": "White-label watermark remover"
       }
     }
   },
@@ -731,28 +731,28 @@
       "description": "Choose the plan that works best for you"
     },
     "faqs": {
-      "title": "FAQ",
-      "subtitle": "Frequently Asked Questions",
+      "title": "Watermark Remover FAQ",
+      "subtitle": "Common Questions About Our Free Online Watermark Removal Tool",
       "items": {
         "item-1": {
-          "question": "How accurate is the watermark removal?",
-          "answer": "Our AI technology achieves 98% accuracy in detecting and removing watermarks, logos, and text overlays from images."
+          "question": "How accurate is your AI watermark remover online tool?",
+          "answer": "Our professional watermark remover achieves 98% accuracy using advanced AI technology. It can detect and remove watermarks including text watermarks, logos, stamps, and transparent overlays from any image instantly."
         },
         "item-2": {
-          "question": "Will my images lose quality?",
-          "answer": "No, our tool preserves the original quality of your images. We support up to 4K resolution without any quality loss."
+          "question": "Does the watermark removal tool preserve image quality?",
+          "answer": "Yes, our free watermark remover preserves 100% of your original image quality. Whether you need to remove watermarks from HD photos or 4K images, our tool maintains full resolution without any blur, artifacts, or quality loss."
         },
         "item-3": {
-          "question": "Can I process multiple images at once?",
-          "answer": "Yes, our batch processing feature allows you to remove watermarks from up to 50 images simultaneously."
+          "question": "Can I batch remove watermarks from multiple photos?",
+          "answer": "Absolutely! Our batch watermark remover allows you to remove watermarks from up to 50 images simultaneously. Simply upload multiple photos with watermarks and our AI will process them all at once, saving you valuable time."
         },
         "item-4": {
-          "question": "Is my data secure?",
-          "answer": "Absolutely. All images are encrypted during transmission and automatically deleted from our servers after processing."
+          "question": "Is this free watermark remover safe and secure?",
+          "answer": "Yes, our watermark remover online tool is 100% secure. All images are encrypted during upload, processed in isolated environments, and automatically deleted after watermark removal. We never store or share your photos."
         },
         "item-5": {
-          "question": "What types of watermarks can be removed?",
-          "answer": "We can remove text watermarks, logos, dates, stamps, signatures, and semi-transparent overlays from any image."
+          "question": "What types of watermarks can your AI remove from photos?",
+          "answer": "Our watermark remover can handle all watermark types: text watermarks, company logos, date stamps, signatures, transparent watermarks, semi-transparent overlays, and even complex pattern watermarks. The AI adapts to each watermark type for optimal removal."
         },
         "item-6": {
           "question": "Can I remove watermarks from Shutterstock, Getty Images, and stock photos?",

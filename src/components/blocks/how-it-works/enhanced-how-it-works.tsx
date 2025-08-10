@@ -1,7 +1,7 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, type Variants, motion } from 'framer-motion';
 import { ArrowRight, Check, Download, Upload, Wand2 } from 'lucide-react';
 import Image from 'next/image';
 import { useState } from 'react';
@@ -60,7 +60,7 @@ export default function EnhancedHowItWorks() {
     },
   ];
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -70,7 +70,7 @@ export default function EnhancedHowItWorks() {
     },
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,

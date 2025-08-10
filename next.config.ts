@@ -1,6 +1,14 @@
 import { createMDX } from 'fumadocs-mdx/next';
 import type { NextConfig } from 'next';
 import createNextIntlPlugin from 'next-intl/plugin';
+import {
+  author,
+  blog,
+  category,
+  changelog,
+  docs,
+  pages,
+} from './source.config';
 
 /**
  * https://nextjs.org/docs/app/api-reference/config/next-config-js
@@ -85,6 +93,8 @@ const withNextIntl = createNextIntlPlugin();
  * https://fumadocs.dev/docs/ui/manual-installation
  * https://fumadocs.dev/docs/mdx/plugin
  */
-const withMDX = createMDX();
+const withMDX = createMDX({
+  configPath: './source.config.ts',
+});
 
 export default withMDX(withNextIntl(nextConfig));

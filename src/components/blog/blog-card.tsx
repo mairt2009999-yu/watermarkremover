@@ -1,8 +1,8 @@
 import { Skeleton } from '@/components/ui/skeleton';
 import { LocaleLink } from '@/i18n/navigation';
+import { type BlogType, authorSource, categorySource } from '@/lib/blog-source';
 import { PLACEHOLDER_IMAGE } from '@/lib/constants';
 import { formatDate } from '@/lib/formatter';
-import { type BlogType, authorSource, categorySource } from '@/lib/source';
 import Image from 'next/image';
 
 interface BlogCardProps {
@@ -10,16 +10,33 @@ interface BlogCardProps {
   post: BlogType;
 }
 
+type BlogFrontmatter = {
+  date: string;
+  title?: string;
+  description?: string;
+  image?: string;
+  author: string;
+  categories: string[];
+};
+
 export default function BlogCard({ locale, post }: BlogCardProps) {
-  const { date, title, description, image, author, categories } = post.data;
+  if (!post) {
+    return null;
+  }
+
+  const data = post.data as unknown as BlogFrontmatter;
+  const { date, title, description, image, author, categories } = data;
   const publishDate = formatDate(new Date(date));
   const blogAuthor = authorSource.getPage([author], locale);
   const blogCategories = categorySource
     .getPages(locale)
-    .filter((category) => categories.includes(category.slugs[0] ?? ''));
+    .filter((category) => (categories ?? []).includes(category.slugs[0] ?? ''));
 
   return (
-    <LocaleLink href={`/blog/${post.slugs}`} className="block h-full">
+    <LocaleLink
+      href={`/blog/${post.slugs[0].replace('.zh', '')}`}
+      className="block h-full"
+    >
       <div className="group flex flex-col border rounded-lg overflow-hidden h-full">
         {/* Image container - fixed aspect ratio */}
         <div className="group overflow-hidden relative aspect-16/9 w-full">
@@ -38,14 +55,22 @@ export default function BlogCard({ locale, post }: BlogCardProps) {
               {blogCategories && blogCategories.length > 0 && (
                 <div className="absolute left-2 bottom-2 opacity-100 transition-opacity duration-300">
                   <div className="flex flex-wrap gap-1">
-                    {blogCategories.map((category, index) => (
-                      <span
-                        key={`${category?.slugs[0]}-${index}`}
-                        className="text-xs font-medium text-white bg-black bg-opacity-50 px-2 py-1 rounded-md"
-                      >
-                        {category?.data.name}
-                      </span>
-                    ))}
+                    {blogCategories.map((category, index) => {
+                      type CategoryFrontmatter = {
+                        name: string;
+                        description?: string;
+                      };
+                      const categoryData =
+                        category.data as unknown as CategoryFrontmatter;
+                      return (
+                        <span
+                          key={`${category?.slugs[0]}-${index}`}
+                          className="text-xs font-medium text-white bg-black bg-opacity-50 px-2 py-1 rounded-md"
+                        >
+                          {categoryData?.name}
+                        </span>
+                      );
+                    })}
                   </div>
                 </div>
               )}
@@ -85,16 +110,29 @@ export default function BlogCard({ locale, post }: BlogCardProps) {
           <div className="mt-4 pt-4 border-t flex items-center justify-between space-x-4 text-muted-foreground">
             <div className="flex items-center gap-2">
               <div className="relative h-8 w-8 shrink-0">
-                {blogAuthor?.data.avatar && (
+                {(() => {
+                  type AuthorFrontmatter = { name: string; avatar?: string };
+                  const authorData = blogAuthor?.data as unknown as
+                    | AuthorFrontmatter
+                    | undefined;
+                  if (!authorData?.avatar) return null;
                   <Image
-                    src={blogAuthor?.data.avatar}
-                    alt={`avatar for ${blogAuthor?.data.name}`}
+                    src={authorData.avatar}
+                    alt={`avatar for ${authorData.name}`}
                     className="rounded-full object-cover border"
                     fill
-                  />
-                )}
+                  />;
+                })()}
               </div>
-              <span className="truncate text-sm">{blogAuthor?.data.name}</span>
+              {(() => {
+                type AuthorFrontmatter = { name: string };
+                const authorData = blogAuthor?.data as unknown as
+                  | AuthorFrontmatter
+                  | undefined;
+                return (
+                  <span className="truncate text-sm">{authorData?.name}</span>
+                );
+              })()}
             </div>
 
             <time className="truncate text-sm" dateTime={date}>

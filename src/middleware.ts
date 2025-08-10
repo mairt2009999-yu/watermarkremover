@@ -1,6 +1,7 @@
 import createMiddleware from 'next-intl/middleware';
 import { type NextRequest, NextResponse } from 'next/server';
 import { LOCALES, routing } from './i18n/routing';
+import { withIntlMiddlewareTimeout } from './lib/middleware-utils';
 import {
   DEFAULT_LOGIN_REDIRECT,
   protectedRoutes,
@@ -83,9 +84,11 @@ export default async function middleware(req: NextRequest) {
     );
   }
 
-  // Apply intlMiddleware for all routes
-  console.log('<< middleware end, applying intlMiddleware');
-  return intlMiddleware(req);
+  // Apply intlMiddleware for all routes with timeout protection
+  console.log(
+    '<< middleware end, applying intlMiddleware with timeout protection'
+  );
+  return withIntlMiddlewareTimeout(intlMiddleware, req);
 }
 
 /**

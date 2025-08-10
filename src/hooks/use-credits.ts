@@ -99,7 +99,7 @@ export function useCredits({
             },
           });
 
-          if (deductResult.success) {
+          if (deductResult.success && 'newBalance' in deductResult) {
             setBalance(deductResult.newBalance);
             toast.success(
               `${creditCheck.required} credits used. Balance: ${deductResult.newBalance}`
@@ -137,7 +137,7 @@ export function useCredits({
           metadata,
         });
 
-        if (result.success) {
+        if (result.success && 'newBalance' in result) {
           setBalance(result.newBalance);
           toast.success(`${requiredCredits} credits used`);
           onSuccess?.();

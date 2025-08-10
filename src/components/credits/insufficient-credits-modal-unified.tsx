@@ -15,12 +15,14 @@ interface UnifiedInsufficientCreditsModalProps {
  * Unified insufficient credits modal that switches between v1 and v2
  * based on the feature flag configuration
  */
-export function InsufficientCreditsModal(props: UnifiedInsufficientCreditsModalProps) {
+export function InsufficientCreditsModal(
+  props: UnifiedInsufficientCreditsModalProps
+) {
   // Use simplified version if v2 is enabled (no purchase options)
   if (isSimplifiedCreditSystem()) {
     return <SimplifiedInsufficientCreditsModal {...props} />;
   }
-  
+
   // Use original version with credit package purchase options
   return <OriginalModal {...props} />;
 }

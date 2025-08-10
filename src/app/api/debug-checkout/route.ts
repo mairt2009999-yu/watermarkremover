@@ -32,7 +32,8 @@ async function debugCheckout(request?: Request) {
     debugInfo.checks.priceIds = {
       monthly: getServerPriceId('pro_monthly'),
       yearly: getServerPriceId('pro_yearly'),
-      lifetime: getServerPriceId('lifetime'),
+      // Note: lifetime plan doesn't exist in getServerPriceId, commenting out
+      // lifetime: getServerPriceId('lifetime'),
     };
 
     // 3. Check payment provider

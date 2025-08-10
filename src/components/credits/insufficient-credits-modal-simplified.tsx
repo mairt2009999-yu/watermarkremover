@@ -11,8 +11,12 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { formatCredits, getUpgradeOptions, SUBSCRIPTION_CREDITS } from '@/credits/types.simplified';
-import { Coins, TrendingUp, Sparkles, Check } from 'lucide-react';
+import {
+  SUBSCRIPTION_CREDITS,
+  formatCredits,
+  getUpgradeOptions,
+} from '@/credits/types.simplified';
+import { Check, Coins, Sparkles, TrendingUp } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
@@ -86,7 +90,9 @@ export function SimplifiedInsufficientCreditsModal({
           <div className="bg-muted/50 rounded-lg p-4">
             <div className="grid grid-cols-3 gap-4 text-center">
               <div>
-                <div className="text-sm text-muted-foreground">Your Balance</div>
+                <div className="text-sm text-muted-foreground">
+                  Your Balance
+                </div>
                 <div className="text-xl font-bold">
                   {formatCredits(currentBalance)}
                 </div>
@@ -109,7 +115,8 @@ export function SimplifiedInsufficientCreditsModal({
           {/* Current Plan Info */}
           {!loading && (
             <div className="text-sm text-muted-foreground text-center">
-              Your current plan includes <strong>{formatCredits(currentAllocation)}</strong> credits/month
+              Your current plan includes{' '}
+              <strong>{formatCredits(currentAllocation)}</strong> credits/month
             </div>
           )}
 
@@ -125,15 +132,23 @@ export function SimplifiedInsufficientCreditsModal({
                 className={`p-4 cursor-pointer hover:border-primary transition-colors ${
                   option.recommended ? 'border-primary' : ''
                 }`}
-                onClick={() => handleUpgradePlan(option.plan.toLowerCase().replace(' ', '_'))}
+                onClick={() =>
+                  handleUpgradePlan(option.plan.toLowerCase().replace(' ', '_'))
+                }
               >
                 <div className="flex items-start gap-3">
-                  <div className={`p-2 rounded-lg ${
-                    option.recommended ? 'bg-primary/10' : 'bg-muted'
-                  }`}>
-                    <TrendingUp className={`h-5 w-5 ${
-                      option.recommended ? 'text-primary' : 'text-muted-foreground'
-                    }`} />
+                  <div
+                    className={`p-2 rounded-lg ${
+                      option.recommended ? 'bg-primary/10' : 'bg-muted'
+                    }`}
+                  >
+                    <TrendingUp
+                      className={`h-5 w-5 ${
+                        option.recommended
+                          ? 'text-primary'
+                          : 'text-muted-foreground'
+                      }`}
+                    />
                   </div>
                   <div className="flex-1">
                     <div className="flex items-center gap-2">
@@ -155,10 +170,11 @@ export function SimplifiedInsufficientCreditsModal({
                     <div className="font-semibold text-sm mt-1">
                       {option.price}
                     </div>
-                    
+
                     {/* Show what they can do with these credits */}
                     <div className="text-xs text-muted-foreground mt-2">
-                      ≈ {Math.floor(option.credits / 5)} watermark removals per month
+                      ≈ {Math.floor(option.credits / 5)} watermark removals per
+                      month
                     </div>
                   </div>
                   {option.credits >= requiredCredits && (
@@ -172,7 +188,10 @@ export function SimplifiedInsufficientCreditsModal({
             {currentAllocation >= SUBSCRIPTION_CREDITS.lifetime && (
               <div className="text-center text-sm text-muted-foreground p-4 bg-muted/30 rounded-lg">
                 <p>You're on our highest plan!</p>
-                <p className="mt-1">Credits reset monthly. Current period has {currentBalance} credits remaining.</p>
+                <p className="mt-1">
+                  Credits reset monthly. Current period has {currentBalance}{' '}
+                  credits remaining.
+                </p>
               </div>
             )}
           </div>
@@ -200,9 +219,7 @@ export function SimplifiedInsufficientCreditsModal({
           <Button variant="outline" onClick={() => onOpenChange(false)}>
             Maybe Later
           </Button>
-          <Button onClick={() => handleUpgradePlan()}>
-            View All Plans
-          </Button>
+          <Button onClick={() => handleUpgradePlan()}>View All Plans</Button>
         </div>
       </DialogContent>
     </Dialog>

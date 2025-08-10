@@ -36,21 +36,21 @@ import {
 
 // SEO优化的结构化数据
 const structuredData = {
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": "AI Watermark Remover",
-  "applicationCategory": "ImageEditor",
-  "operatingSystem": "Web",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD"
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'AI Watermark Remover',
+  applicationCategory: 'ImageEditor',
+  operatingSystem: 'Web',
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
   },
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "4.8",
-    "reviewCount": "2459"
-  }
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.8',
+    reviewCount: '2459',
+  },
 };
 
 const transitionVariants = {
@@ -120,7 +120,7 @@ export default function HeroSectionOptimized() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      
+
       <main id="hero" className="overflow-hidden">
         {/* Animated gradient background */}
         <div className="absolute inset-0 -z-10">
@@ -162,10 +162,10 @@ export default function HeroSectionOptimized() {
               as="p"
               className="mx-auto mt-6 max-w-2xl text-center text-balance text-lg text-muted-foreground lg:text-xl"
             >
-              Remove watermarks from photos online instantly with our professional 
-              AI watermark remover tool. Erase logos, text, dates, and signatures 
-              from images automatically. No software download required - 100% free, 
-              secure, and maintains HD quality.
+              Remove watermarks from photos online instantly with our
+              professional AI watermark remover tool. Erase logos, text, dates,
+              and signatures from images automatically. No software download
+              required - 100% free, secure, and maintains HD quality.
             </TextEffect>
 
             {/* 信任指标 */}
@@ -250,7 +250,8 @@ export default function HeroSectionOptimized() {
                           Drop your watermarked image here, or click to browse
                         </p>
                         <p className="text-sm text-muted-foreground">
-                          Supports JPG, PNG, WEBP, BMP up to 50MB | Batch processing available
+                          Supports JPG, PNG, WEBP, BMP up to 50MB | Batch
+                          processing available
                         </p>
                       </div>
                       <Button size="lg" className="mt-6">
@@ -271,14 +272,14 @@ export default function HeroSectionOptimized() {
               <div className="flex flex-wrap justify-center gap-2">
                 {[
                   'Text Watermarks',
-                  'Logo Watermarks', 
+                  'Logo Watermarks',
                   'Date Stamps',
                   'Signatures',
                   'Copyright Marks',
                   'Semi-transparent Overlays',
                   'Pattern Watermarks',
-                  'QR Codes'
-                ].map(type => (
+                  'QR Codes',
+                ].map((type) => (
                   <Badge key={type} variant="outline" className="text-xs">
                     <Check className="h-3 w-3 mr-1" />
                     {type}
@@ -307,7 +308,8 @@ export default function HeroSectionOptimized() {
                   Professional Watermark Removal Results
                 </h2>
                 <p className="text-lg text-muted-foreground">
-                  See how our AI instantly removes watermarks while preserving image quality
+                  See how our AI instantly removes watermarks while preserving
+                  image quality
                 </p>
               </div>
 
@@ -360,8 +362,8 @@ export default function HeroSectionOptimized() {
                     'Stock Photography',
                     'Social Media Content',
                     'Portfolio Images',
-                    'Educational Materials'
-                  ].map(use => (
+                    'Educational Materials',
+                  ].map((use) => (
                     <Badge key={use} variant="secondary" className="text-xs">
                       {use}
                     </Badge>

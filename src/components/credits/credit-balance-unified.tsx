@@ -13,7 +13,7 @@ export function CreditBalance() {
   if (isSimplifiedCreditSystem()) {
     return <SimplifiedCreditBalance />;
   }
-  
+
   // Use original version with purchase options
   return <OriginalCreditBalance />;
 }

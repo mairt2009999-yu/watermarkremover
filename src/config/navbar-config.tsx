@@ -64,11 +64,11 @@ export function getNavbarLinks(): NestedMenuItem[] {
       href: Routes.Blog,
       external: false,
     },
-    {
-      title: t('docs.title'),
-      href: Routes.Docs,
-      external: false,
-    },
+    // {
+    //   title: t('docs.title'),
+    //   href: Routes.Docs,
+    //   external: false,
+    // },
     {
       title: t('ai.title'),
       items: [
@@ -126,20 +126,20 @@ export function getNavbarLinks(): NestedMenuItem[] {
           href: Routes.Waitlist,
           external: false,
         },
-        {
-          title: t('pages.items.roadmap.title'),
-          description: t('pages.items.roadmap.description'),
-          icon: <SquareKanbanIcon className="size-4 shrink-0" />,
-          href: Routes.Roadmap,
-          external: true,
-        },
-        {
-          title: t('pages.items.changelog.title'),
-          description: t('pages.items.changelog.description'),
-          icon: <ListChecksIcon className="size-4 shrink-0" />,
-          href: Routes.Changelog,
-          external: false,
-        },
+        // {
+        //   title: t('pages.items.roadmap.title'),
+        //   description: t('pages.items.roadmap.description'),
+        //   icon: <SquareKanbanIcon className="size-4 shrink-0" />,
+        //   href: Routes.Roadmap,
+        //   external: true,
+        // },
+        // {
+        //   title: t('pages.items.changelog.title'),
+        //   description: t('pages.items.changelog.description'),
+        //   icon: <ListChecksIcon className="size-4 shrink-0" />,
+        //   href: Routes.Changelog,
+        //   external: false,
+        // },
         {
           title: t('pages.items.cookiePolicy.title'),
           description: t('pages.items.cookiePolicy.description'),

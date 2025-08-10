@@ -301,29 +301,42 @@ export default function WatermarkTypesShowcase() {
               {/* Batch Processing Features */}
               <div className="p-4 rounded-lg bg-gradient-to-r from-primary/5 to-primary/10 border border-primary/20">
                 <div className="flex items-center gap-3 mb-3">
-                  <Badge variant="default" className="bg-primary text-primary-foreground">
+                  <Badge
+                    variant="default"
+                    className="bg-primary text-primary-foreground"
+                  >
                     {locale === 'zh' ? '批量处理' : 'Batch Processing'}
                   </Badge>
                   <span className="text-sm font-semibold">
-                    {locale === 'zh' ? '最多同时处理10张图片' : 'Process up to 10 images at once'}
+                    {locale === 'zh'
+                      ? '最多同时处理10张图片'
+                      : 'Process up to 10 images at once'}
                   </span>
                 </div>
                 <div className="grid grid-cols-2 gap-3 text-sm">
                   <div className="flex items-center gap-2">
                     <div className="w-1.5 h-1.5 rounded-full bg-green-500" />
-                    {locale === 'zh' ? '同时上传多张图片' : 'Upload multiple images'}
+                    {locale === 'zh'
+                      ? '同时上传多张图片'
+                      : 'Upload multiple images'}
                   </div>
                   <div className="flex items-center gap-2">
                     <div className="w-1.5 h-1.5 rounded-full bg-green-500" />
-                    {locale === 'zh' ? '批量下载处理结果' : 'Batch download results'}
+                    {locale === 'zh'
+                      ? '批量下载处理结果'
+                      : 'Batch download results'}
                   </div>
                   <div className="flex items-center gap-2">
                     <div className="w-1.5 h-1.5 rounded-full bg-green-500" />
-                    {locale === 'zh' ? '实时处理进度显示' : 'Real-time progress tracking'}
+                    {locale === 'zh'
+                      ? '实时处理进度显示'
+                      : 'Real-time progress tracking'}
                   </div>
                   <div className="flex items-center gap-2">
                     <div className="w-1.5 h-1.5 rounded-full bg-green-500" />
-                    {locale === 'zh' ? '保持原始图片质量' : 'Preserve original quality'}
+                    {locale === 'zh'
+                      ? '保持原始图片质量'
+                      : 'Preserve original quality'}
                   </div>
                 </div>
               </div>
@@ -337,7 +350,7 @@ export default function WatermarkTypesShowcase() {
                   <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                 </Button>
                 <p className="text-xs text-muted-foreground">
-                  {locale === 'zh' 
+                  {locale === 'zh'
                     ? '无需注册 • 完全免费 • 支持批处理 • 保持高清质量'
                     : 'No Sign-up Required • Completely Free • Batch Support • HD Quality'}
                 </p>

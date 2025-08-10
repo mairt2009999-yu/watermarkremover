@@ -27,9 +27,10 @@ const getRuntimePricePlans = (): Record<string, PricePlan> => {
   }
 
   // Update Lifetime plan price
-  if (plans.lifetime && plans.lifetime.prices && plans.lifetime.prices[0]) {
-    plans.lifetime.prices[0].priceId = getPriceId('lifetime');
-  }
+  // Note: lifetime plan is not configured in getPriceId, commenting out for now
+  // if (plans.lifetime && plans.lifetime.prices && plans.lifetime.prices[0]) {
+  //   plans.lifetime.prices[0].priceId = getPriceId('lifetime');
+  // }
 
   return plans;
 };

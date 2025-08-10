@@ -1,14 +1,14 @@
+import { isSimplifiedCreditSystem } from '@/config/features';
 import { creditService } from '@/credits';
 import { getDb } from '@/db';
 import { payment } from '@/db/schema';
-import { isSimplifiedCreditSystem } from '@/config/features';
 import { eq } from 'drizzle-orm';
 import { NextResponse } from 'next/server';
 
 /**
  * Monthly credit reset endpoint
  * This should be called by a cron job on the 1st of each month
- * 
+ *
  * For Vercel Cron: Add to vercel.json
  * {
  *   "crons": [{
@@ -23,10 +23,7 @@ export async function GET(request: Request) {
     if (process.env.NODE_ENV === 'production') {
       const authHeader = request.headers.get('authorization');
       if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
-        return NextResponse.json(
-          { error: 'Unauthorized' },
-          { status: 401 }
-        );
+        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
       }
     }
 
@@ -48,7 +45,9 @@ export async function GET(request: Request) {
       .from(payment)
       .where(eq(payment.status, 'active'));
 
-    console.log(`[Cron] Found ${activeSubscriptions.length} active subscriptions`);
+    console.log(
+      `[Cron] Found ${activeSubscriptions.length} active subscriptions`
+    );
 
     let successCount = 0;
     let errorCount = 0;
@@ -59,7 +58,7 @@ export async function GET(request: Request) {
       try {
         // Determine plan type from price ID or subscription type
         const planId = determinePlanId(subscription);
-        
+
         if (planId) {
           await creditService.allocateMonthlyCredits(
             subscription.userId,
@@ -67,12 +66,17 @@ export async function GET(request: Request) {
           );
           successCount++;
         } else {
-          console.warn(`[Cron] Could not determine plan for user ${subscription.userId}`);
+          console.warn(
+            `[Cron] Could not determine plan for user ${subscription.userId}`
+          );
           errors.push(`Unknown plan for user ${subscription.userId}`);
           errorCount++;
         }
       } catch (error) {
-        console.error(`[Cron] Error resetting credits for user ${subscription.userId}:`, error);
+        console.error(
+          `[Cron] Error resetting credits for user ${subscription.userId}:`,
+          error
+        );
         errors.push(`Failed for user ${subscription.userId}: ${error}`);
         errorCount++;
       }
@@ -154,10 +158,7 @@ export async function POST(request: Request) {
   // You should implement proper admin authentication here
   const adminKey = request.headers.get('x-admin-key');
   if (adminKey !== process.env.ADMIN_API_KEY) {
-    return NextResponse.json(
-      { error: 'Unauthorized' },
-      { status: 401 }
-    );
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
   // Call the same logic as GET

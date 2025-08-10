@@ -22,11 +22,11 @@ import {
   type Subscription,
   type getSubscriptionsParams,
 } from '../types';
-import { 
-  handleSubscriptionCreated, 
-  handleSubscriptionUpdated,
+import {
+  handleOneTimePayment as handleCreditOneTimePayment,
+  handleSubscriptionCreated,
   handleSubscriptionDeleted,
-  handleOneTimePayment as handleCreditOneTimePayment
+  handleSubscriptionUpdated,
 } from '../webhook-credit-handler';
 
 /**
@@ -479,9 +479,13 @@ export class StripeProvider implements PaymentProvider {
       console.log(
         `<< Created new payment record ${result[0].id} for Stripe subscription ${stripeSubscription.id}`
       );
-      
+
       // Allocate credits for the new subscription
-      await handleSubscriptionCreated(userId, priceId, stripeSubscription.metadata);
+      await handleSubscriptionCreated(
+        userId,
+        priceId,
+        stripeSubscription.metadata
+      );
     } else {
       console.warn(
         `<< No payment record created for Stripe subscription ${stripeSubscription.id}`
@@ -516,7 +520,7 @@ export class StripeProvider implements PaymentProvider {
       .from(payment)
       .where(eq(payment.subscriptionId, stripeSubscription.id))
       .limit(1);
-    
+
     const oldPriceId = existingPayment[0]?.priceId || null;
     const userId = existingPayment[0]?.userId;
 
@@ -553,10 +557,15 @@ export class StripeProvider implements PaymentProvider {
       console.log(
         `<< Updated payment record ${result[0].id} for Stripe subscription ${stripeSubscription.id}`
       );
-      
+
       // Handle credit adjustment if plan changed
       if (userId && oldPriceId !== priceId) {
-        await handleSubscriptionUpdated(userId, oldPriceId, priceId, stripeSubscription.metadata);
+        await handleSubscriptionUpdated(
+          userId,
+          oldPriceId,
+          priceId,
+          stripeSubscription.metadata
+        );
       }
     } else {
       console.warn(
@@ -585,13 +594,17 @@ export class StripeProvider implements PaymentProvider {
         updatedAt: new Date(),
       })
       .where(eq(payment.subscriptionId, stripeSubscription.id))
-      .returning({ id: payment.id, userId: payment.userId, priceId: payment.priceId });
+      .returning({
+        id: payment.id,
+        userId: payment.userId,
+        priceId: payment.priceId,
+      });
 
     if (result.length > 0) {
       console.log(
         `<< Marked payment record for subscription ${stripeSubscription.id} as canceled`
       );
-      
+
       // Handle credit deletion/expiration
       const { userId, priceId } = result[0];
       if (userId && priceId) {
@@ -656,9 +669,13 @@ export class StripeProvider implements PaymentProvider {
     console.log(
       `<< Created one-time payment record for user ${userId}, price: ${priceId}`
     );
-    
+
     // Allocate credits for one-time payment (e.g., lifetime plan)
-    await handleCreditOneTimePayment(userId, priceId, session.metadata || undefined);
+    await handleCreditOneTimePayment(
+      userId,
+      priceId,
+      session.metadata || undefined
+    );
 
     // Send notification
     const amount = session.amount_total ? session.amount_total / 100 : 0;

@@ -35,7 +35,7 @@ export async function GET() {
           'Content-Type': 'application/json',
           Accept: 'application/json',
         };
-        
+
         // Add method-specific headers
         Object.entries(method.headers).forEach(([key, value]) => {
           if (value !== undefined) {

@@ -26,8 +26,11 @@ export function getFeatureFlags(): FeatureFlags {
     creditSystem: {
       // v1 = original system with purchases
       // v2 = simplified subscription-only system
-      version: (process.env.NEXT_PUBLIC_CREDIT_SYSTEM_VERSION as CreditSystemVersion) || 'v1',
-      enablePurchases: process.env.NEXT_PUBLIC_ENABLE_CREDIT_PURCHASES !== 'false',
+      version:
+        (process.env
+          .NEXT_PUBLIC_CREDIT_SYSTEM_VERSION as CreditSystemVersion) || 'v1',
+      enablePurchases:
+        process.env.NEXT_PUBLIC_ENABLE_CREDIT_PURCHASES !== 'false',
       enableRollover: process.env.NEXT_PUBLIC_ENABLE_CREDIT_ROLLOVER === 'true',
       debugMode: process.env.NODE_ENV === 'development',
     },
@@ -51,7 +54,9 @@ export function isSimplifiedCreditSystem(): boolean {
  */
 export function isCreditPurchaseEnabled(): boolean {
   const flags = getFeatureFlags();
-  return flags.creditSystem.version === 'v1' && flags.creditSystem.enablePurchases;
+  return (
+    flags.creditSystem.version === 'v1' && flags.creditSystem.enablePurchases
+  );
 }
 
 /**
@@ -59,14 +64,14 @@ export function isCreditPurchaseEnabled(): boolean {
  */
 export function getCreditSystemConfig() {
   const flags = getFeatureFlags();
-  
+
   if (flags.creditSystem.version === 'v2') {
     return {
       subscriptionCredits: {
-        free: 5,
-        pro_monthly: 100,
-        pro_yearly: 150,
-        lifetime: 500,
+        free: 10,
+        starter: 100,
+        pro_monthly: 300,
+        pro_yearly: 400,
       },
       features: {
         purchases: false,
@@ -75,14 +80,14 @@ export function getCreditSystemConfig() {
       },
     };
   }
-  
+
   // v1 - original system
   return {
     subscriptionCredits: {
       free: 10,
+      starter: 100,
       pro_monthly: 300,
       pro_yearly: 400,
-      lifetime: 1000,
     },
     features: {
       purchases: true,

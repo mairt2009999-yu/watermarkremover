@@ -8,7 +8,7 @@ import type { WatermarkCategory } from '@/types/watermark.types';
 /**
  * Legacy watermark type definitions (for backward compatibility)
  */
-export type LegacyWatermarkType = 
+export type LegacyWatermarkType =
   | 'visible-text-logo'
   | 'semi-transparent'
   | 'embedded-digital'
@@ -48,21 +48,21 @@ export class WatermarkTypeMapperService {
       'semi-transparent': 'overlay',
       'embedded-digital': 'overlay', // Note: We're remapping this to overlay since true embedded watermarks can't be removed
       'repetitive-pattern': 'pattern',
-      
+
       // Python script types
-      'text_overlay': 'text',
-      'logo_pattern': 'logo',
-      'corner_mark': 'text',
-      'subtle_embed': 'overlay',
-      'grid_pattern': 'pattern',
-      
+      text_overlay: 'text',
+      logo_pattern: 'logo',
+      corner_mark: 'text',
+      subtle_embed: 'overlay',
+      grid_pattern: 'pattern',
+
       // Metadata.json types
-      'text_center': 'text',
-      'text_corner': 'text',
-      'pattern_diagonal': 'pattern',
-      'pattern_grid': 'pattern',
-      'logo': 'logo',
-      'embedded': 'overlay',
+      text_center: 'text',
+      text_corner: 'text',
+      pattern_diagonal: 'pattern',
+      pattern_grid: 'pattern',
+      logo: 'logo',
+      embedded: 'overlay',
     };
 
     return mappings[legacyType] || 'text'; // Default to text if unknown
@@ -74,15 +74,23 @@ export class WatermarkTypeMapperService {
   static mapImagePath(oldPath: string): string {
     const pathMappings: Record<string, string> = {
       // Old generated paths to new demo paths
-      '/demo/generated/product_photography_text_center.jpg': '/demo/watermarked/text_center_sample.jpg',
-      '/demo/generated/product_photography_clean.jpg': '/demo/clean/text_center_clean.jpg',
-      '/demo/generated/nature_landscape_logo.jpg': '/demo/watermarked/logo_corner_brand.jpg',
-      '/demo/generated/nature_landscape_clean.jpg': '/demo/clean/logo_corner_clean.jpg',
-      '/demo/generated/portrait_photography_embedded.jpg': '/demo/watermarked/overlay_medium_opacity.jpg',
-      '/demo/generated/portrait_photography_clean.jpg': '/demo/clean/overlay_medium_clean.jpg',
-      '/demo/generated/architecture_building_pattern_grid.jpg': '/demo/watermarked/pattern_grid_full.jpg',
-      '/demo/generated/architecture_building_clean.jpg': '/demo/clean/pattern_grid_clean.jpg',
-      
+      '/demo/generated/product_photography_text_center.jpg':
+        '/demo/watermarked/text_center_sample.jpg',
+      '/demo/generated/product_photography_clean.jpg':
+        '/demo/clean/text_center_clean.jpg',
+      '/demo/generated/nature_landscape_logo.jpg':
+        '/demo/watermarked/logo_corner_brand.jpg',
+      '/demo/generated/nature_landscape_clean.jpg':
+        '/demo/clean/logo_corner_clean.jpg',
+      '/demo/generated/portrait_photography_embedded.jpg':
+        '/demo/watermarked/overlay_medium_opacity.jpg',
+      '/demo/generated/portrait_photography_clean.jpg':
+        '/demo/clean/overlay_medium_clean.jpg',
+      '/demo/generated/architecture_building_pattern_grid.jpg':
+        '/demo/watermarked/pattern_grid_full.jpg',
+      '/demo/generated/architecture_building_clean.jpg':
+        '/demo/clean/pattern_grid_clean.jpg',
+
       // Add more mappings as needed
     };
 
@@ -134,17 +142,22 @@ export class WatermarkTypeMapperService {
     if (!oldData) return null;
 
     // Check if it's already in new format
-    if (oldData.id && ['text', 'logo', 'pattern', 'overlay'].includes(oldData.id)) {
+    if (
+      oldData.id &&
+      ['text', 'logo', 'pattern', 'overlay'].includes(oldData.id)
+    ) {
       return oldData; // Already migrated
     }
 
     // Migrate old format
     const newCategory = this.mapLegacyType(oldData.type || oldData.id);
-    
+
     return {
       category: newCategory,
       originalType: oldData.type || oldData.id,
-      beforeImage: this.mapImagePath(oldData.beforeImage || oldData.watermarked || ''),
+      beforeImage: this.mapImagePath(
+        oldData.beforeImage || oldData.watermarked || ''
+      ),
       afterImage: this.mapImagePath(oldData.afterImage || oldData.clean || ''),
       migrated: true,
       migratedAt: new Date().toISOString(),
@@ -155,7 +168,7 @@ export class WatermarkTypeMapperService {
    * Batch migrate multiple watermark entries
    */
   static batchMigrate(entries: any[]): any[] {
-    return entries.map(entry => this.migrateWatermarkData(entry));
+    return entries.map((entry) => this.migrateWatermarkData(entry));
   }
 
   /**
@@ -177,7 +190,7 @@ export class WatermarkTypeMapperService {
       } as Record<WatermarkCategory, number>,
     };
 
-    entries.forEach(entry => {
+    entries.forEach((entry) => {
       if (this.needsMigration(entry.type || entry.id)) {
         stats.migrated++;
         const category = this.mapLegacyType(entry.type || entry.id);
@@ -193,7 +206,7 @@ export class WatermarkTypeMapperService {
    */
   static generateMigrationReport(entries: any[]): string {
     const stats = this.getMigrationStats(entries);
-    
+
     return `
 Watermark Type Migration Report
 ================================
@@ -215,5 +228,6 @@ as true embedded watermarks (invisible metadata) cannot be removed by image proc
 // Export convenience functions
 export const mapLegacyType = WatermarkTypeMapperService.mapLegacyType;
 export const mapImagePath = WatermarkTypeMapperService.mapImagePath;
-export const migrateWatermarkData = WatermarkTypeMapperService.migrateWatermarkData;
+export const migrateWatermarkData =
+  WatermarkTypeMapperService.migrateWatermarkData;
 export const needsMigration = WatermarkTypeMapperService.needsMigration;

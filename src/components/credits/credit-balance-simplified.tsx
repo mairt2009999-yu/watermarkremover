@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { formatCredits, getUsagePercentage } from '@/credits/types.simplified';
-import { Calendar, Coins, TrendingUp, AlertCircle } from 'lucide-react';
+import { AlertCircle, Calendar, Coins, TrendingUp } from 'lucide-react';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
@@ -32,7 +32,14 @@ export function SimplifiedCreditBalance() {
       setLoading(true);
       const result = await getUserCredits();
       if (result.success && result.data) {
-        setCredits(result.data);
+        const usagePercentage = getUsagePercentage(
+          result.data.totalSpent || 0,
+          result.data.monthlyAllocation || 0
+        );
+        setCredits({
+          ...result.data,
+          usagePercentage,
+        });
       } else {
         setError(result.error || 'Failed to load credits');
       }
@@ -66,7 +73,10 @@ export function SimplifiedCreditBalance() {
     );
   }
 
-  const usagePercentage = getUsagePercentage(credits.balance, credits.monthlyAllocation);
+  const usagePercentage = getUsagePercentage(
+    credits.balance,
+    credits.monthlyAllocation
+  );
   const remainingPercentage = 100 - usagePercentage;
 
   return (
@@ -104,7 +114,9 @@ export function SimplifiedCreditBalance() {
           </div>
           <Progress value={remainingPercentage} className="h-2" />
           <div className="flex justify-between text-xs text-muted-foreground mt-1">
-            <span>{formatCredits(credits.monthlyAllocation - credits.balance)} used</span>
+            <span>
+              {formatCredits(credits.monthlyAllocation - credits.balance)} used
+            </span>
             <span>{formatCredits(credits.balance)} remaining</span>
           </div>
         </div>
@@ -131,7 +143,7 @@ export function SimplifiedCreditBalance() {
               <div>
                 <p className="text-sm font-medium">Running low on credits</p>
                 <p className="text-xs mt-1">
-                  You have {formatCredits(credits.balance)} credits left. 
+                  You have {formatCredits(credits.balance)} credits left.
                   Consider upgrading your plan for more monthly credits.
                 </p>
                 <Link href="/pricing">
@@ -152,7 +164,8 @@ export function SimplifiedCreditBalance() {
               <div>
                 <p className="text-sm font-medium">No credits remaining</p>
                 <p className="text-xs mt-1">
-                  Your monthly credits are exhausted. Upgrade your plan or wait {credits.daysUntilReset} days for reset.
+                  Your monthly credits are exhausted. Upgrade your plan or wait{' '}
+                  {credits.daysUntilReset} days for reset.
                 </p>
                 <Link href="/pricing">
                   <Button size="sm" className="mt-2">
@@ -168,8 +181,8 @@ export function SimplifiedCreditBalance() {
         {credits.monthlyAllocation <= 5 && (
           <div className="bg-blue-50 dark:bg-blue-900/20 p-3 rounded-lg">
             <p className="text-sm text-blue-800 dark:text-blue-200">
-              💡 <strong>Free Plan:</strong> You get {credits.monthlyAllocation} credits/month.
-              Upgrade to Pro for 100+ credits monthly!
+              💡 <strong>Free Plan:</strong> You get {credits.monthlyAllocation}{' '}
+              credits/month. Upgrade to Pro for 100+ credits monthly!
             </p>
           </div>
         )}

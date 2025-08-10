@@ -57,46 +57,45 @@
   "PricePlans": {
     "free": {
       "name": "免费版",
-      "description": "适用于个人使用的基本功能",
+      "description": "个人用户免费去水印工具",
       "features": {
-        "feature-1": "最多3个项目",
-        "feature-2": "1GB存储空间",
-        "feature-3": "基础分析功能",
-        "feature-4": "社区支持"
+        "feature-1": "每月10积分",
+        "feature-2": "基础去水印功能（720p画质）",
+        "feature-3": "标准水印检测AI",
+        "feature-4": "去除文字水印和标志"
       },
       "limits": {
-        "limit-1": "不支持自定义域名",
-        "limit-2": "不支持自定义品牌",
-        "limit-3": "不支持终身更新"
+        "limit-1": "批量去水印",
+        "limit-2": "4K去水印",
+        "limit-3": "优先处理"
+      }
+    },
+    "starter": {
+      "name": "入门版",
+      "description": "适合轻度用户的入门方案",
+      "features": {
+        "feature-1": "每月100积分",
+        "feature-2": "高清去水印（1080p画质）",
+        "feature-3": "优先处理",
+        "feature-4": "邮件支持"
+      },
+      "limits": {
+        "limit-1": "高级AI功能"
       }
     },
     "pro": {
       "name": "专业版",
-      "description": "专业人士的高级功能",
+      "description": "企业级专业去水印工具",
       "features": {
-        "feature-1": "无限项目",
-        "feature-2": "10GB存储空间",
-        "feature-3": "高级分析功能",
-        "feature-4": "优先支持",
-        "feature-5": "自定义域名"
+        "feature-1": "每月300+积分",
+        "feature-2": "高级高清去水印（1080p+）",
+        "feature-3": "优先AI水印处理",
+        "feature-4": "去除透明水印",
+        "feature-5": "批量去水印（50张图片）"
       },
       "limits": {
-        "limit-1": "不支持自定义品牌",
-        "limit-2": "不支持终身更新"
-      }
-    },
-    "lifetime": {
-      "name": "终身版",
-      "description": "一次性付款获得所有高级功能",
-      "features": {
-        "feature-1": "所有专业版功能",
-        "feature-2": "100GB存储空间",
-        "feature-3": "专属支持",
-        "feature-4": "企业级安全",
-        "feature-5": "高级集成",
-        "feature-6": "自定义域名",
-        "feature-7": "自定义品牌",
-        "feature-8": "终身更新"
+        "limit-1": "API去水印",
+        "limit-2": "白标去水印工具"
       }
     }
   },

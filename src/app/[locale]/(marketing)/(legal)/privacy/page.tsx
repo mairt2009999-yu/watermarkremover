@@ -1,9 +1,12 @@
+import { CustomPage } from '@/components/page/custom-page';
 import { constructMetadata } from '@/lib/metadata';
+import { pagesSource } from '@/lib/pages-source';
 import { getUrlWithLocale } from '@/lib/urls/urls';
 import type { NextPageProps } from '@/types/next-page-props';
 import type { Metadata } from 'next';
 import type { Locale } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
+import { notFound } from 'next/navigation';
 
 export async function generateMetadata({
   params,
@@ -13,10 +16,11 @@ export async function generateMetadata({
   try {
     const { locale } = await params;
     const t = await getTranslations({ locale, namespace: 'Metadata' });
+    const page = pagesSource.getPage(['privacy-policy'], locale);
 
     return constructMetadata({
-      title: 'Privacy Policy | ' + t('title'),
-      description: 'Privacy Policy',
+      title: page?.data.title || 'Privacy Policy' + ' | ' + t('title'),
+      description: page?.data.description || 'Your privacy is important to us',
       canonicalUrl: getUrlWithLocale('/privacy', locale),
     });
   } catch (error) {
@@ -27,21 +31,15 @@ export async function generateMetadata({
 
 export default async function PrivacyPolicyPage(props: NextPageProps) {
   const params = await props.params;
-  const locale = params?.locale || 'en';
+  const locale = Array.isArray(params?.locale)
+    ? params.locale[0]
+    : params?.locale || 'en';
 
-  return (
-    <div className="max-w-4xl mx-auto space-y-8 p-8">
-      <div className="space-y-4">
-        <h1 className="text-center text-3xl font-bold tracking-tight">
-          Privacy Policy
-        </h1>
-        <p className="text-center text-lg text-muted-foreground">
-          Your privacy is important to us.
-        </p>
-      </div>
-      <div className="prose prose-neutral dark:prose-invert max-w-none">
-        <p>Privacy Policy content will be loaded here.</p>
-      </div>
-    </div>
-  );
+  const page = pagesSource.getPage(['privacy-policy'], locale);
+
+  if (!page) {
+    notFound();
+  }
+
+  return <CustomPage page={page} />;
 }

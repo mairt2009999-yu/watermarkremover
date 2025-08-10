@@ -1,11 +1,14 @@
 'use server';
 
-import { getSession } from '@/lib/server';
+import {
+  isCreditPurchaseEnabled,
+  isSimplifiedCreditSystem,
+} from '@/config/features';
 import { creditService } from '@/credits';
-import { isCreditPurchaseEnabled, isSimplifiedCreditSystem } from '@/config/features';
 import type { CreditTransaction } from '@/credits';
-import { CreditService } from '@/credits/credit.service';
-import { SimplifiedCreditService } from '@/credits/credit.service.simplified';
+import type { CreditService } from '@/credits/credit.service';
+import type { SimplifiedCreditService } from '@/credits/credit.service.simplified';
+import { getSession } from '@/lib/server';
 import { z } from 'zod';
 
 // Schema for input validation
@@ -152,7 +155,7 @@ export async function getCreditPackages(): Promise<{
   try {
     // @ts-ignore - getCreditPackages only exists in v1
     const packages = await creditService.getCreditPackages?.();
-    
+
     return {
       success: true,
       data: packages || [],
@@ -173,7 +176,8 @@ export async function purchaseCreditPackage(
   if (!isCreditPurchaseEnabled()) {
     return {
       success: false,
-      error: 'Credit purchases are not available. Please upgrade your subscription for more credits.',
+      error:
+        'Credit purchases are not available. Please upgrade your subscription for more credits.',
     };
   }
 
@@ -248,7 +252,7 @@ export async function addCreditsToUser(
     //   return { success: false, error: 'Forbidden' };
     // }
 
-    let result;
+    let result: any;
     if (isSimplifiedCreditSystem()) {
       result = await (creditService as SimplifiedCreditService).addBonusCredits(
         userId,

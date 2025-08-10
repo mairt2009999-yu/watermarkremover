@@ -1,5 +1,5 @@
-import { creditService } from '@/credits';
 import { isSimplifiedCreditSystem } from '@/config/features';
+import { creditService } from '@/credits';
 
 /**
  * Enhanced webhook handler for credit allocation
@@ -33,20 +33,25 @@ export async function handleSubscriptionCreated(
 ): Promise<void> {
   try {
     const planId = getPlanIdFromPriceId(priceId);
-    
+
     if (!planId) {
       console.warn(`[Credits] No plan mapping found for price ${priceId}`);
       return;
     }
 
-    console.log(`[Credits] Allocating monthly credits for new subscription: user=${userId}, plan=${planId}`);
-    
+    console.log(
+      `[Credits] Allocating monthly credits for new subscription: user=${userId}, plan=${planId}`
+    );
+
     // Allocate credits based on the plan
     await creditService.allocateMonthlyCredits(userId, planId);
-    
+
     console.log(`[Credits] Successfully allocated credits for ${userId}`);
   } catch (error) {
-    console.error('[Credits] Error allocating credits on subscription creation:', error);
+    console.error(
+      '[Credits] Error allocating credits on subscription creation:',
+      error
+    );
     // Don't throw - we don't want to fail the webhook if credits fail
   }
 }
@@ -69,7 +74,7 @@ export async function handleSubscriptionUpdated(
 
     const oldPlanId = oldPriceId ? getPlanIdFromPriceId(oldPriceId) : null;
     const newPlanId = getPlanIdFromPriceId(newPriceId);
-    
+
     if (!newPlanId) {
       console.warn(`[Credits] No plan mapping found for price ${newPriceId}`);
       return;
@@ -81,15 +86,24 @@ export async function handleSubscriptionUpdated(
       return;
     }
 
-    console.log(`[Credits] Handling subscription change: user=${userId}, ${oldPlanId} -> ${newPlanId}`);
-    
+    console.log(
+      `[Credits] Handling subscription change: user=${userId}, ${oldPlanId} -> ${newPlanId}`
+    );
+
     // Handle the plan change
     // @ts-ignore - handleSubscriptionChange might not exist in v1
-    await creditService.handleSubscriptionChange?.(userId, oldPlanId, newPlanId);
-    
+    await creditService.handleSubscriptionChange?.(
+      userId,
+      oldPlanId,
+      newPlanId
+    );
+
     console.log(`[Credits] Successfully adjusted credits for ${userId}`);
   } catch (error) {
-    console.error('[Credits] Error adjusting credits on subscription update:', error);
+    console.error(
+      '[Credits] Error adjusting credits on subscription update:',
+      error
+    );
     // Don't throw - we don't want to fail the webhook if credits fail
   }
 }
@@ -108,12 +122,14 @@ export async function handleSubscriptionCanceled(
       return;
     }
 
-    console.log(`[Credits] Handling subscription cancellation for user=${userId}`);
-    
+    console.log(
+      `[Credits] Handling subscription cancellation for user=${userId}`
+    );
+
     // In v2, credits remain until period end
     // @ts-ignore - handleSubscriptionCancellation might not exist in v1
     await creditService.handleSubscriptionCancellation?.(userId);
-    
+
     console.log(`[Credits] Marked subscription as canceled for ${userId}`);
   } catch (error) {
     console.error('[Credits] Error handling subscription cancellation:', error);
@@ -135,15 +151,20 @@ export async function handleSubscriptionDeleted(
       return;
     }
 
-    console.log(`[Credits] Handling subscription deletion (expiration) for user=${userId}`);
-    
+    console.log(
+      `[Credits] Handling subscription deletion (expiration) for user=${userId}`
+    );
+
     // Expire all credits when subscription ends
     // @ts-ignore - expireUserCredits might not exist in v1
     await creditService.expireUserCredits?.(userId);
-    
+
     console.log(`[Credits] Expired all credits for ${userId}`);
   } catch (error) {
-    console.error('[Credits] Error expiring credits on subscription deletion:', error);
+    console.error(
+      '[Credits] Error expiring credits on subscription deletion:',
+      error
+    );
     // Don't throw - we don't want to fail the webhook if credits fail
   }
 }
@@ -158,7 +179,7 @@ export async function handleOneTimePayment(
 ): Promise<void> {
   try {
     const planId = getPlanIdFromPriceId(priceId);
-    
+
     if (!planId) {
       console.warn(`[Credits] No plan mapping found for price ${priceId}`);
       return;
@@ -168,10 +189,15 @@ export async function handleOneTimePayment(
     if (planId === 'lifetime') {
       console.log(`[Credits] Allocating lifetime credits for user=${userId}`);
       await creditService.allocateMonthlyCredits(userId, 'lifetime');
-      console.log(`[Credits] Successfully allocated lifetime credits for ${userId}`);
+      console.log(
+        `[Credits] Successfully allocated lifetime credits for ${userId}`
+      );
     }
   } catch (error) {
-    console.error('[Credits] Error allocating credits for one-time payment:', error);
+    console.error(
+      '[Credits] Error allocating credits for one-time payment:',
+      error
+    );
     // Don't throw - we don't want to fail the webhook if credits fail
   }
 }
@@ -187,7 +213,7 @@ export async function handlePaymentFailed(
   // - Send warning email about credit suspension
   // - Temporarily restrict credit usage
   // - Log the failure for admin review
-  
+
   console.warn(`[Credits] Payment failed for user=${userId}, price=${priceId}`);
   // Currently no action taken - credits remain active until subscription expires
 }
