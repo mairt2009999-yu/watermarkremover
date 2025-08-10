@@ -28,7 +28,7 @@ dist/
 build/
 
 # Fumadocs/MDX
-.source/
+# .source/ - Now tracked in git for Vercel deployment
 
 # ===========================
 # Development & Debug
