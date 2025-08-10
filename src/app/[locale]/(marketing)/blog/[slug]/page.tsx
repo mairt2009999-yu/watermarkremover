@@ -151,7 +151,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
           {/* Article Content */}
           <div className="prose prose-neutral dark:prose-invert max-w-none">
-            <MDX components={getMDXComponents()} />
+            {MDX ? (
+              <MDX components={getMDXComponents()} />
+            ) : (
+              <div className="text-center py-8 text-muted-foreground">
+                <p>Content is loading...</p>
+              </div>
+            )}
           </div>
 
           {/* Article Footer */}

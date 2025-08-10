@@ -101,7 +101,6 @@
     "fumadocs-ui": "^15.5.3",
     "input-otp": "^1.4.2",
     "lucide-react": "^0.483.0",
-    "motion": "^12.4.3",
     "nanoid": "^5.1.5",
     "next": "15.4.4",
     "next-intl": "^4.0.0",

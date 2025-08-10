@@ -4,7 +4,7 @@ import { Logo } from '../layout/logo';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import React from 'react';
-import { useScroll } from 'motion/react';
+import { useScroll } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
 const menuItems = [

@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { Progress as ProgressPrimitives } from '@base-ui-components/react/progress';
-import { motion, type Transition } from 'motion/react';
+import { motion, type Transition } from 'framer-motion';
 
 import { cn } from '@/lib/utils';
 import {

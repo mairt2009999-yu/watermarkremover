@@ -1,8 +1,8 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { HTMLMotionProps } from "motion/react";
-import { AnimatePresence, motion } from "motion/react";
+import { HTMLMotionProps } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import React, { useState } from "react";
 
 interface AnimatedSubscribeButtonProps

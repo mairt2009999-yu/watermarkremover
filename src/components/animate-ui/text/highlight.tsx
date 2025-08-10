@@ -7,7 +7,7 @@ import {
   type HTMLMotionProps,
   type Transition,
   type UseInViewOptions,
-} from 'motion/react';
+} from 'framer-motion';
 
 import { cn } from '@/lib/utils';
 

@@ -84,7 +84,7 @@ export default function FeatureGrid() {
   };
 
   return (
-    <section className="py-16 md:py-24">
+    <section id="features" className="py-16 md:py-24">
       <div className="mx-auto max-w-6xl px-6">
         <motion.div
           initial="hidden"

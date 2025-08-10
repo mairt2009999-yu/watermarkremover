@@ -9,6 +9,8 @@ import { useEffect, useState } from 'react';
 export function Logo({ className }: { className?: string }) {
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const [imageError, setImageError] = useState(false);
+
   const logoLight = websiteConfig.metadata.images?.logoLight ?? '/logo.png';
   const logoDark = websiteConfig.metadata.images?.logoDark ?? logoLight;
 
@@ -21,14 +23,28 @@ export function Logo({ className }: { className?: string }) {
     setMounted(true);
   }, []);
 
+  // Fallback if image fails to load
+  if (imageError) {
+    return (
+      <div
+        className={cn('size-8 rounded-md bg-primary flex items-center justify-center text-primary-foreground font-bold text-sm', className)}
+        title="WatermarkRemover"
+      >
+        WR
+      </div>
+    );
+  }
+
   return (
     <Image
       src={logo}
-      alt="Logo"
-      title="Logo"
+      alt="WatermarkRemover Logo"
+      title="WatermarkRemover"
       width={96}
       height={96}
       className={cn('size-8 rounded-md', className)}
+      onError={() => setImageError(true)}
+      priority
     />
   );
 }

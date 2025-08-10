@@ -7,7 +7,7 @@ import {
   useInView,
   useMotionValue,
   useSpring,
-} from 'motion/react';
+} from 'framer-motion';
 
 type CountingNumberProps = React.ComponentProps<'span'> & {
   number: number;

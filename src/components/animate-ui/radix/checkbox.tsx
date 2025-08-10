@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { Checkbox as CheckboxPrimitive } from 'radix-ui';
-import { motion, type HTMLMotionProps } from 'motion/react';
+import { motion, type HTMLMotionProps } from 'framer-motion';
 
 import { cn } from '@/lib/utils';
 

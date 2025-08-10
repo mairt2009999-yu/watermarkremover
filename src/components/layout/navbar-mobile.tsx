@@ -122,7 +122,11 @@ export function NavbarMobile({
             page will scroll when we scroll the mobile menu */}
           <RemoveScroll allowPinchZoom enabled>
             {/* Only render MainMobileMenu when not in loading state */}
-            {!isPending && (
+            {isPending ? (
+              <div className="fixed w-full inset-0 z-50 mt-[64px] bg-background backdrop-blur-md animate-in fade-in-0 flex items-center justify-center">
+                <div className="text-muted-foreground">Loading...</div>
+              </div>
+            ) : (
               <MainMobileMenu
                 userLoggedIn={!!currentUser}
                 onLinkClicked={handleToggleMobileMenu}

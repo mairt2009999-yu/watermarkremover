@@ -13,7 +13,7 @@ import {
 } from 'lucide-react';
 import Image from 'next/image';
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { BorderBeam } from '@/components/magicui/border-beam';
 
 export default function Features() {

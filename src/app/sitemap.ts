@@ -20,7 +20,6 @@ const staticRoutes = [
   '/about',
   '/contact',
   '/waitlist',
-  '/changelog',
   '/privacy',
   '/terms',
   '/cookie',

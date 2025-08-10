@@ -38,15 +38,15 @@ export function Footer({ className }: React.HTMLAttributes<HTMLElement>) {
               {/* social links */}
               <div className="flex items-center gap-4 py-2">
                 <div className="flex items-center gap-2">
-                  {socialLinks?.map((link) => (
+                  {socialLinks?.filter(link => link.href && link.href !== '#').map((link) => (
                     <a
                       key={link.title}
-                      href={link.href || '#'}
+                      href={link.href}
                       target="_blank"
-                      rel="noreferrer"
+                      rel="noopener noreferrer"
                       aria-label={link.title}
-                      className="border border-border inline-flex h-8 w-8 items-center 
-                          justify-center rounded-full hover:bg-accent hover:text-accent-foreground"
+                      className="border border-border inline-flex h-8 w-8 items-center
+                          justify-center rounded-full hover:bg-accent hover:text-accent-foreground transition-colors"
                     >
                       <span className="sr-only">{link.title}</span>
                       {link.icon ? link.icon : null}

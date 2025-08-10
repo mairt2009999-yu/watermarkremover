@@ -6,7 +6,7 @@ import {
   useInView,
   type Transition,
   type UseInViewOptions,
-} from 'motion/react';
+} from 'framer-motion';
 
 type WritingTextProps = Omit<React.ComponentProps<'span'>, 'children'> & {
   transition?: Transition;

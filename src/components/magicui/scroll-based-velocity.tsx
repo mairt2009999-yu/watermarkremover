@@ -8,7 +8,7 @@ import {
   useSpring,
   useTransform,
   useVelocity,
-} from "motion/react";
+} from 'framer-motion';
 import React, { useEffect, useRef, useState } from "react";
 
 import { cn } from "@/lib/utils";

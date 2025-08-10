@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { useInView, type UseInViewOptions } from 'motion/react';
+import { useInView, type UseInViewOptions } from 'framer-motion';
 import { useTheme } from 'next-themes';
 
 import { cn } from '@/lib/utils';

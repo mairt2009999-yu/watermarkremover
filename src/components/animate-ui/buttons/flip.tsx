@@ -6,7 +6,7 @@ import {
   type Transition,
   type Variant,
   motion,
-} from 'motion/react';
+} from 'framer-motion';
 
 import { cn } from '@/lib/utils';
 
