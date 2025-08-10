@@ -34,7 +34,7 @@ GITHUB_CLIENT_SECRET=""
 # https://www.better-auth.com/docs/authentication/google
 # Get Client information from https://console.cloud.google.com/apis/credentials
 # -----------------------------------------------------------------------------
-GOOGLE_CLIENT_ID=""
+GOOGLE_CLIENT_ID="66312198489-jfqa7d92e7rng4igqcdrqueaod235d3l.apps.googleusercontent.com"
 GOOGLE_CLIENT_SECRET=""
 
 # -----------------------------------------------------------------------------

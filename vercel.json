@@ -8,6 +8,7 @@
   "installCommand": "pnpm install",
   "framework": "nextjs",
   "env": {
-    "PRISMA_GENERATE_SKIP_AUTOINSTALL": "true"
+    "PRISMA_GENERATE_SKIP_AUTOINSTALL": "true",
+    "NODE_ENV": "production"
   }
 }

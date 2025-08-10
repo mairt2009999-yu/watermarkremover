@@ -2,12 +2,16 @@
   "name": "watermarkremovertools-template",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "fumadocs-mdx && next build",
     "start": "next start",
     "postinstall": "prisma generate || true",
-    "vercel-build": "fumadocs-mdx && prisma generate && next build",
+    "vercel-build": "NODE_ENV=production fumadocs-mdx && prisma generate && next build",
     "lint": "biome check --write .",
     "lint:fix": "biome check --fix --unsafe .",
     "format": "biome format --write .",
