@@ -8,6 +8,10 @@ The complete watermark removal tool built with Next.js, featuring AI-powered pro
 
 This project is created by the WatermarkRemoverTools team. Visit our website at [watermarkremover.tools](https://watermarkremover.tools) for more information.
 
+## Build Status
+
+Latest build includes all required source files for deployment.
+
 ## Documentation
 
 The documentation is available on the [website](https://watermarkremover.tools/docs). It includes guides, tutorials, and detailed explanations of the tool. We designed it to be as user-friendly as possible, so you can start removing watermarks immediately.
