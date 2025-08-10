@@ -27,7 +27,10 @@ export function Logo({ className }: { className?: string }) {
   if (imageError) {
     return (
       <div
-        className={cn('size-8 rounded-md bg-primary flex items-center justify-center text-primary-foreground font-bold text-sm', className)}
+        className={cn(
+          'size-8 rounded-md bg-primary flex items-center justify-center text-primary-foreground font-bold text-sm',
+          className
+        )}
         title="WatermarkRemover"
       >
         WR
