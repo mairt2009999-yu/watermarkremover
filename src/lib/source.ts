@@ -1,9 +1,9 @@
 import { type InferPageType, loader } from 'fumadocs-core/source';
 import * as LucideIcons from 'lucide-react';
 import { createElement } from 'react';
+// Note: blog import removed to avoid fumadocs flatMap error during build
+// Blog data is now handled by blog-data.ts
 import { author, category, changelog, docs, pages } from '../../.source';
-// Import blog directly to avoid fumadocs processing issues
-import * as blogRaw from '../../.source';
 import { docsI18nConfig } from './docs/i18n';
 
 /**
@@ -249,146 +249,27 @@ export const categorySource = {
 };
 
 /**
- * Blog source - custom implementation with type assertion to avoid TypeScript errors
+ * Blog source is now handled by blog-data.ts to avoid fumadocs build issues
+ * See: src/lib/blog-data.ts
  */
-export const blogSource = {
-  getPage(slugs: string[] | undefined, locale?: string) {
-    try {
-      // Ensure slugs is defined and has at least one element
-      if (!slugs || !Array.isArray(slugs) || slugs.length === 0) {
-        console.warn('Invalid slugs provided to blogSource.getPage');
-        return null;
-      }
-      
-      const slug = slugs[0];
-      if (!slug) {
-        console.warn('No slug provided to blogSource.getPage');
-        return null;
-      }
-      
-      // Use blogRaw.blog to access the raw blog data
-      const blogData = (blogRaw as any).blog;
-      if (!blogData) {
-        console.warn('Blog data is not available');
-        return null;
-      }
-      
-      // Cast blog to any[] to avoid TypeScript errors
-      const blogArray = blogData as any[];
-      
-      if (blogArray.length === 0) {
-        console.warn('Blog array is empty');
-        return null;
-      }
 
-      // Find the blog post by slug
-      const post = blogArray.find((p: any) => {
-        if (!p || typeof p !== 'object') return false;
-        // Check both possible property names
-        const hasData = p.info && p.data;
-        if (!hasData) return false;
-        const filePath = p.info?.path?.replace('.mdx', '') || '';
-        return filePath === slug;
-      });
-
-      if (!post) {
-        console.log(`Blog post not found for slug: ${slug}`);
-        return null;
-      }
-
-      const finalSlug = post.info?.path?.replace('.mdx', '').replace('.zh', '') || '';
-      return {
-        slugs: [finalSlug],
-        data: {
-          title: post.data?.title || 'Untitled',
-          description: post.data?.description || '',
-          date: post.data?.date,
-          published: post.data?.published !== false,
-          author: post.data?.author || 'watermarkremovertools',
-          categories: Array.isArray(post.data?.categories) ? post.data.categories : [],
-          image: post.data?.image,
-          body: post.data?.body,
-        },
-        url: `/blog/${finalSlug}`,
-      };
-    } catch (error) {
-      console.error('Error in blogSource.getPage:', error);
-      return null;
-    }
-  },
-
-  getPages(locale?: string) {
-    try {
-      // Use blogRaw.blog to access the raw blog data
-      const blogData = (blogRaw as any).blog;
-      if (!blogData) {
-        console.warn('Blog data is not available');
-        return [];
-      }
-      
-      // Cast blog to any[] to avoid TypeScript errors
-      const blogArray = blogData as any[];
-      
-      if (blogArray.length === 0) {
-        console.warn('Blog array is empty');
-        return [];
-      }
-
-      const allPosts = blogArray
-        .filter((p: any) => {
-          // Ensure we have valid post data
-          if (!p || typeof p !== 'object') {
-            console.warn('Invalid post structure:', p);
-            return false;
-          }
-          
-          const hasData = p.info && p.data;
-          if (!hasData) {
-            console.warn('Post missing info or data:', p);
-            return false;
-          }
-          
-          // Filter published posts only
-          if (p.data?.published === false) {
-            return false;
-          }
-          
-          if (!locale) return true;
-          const filePath = p.info?.path || '';
-          const isLocalized =
-            locale === 'zh'
-              ? filePath.includes('.zh')
-              : !filePath.includes('.zh');
-          return isLocalized;
-        })
-        .map((p: any) => {
-          const slug = p.info?.path?.replace('.mdx', '').replace('.zh', '') || '';
-          return {
-            slugs: [slug],
-            data: {
-              title: p.data?.title || 'Untitled',
-              description: p.data?.description || '',
-              date: p.data?.date,
-              published: p.data?.published !== false,
-              author: p.data?.author || 'watermarkremovertools',
-              categories: Array.isArray(p.data?.categories) ? p.data.categories : [],
-              image: p.data?.image,
-              body: p.data?.body,
-            },
-            url: `/blog/${slug}`,
-          };
-        });
-
-      return allPosts;
-    } catch (error) {
-      console.error('Error in blogSource.getPages:', error);
-      return [];
-    }
-  },
+// BlogType export for backward compatibility with components
+export type BlogType = {
+  slugs: string[];
+  data: {
+    title?: string;
+    description?: string;
+    date?: string;
+    author?: string;
+    categories?: string[];
+    image?: string;
+    published?: boolean;
+    body?: any;
+  };
+  url: string;
 };
 
 export type ChangelogType = InferPageType<typeof changelogSource>;
 export type PagesType = ReturnType<typeof pagesSource.getPage>;
-export type BlogType = ReturnType<typeof blogSource.getPage>;
 export type AuthorType = ReturnType<typeof authorSource.getPage>;
 export type CategoryType = ReturnType<typeof categorySource.getPage>;

@@ -2,7 +2,8 @@ import { getMDXComponents } from '@/components/docs/mdx-components';
 import Container from '@/components/layout/container';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
-import { authorSource, blogSource, categorySource } from '@/lib/source';
+import { authorSource, categorySource } from '@/lib/source';
+import { getBlogPost } from '@/lib/blog-data';
 import { formatDate } from '@/lib/formatter';
 import { constructMetadata } from '@/lib/metadata';
 import { getUrlWithLocale } from '@/lib/urls/urls';
@@ -21,14 +22,8 @@ export async function generateMetadata({
 }: BlogPostPageProps): Promise<Metadata | undefined> {
   const { locale, slug } = await params;
 
-  // Find the blog post - try without error
-  let post = null;
-  try {
-    post = blogSource.getPage ? blogSource.getPage([slug]) : null;
-  } catch (error) {
-    console.error('Error getting blog post for metadata:', error);
-    return undefined;
-  }
+  // Find the blog post using new blog-data system
+  const post = getBlogPost(slug);
 
   if (!post) {
     return undefined;
@@ -37,9 +32,9 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: 'Metadata' });
 
   return constructMetadata({
-    title: `${post.data.title} | ${t('title')}`,
-    description: post.data.description || '',
-    image: (post.data as any).image,
+    title: `${post.title} | ${t('title')}`,
+    description: post.description || '',
+    image: post.image,
     canonicalUrl: getUrlWithLocale(`/blog/${slug}`, locale),
   });
 }
@@ -68,14 +63,8 @@ export const dynamic = 'force-dynamic';
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { locale, slug } = await params;
 
-  // Get the blog post - handle potential errors
-  let post = null;
-  try {
-    post = blogSource.getPage ? blogSource.getPage([slug]) : null;
-  } catch (error) {
-    console.error('Error getting blog post:', error);
-    notFound();
-  }
+  // Get the blog post using new blog-data system
+  const post = getBlogPost(slug);
 
   // If not found, return 404
   if (!post) {
@@ -83,21 +72,21 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   }
 
   // Get author data
-  const authorSlug = (post.data as any).author || 'watermarkremovertools';
+  const authorSlug = post.author || 'watermarkremovertools';
   const author =
     authorSource.getPage([authorSlug]) ||
     authorSource.getPage([`${authorSlug}.${locale}`]);
 
   // Get category data
-  const categories = (post.data as any).categories || [];
+  const categories = post.categories || [];
 
   // Calculate reading time (rough estimate: 200 words per minute)
-  const content = post.data.description || '';
+  const content = post.description || '';
   const wordCount = content.split(/\s+/).length;
   const readingTime = Math.ceil(wordCount / 200);
 
   // Get the MDX component from the body
-  const MDX = (post.data as any).body;
+  const MDX = post.body;
 
   return (
     <article className="flex flex-col min-h-screen">
@@ -118,13 +107,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
             {/* Title */}
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              {post.data.title}
+              {post.title}
             </h1>
 
             {/* Description */}
-            {post.data.description && (
+            {post.description && (
               <p className="text-xl text-muted-foreground mb-6">
-                {post.data.description}
+                {post.description}
               </p>
             )}
 
@@ -145,9 +134,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               )}
 
               {/* Date */}
-              {(post.data as any).date && (
-                <time dateTime={(post.data as any).date}>
-                  {formatDate(new Date((post.data as any).date))}
+              {post.date && (
+                <time dateTime={post.date}>
+                  {formatDate(new Date(post.date))}
                 </time>
               )}
 
@@ -157,11 +146,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           </header>
 
           {/* Featured Image */}
-          {(post.data as any).image && (
+          {post.image && (
             <div className="relative w-full h-[400px] mb-8 rounded-lg overflow-hidden">
               <Image
-                src={(post.data as any).image}
-                alt={post.data.title || ''}
+                src={post.image}
+                alt={post.title || ''}
                 fill
                 className="object-cover"
                 priority

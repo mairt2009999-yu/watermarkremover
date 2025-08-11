@@ -1,6 +1,6 @@
 import BlogGridWithPagination from '@/components/blog/blog-grid-with-pagination';
 import Container from '@/components/layout/container';
-import { blogSource } from '@/lib/source';
+import { getBlogPostsByLocale } from '@/lib/blog-data';
 import { constructMetadata } from '@/lib/metadata';
 import { getUrlWithLocale } from '@/lib/urls/urls';
 import type { Metadata } from 'next';
@@ -41,20 +41,29 @@ export default async function BlogPage({
   const { page } = await searchParams;
   const currentPage = Number.parseInt(page || '1', 10);
 
-  // Get all blog posts - handle potential undefined
-  const postsData = blogSource.getPages ? blogSource.getPages() : [];
-  const allPosts = (Array.isArray(postsData) ? postsData : [])
-    .filter((post) => {
-      // Filter by published status
-      const isPublished = (post.data as any).published !== false;
-      return isPublished;
-    })
+  // Get all blog posts for the current locale
+  const allPosts = getBlogPostsByLocale(locale)
     .sort((a, b) => {
       // Sort by date, newest first
-      const dateA = new Date((a.data as any).date || 0).getTime();
-      const dateB = new Date((b.data as any).date || 0).getTime();
+      const dateA = new Date(a.date || 0).getTime();
+      const dateB = new Date(b.date || 0).getTime();
       return dateB - dateA;
-    });
+    })
+    .map((post) => ({
+      // Convert to format expected by BlogGridWithPagination
+      slugs: [post.slug],
+      data: {
+        title: post.title,
+        description: post.description,
+        date: post.date,
+        author: post.author,
+        categories: post.categories,
+        image: post.image,
+        published: post.published,
+        body: post.body,
+      },
+      url: post.url,
+    }));
 
   // Calculate pagination
   const totalPages = Math.ceil(allPosts.length / POSTS_PER_PAGE);
