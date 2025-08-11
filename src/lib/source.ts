@@ -250,22 +250,38 @@ export const categorySource = {
  * Blog source - custom implementation to avoid fumadocs processing issues
  */
 export const blogSource = {
-  getPage(slugs: string[], locale?: string) {
+  getPage(slugs: string[] | undefined, locale?: string) {
     try {
+      // Ensure slugs is defined and has at least one element
+      if (!slugs || !Array.isArray(slugs) || slugs.length === 0) {
+        console.warn('Invalid slugs provided to blogSource.getPage');
+        return null;
+      }
+      
       const slug = slugs[0];
       if (!slug) {
         console.warn('No slug provided to blogSource.getPage');
         return null;
       }
       
-      if (!blog || !Array.isArray(blog)) {
-        console.warn('Blog data is not available or not an array');
+      // Check if blog data exists
+      if (!blog) {
+        console.warn('Blog data is not available');
+        return null;
+      }
+      
+      // Convert blog to array if it's not already
+      const blogArray = Array.isArray(blog) ? blog : [];
+      
+      if (blogArray.length === 0) {
+        console.warn('Blog array is empty');
         return null;
       }
 
       // Find the blog post by slug
-      const post = (blog as any[]).find((p: any) => {
-        if (!p || !p.info || !p.data) return false;
+      const post = blogArray.find((p: any) => {
+        if (!p || typeof p !== 'object') return false;
+        if (!p.info || !p.data) return false;
         const filePath = p.info?.path?.replace('.mdx', '') || '';
         return filePath === slug;
       });
@@ -284,7 +300,7 @@ export const blogSource = {
           date: post.data?.date,
           published: post.data?.published !== false,
           author: post.data?.author || 'watermarkremovertools',
-          categories: post.data?.categories || [],
+          categories: Array.isArray(post.data?.categories) ? post.data.categories : [],
           image: post.data?.image,
           body: post.data?.body,
         },
@@ -298,16 +314,30 @@ export const blogSource = {
 
   getPages(locale?: string) {
     try {
-      if (!blog || !Array.isArray(blog)) {
-        console.warn('Blog data is not available or not an array');
+      // Check if blog data exists
+      if (!blog) {
+        console.warn('Blog data is not available');
+        return [];
+      }
+      
+      // Convert blog to array if it's not already
+      const blogArray = Array.isArray(blog) ? blog : [];
+      
+      if (blogArray.length === 0) {
+        console.warn('Blog array is empty');
         return [];
       }
 
-      const allPosts = (blog as any[])
+      const allPosts = blogArray
         .filter((p: any) => {
           // Ensure we have valid post data
-          if (!p || !p.info || !p.data) {
+          if (!p || typeof p !== 'object') {
             console.warn('Invalid post structure:', p);
+            return false;
+          }
+          
+          if (!p.info || !p.data) {
+            console.warn('Post missing info or data:', p);
             return false;
           }
           
@@ -334,7 +364,7 @@ export const blogSource = {
               date: p.data?.date,
               published: p.data?.published !== false,
               author: p.data?.author || 'watermarkremovertools',
-              categories: p.data?.categories || [],
+              categories: Array.isArray(p.data?.categories) ? p.data.categories : [],
               image: p.data?.image,
               body: p.data?.body,
             },
