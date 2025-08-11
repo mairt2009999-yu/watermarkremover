@@ -21,9 +21,14 @@ export async function generateMetadata({
 }: BlogPostPageProps): Promise<Metadata | undefined> {
   const { locale, slug } = await params;
 
-  // Find the blog post based on locale
-  const postSlug = locale === 'zh' ? `${slug}.zh` : slug;
-  const post = blogSource.getPage([postSlug]) || blogSource.getPage([slug]);
+  // Find the blog post - try without error
+  let post = null;
+  try {
+    post = blogSource.getPage ? blogSource.getPage([slug]) : null;
+  } catch (error) {
+    console.error('Error getting blog post for metadata:', error);
+    return undefined;
+  }
 
   if (!post) {
     return undefined;
@@ -39,23 +44,38 @@ export async function generateMetadata({
   });
 }
 
-// Generate static params for all blog posts
-export async function generateStaticParams() {
-  const posts = blogSource.getPages();
+// Disable static generation for blog posts to avoid fumadocs flatMap error
+// This will use dynamic rendering instead
+export const dynamic = 'force-dynamic';
 
-  return posts.map((post) => {
-    // Remove the .zh suffix for Chinese posts as the locale is handled separately
-    const slug = post.slugs[0].replace('.zh', '');
-    return { slug };
-  });
-}
+// Temporarily disable static params generation due to fumadocs issue
+// export async function generateStaticParams() {
+//   try {
+//     const posts = blogSource.getPages ? blogSource.getPages() : [];
+//     const validPosts = Array.isArray(posts) ? posts : [];
+//     
+//     return validPosts
+//       .filter((post) => post && post.slugs && post.slugs[0])
+//       .map((post) => ({
+//         slug: post.slugs[0],
+//       }));
+//   } catch (error) {
+//     console.error('Error in generateStaticParams:', error);
+//     return [];
+//   }
+// }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { locale, slug } = await params;
 
-  // Get the blog post based on locale
-  const postSlug = locale === 'zh' ? `${slug}.zh` : slug;
-  const post = blogSource.getPage([postSlug]) || blogSource.getPage([slug]);
+  // Get the blog post - handle potential errors
+  let post = null;
+  try {
+    post = blogSource.getPage ? blogSource.getPage([slug]) : null;
+  } catch (error) {
+    console.error('Error getting blog post:', error);
+    notFound();
+  }
 
   // If not found, return 404
   if (!post) {

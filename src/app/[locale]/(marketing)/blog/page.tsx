@@ -9,6 +9,9 @@ import { getTranslations } from 'next-intl/server';
 
 const POSTS_PER_PAGE = 10;
 
+// Use dynamic rendering to avoid fumadocs build issues
+export const dynamic = 'force-dynamic';
+
 export async function generateMetadata({
   params,
 }: {
@@ -38,20 +41,13 @@ export default async function BlogPage({
   const { page } = await searchParams;
   const currentPage = Number.parseInt(page || '1', 10);
 
-  // Get all blog posts and filter by locale
-  const allPosts = blogSource
-    .getPages()
+  // Get all blog posts - handle potential undefined
+  const postsData = blogSource.getPages ? blogSource.getPages() : [];
+  const allPosts = (Array.isArray(postsData) ? postsData : [])
     .filter((post) => {
-      // Filter by locale - check if the slug ends with the locale code
-      const isCorrectLocale =
-        locale === 'zh'
-          ? post.slugs[0].endsWith('.zh')
-          : !post.slugs[0].endsWith('.zh');
-
       // Filter by published status
       const isPublished = (post.data as any).published !== false;
-
-      return isCorrectLocale && isPublished;
+      return isPublished;
     })
     .sort((a, b) => {
       // Sort by date, newest first

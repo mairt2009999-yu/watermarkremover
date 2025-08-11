@@ -247,70 +247,106 @@ export const categorySource = {
 };
 
 /**
- * Blog source - simplified to avoid fumadocs internal processing issues
+ * Blog source - custom implementation to avoid fumadocs processing issues
  */
 export const blogSource = {
   getPage(slugs: string[], locale?: string) {
-    const slug = slugs[0];
-    if (!blog || !Array.isArray(blog)) {
+    try {
+      const slug = slugs[0];
+      if (!slug) {
+        console.warn('No slug provided to blogSource.getPage');
+        return null;
+      }
+      
+      if (!blog || !Array.isArray(blog)) {
+        console.warn('Blog data is not available or not an array');
+        return null;
+      }
+
+      // Find the blog post by slug
+      const post = (blog as any[]).find((p: any) => {
+        if (!p || !p.info || !p.data) return false;
+        const filePath = p.info?.path?.replace('.mdx', '') || '';
+        return filePath === slug;
+      });
+
+      if (!post) {
+        console.log(`Blog post not found for slug: ${slug}`);
+        return null;
+      }
+
+      const finalSlug = post.info?.path?.replace('.mdx', '').replace('.zh', '') || '';
+      return {
+        slugs: [finalSlug],
+        data: {
+          title: post.data?.title || 'Untitled',
+          description: post.data?.description || '',
+          date: post.data?.date,
+          published: post.data?.published !== false,
+          author: post.data?.author || 'watermarkremovertools',
+          categories: post.data?.categories || [],
+          image: post.data?.image,
+          body: post.data?.body,
+        },
+        url: `/blog/${finalSlug}`,
+      };
+    } catch (error) {
+      console.error('Error in blogSource.getPage:', error);
       return null;
     }
-
-    // Find the blog post by slug
-    const post = (blog as any[]).find((p: any) => {
-      const filePath = p.info?.path?.replace('.mdx', '') || '';
-      return filePath === slug;
-    });
-
-    if (!post) {
-      return null;
-    }
-
-    return {
-      slugs: [post.info?.path?.replace('.mdx', '') || ''],
-      data: {
-        title: post.data?.title,
-        description: post.data?.description,
-        date: post.data?.date,
-        published: post.data?.published,
-        author: post.data?.author,
-        categories: post.data?.categories,
-        image: post.data?.image,
-        body: post.data?.body,
-      },
-      url: `/blog/${post.info?.path?.replace('.mdx', '').replace('.zh', '')}`,
-    };
   },
 
   getPages(locale?: string) {
-    if (!blog || !Array.isArray(blog)) {
+    try {
+      if (!blog || !Array.isArray(blog)) {
+        console.warn('Blog data is not available or not an array');
+        return [];
+      }
+
+      const allPosts = (blog as any[])
+        .filter((p: any) => {
+          // Ensure we have valid post data
+          if (!p || !p.info || !p.data) {
+            console.warn('Invalid post structure:', p);
+            return false;
+          }
+          
+          // Filter published posts only
+          if (p.data?.published === false) {
+            return false;
+          }
+          
+          if (!locale) return true;
+          const filePath = p.info?.path || '';
+          const isLocalized =
+            locale === 'zh'
+              ? filePath.includes('.zh')
+              : !filePath.includes('.zh');
+          return isLocalized;
+        })
+        .map((p: any) => {
+          const slug = p.info?.path?.replace('.mdx', '').replace('.zh', '') || '';
+          return {
+            slugs: [slug],
+            data: {
+              title: p.data?.title || 'Untitled',
+              description: p.data?.description || '',
+              date: p.data?.date,
+              published: p.data?.published !== false,
+              author: p.data?.author || 'watermarkremovertools',
+              categories: p.data?.categories || [],
+              image: p.data?.image,
+              body: p.data?.body,
+            },
+            url: `/blog/${slug}`,
+          };
+        });
+
+      return allPosts;
+    } catch (error) {
+      console.error('Error in blogSource.getPages:', error);
       return [];
     }
-
-    return (blog as any[])
-      .filter((p: any) => {
-        if (!locale) return true;
-        const filePath = p.info?.path || '';
-        const isLocalized =
-          locale === 'zh'
-            ? filePath.includes('.zh')
-            : !filePath.includes('.zh');
-        return isLocalized;
-      })
-      .map((p: any) => ({
-        slugs: [p.info?.path?.replace('.mdx', '').replace('.zh', '') || ''],
-        data: {
-          title: p.data?.title,
-          description: p.data?.description,
-          date: p.data?.date,
-          published: p.data?.published,
-          author: p.data?.author,
-          categories: p.data?.categories,
-          image: p.data?.image,
-          body: p.data?.body,
-        },
-        url: `/blog/${p.info?.path?.replace('.mdx', '').replace('.zh', '')}`,
-      }));
   },
 };
 
