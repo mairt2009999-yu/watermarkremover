@@ -2,7 +2,6 @@ import { getMDXComponents } from '@/components/docs/mdx-components';
 import Container from '@/components/layout/container';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
-import { authorSource, categorySource } from '@/lib/source';
 import { getBlogPost } from '@/lib/blog-data';
 import { formatDate } from '@/lib/formatter';
 import { constructMetadata } from '@/lib/metadata';
@@ -22,7 +21,7 @@ export async function generateMetadata({
 }: BlogPostPageProps): Promise<Metadata | undefined> {
   const { locale, slug } = await params;
 
-  // Find the blog post using new blog-data system
+  // Find the blog post using blog-data system
   const post = getBlogPost(slug);
 
   if (!post) {
@@ -63,7 +62,7 @@ export const dynamic = 'force-dynamic';
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { locale, slug } = await params;
 
-  // Get the blog post using new blog-data system
+  // Get the blog post using blog-data system
   const post = getBlogPost(slug);
 
   // If not found, return 404
@@ -71,11 +70,30 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     notFound();
   }
 
+  // Static author data to avoid fumadocs dependencies
+  const authorData: Record<string, any> = {
+    watermarkremovertools: {
+      name: 'WatermarkRemoverTools',
+      avatar: '/images/avatars/watermarkremovertools.png',
+      description: 'Expert team specializing in AI-powered watermark removal and image processing technologies.'
+    },
+    fox: {
+      name: 'Fox',
+      avatar: '/images/avatars/fox.png',
+      description: 'Tech enthusiast and developer focused on AI image processing.'
+    },
+    mkdirs: {
+      name: 'Mkdirs',
+      avatar: '/images/avatars/mkdirs.png',
+      description: 'Software engineer specializing in automation and digital tools.'
+    }
+  };
+
   // Get author data
   const authorSlug = post.author || 'watermarkremovertools';
-  const author =
-    authorSource.getPage([authorSlug]) ||
-    authorSource.getPage([`${authorSlug}.${locale}`]);
+  const author = authorData[authorSlug] ? {
+    data: authorData[authorSlug]
+  } : null;
 
   // Get category data
   const categories = post.categories || [];

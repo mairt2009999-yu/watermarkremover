@@ -1,13 +1,28 @@
 import { Skeleton } from '@/components/ui/skeleton';
 import { LocaleLink } from '@/i18n/navigation';
-import { type BlogType, authorSource, categorySource } from '@/lib/source';
 import { PLACEHOLDER_IMAGE } from '@/lib/constants';
 import { formatDate } from '@/lib/formatter';
 import Image from 'next/image';
 
+// Compatible type for blog posts to match the structure from blog page
+interface BlogPostType {
+  slugs: string[];
+  data: {
+    title?: string;
+    description?: string;
+    date?: string;
+    author?: string;
+    categories?: string[];
+    image?: string;
+    published?: boolean;
+    body?: any;
+  };
+  url: string;
+}
+
 interface BlogCardProps {
   locale: string;
-  post: BlogType;
+  post: BlogPostType;
 }
 
 type BlogFrontmatter = {
@@ -27,10 +42,44 @@ export default function BlogCard({ locale, post }: BlogCardProps) {
   const data = post.data as unknown as BlogFrontmatter;
   const { date, title, description, image, author, categories } = data;
   const publishDate = formatDate(new Date(date));
-  const blogAuthor = authorSource.getPage([author], locale);
-  const blogCategories = categorySource
-    .getPages(locale)
-    .filter((category) => (categories ?? []).includes(category.slugs[0] ?? ''));
+  
+  // Static author data to avoid fumadocs dependencies
+  const authorData: Record<string, any> = {
+    watermarkremovertools: {
+      name: 'WatermarkRemoverTools',
+      avatar: '/images/avatars/watermarkremovertools.png',
+      description: 'Expert team specializing in AI-powered watermark removal and image processing technologies.'
+    },
+    fox: {
+      name: 'Fox',
+      avatar: '/images/avatars/fox.png',
+      description: 'Tech enthusiast and developer focused on AI image processing.'
+    },
+    mkdirs: {
+      name: 'Mkdirs',
+      avatar: '/images/avatars/mkdirs.png',
+      description: 'Software engineer specializing in automation and digital tools.'
+    }
+  };
+
+  // Static category data
+  const categoryData: Record<string, any> = {
+    tutorial: { name: 'Tutorial', description: 'Step-by-step guides and tutorials' },
+    'social-media': { name: 'Social Media', description: 'Social media related content' },
+    instagram: { name: 'Instagram', description: 'Instagram-specific content' },
+    'ai-technology': { name: 'AI Technology', description: 'AI and technology insights' },
+    guide: { name: 'Guide', description: 'Comprehensive guides' },
+    comparison: { name: 'Comparison', description: 'Product and tool comparisons' },
+    tools: { name: 'Tools', description: 'Tool reviews and recommendations' },
+    shutterstock: { name: 'Shutterstock', description: 'Shutterstock-related content' },
+    legal: { name: 'Legal', description: 'Legal and compliance topics' }
+  };
+
+  const blogAuthor = author && authorData[author] ? { data: authorData[author] } : null;
+  const blogCategories = (categories ?? []).map(cat => ({
+    slugs: [cat],
+    data: categoryData[cat] || { name: cat, description: '' }
+  })).filter(cat => cat.data);
 
   return (
     <LocaleLink

@@ -1,10 +1,25 @@
 import BlogCard, { BlogCardSkeleton } from '@/components/blog/blog-card';
 import { websiteConfig } from '@/config/website';
-import type { BlogType } from '@/lib/source';
+
+// Compatible type for blog posts to match the structure from blog page
+interface BlogPostType {
+  slugs: string[];
+  data: {
+    title?: string;
+    description?: string;
+    date?: string;
+    author?: string;
+    categories?: string[];
+    image?: string;
+    published?: boolean;
+    body?: any;
+  };
+  url: string;
+}
 
 interface BlogGridProps {
   locale: string;
-  posts: BlogType[];
+  posts: BlogPostType[];
 }
 
 export default function BlogGrid({ locale, posts }: BlogGridProps) {

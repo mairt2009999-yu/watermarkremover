@@ -3,7 +3,6 @@ import type { NextConfig } from 'next';
 import createNextIntlPlugin from 'next-intl/plugin';
 import {
   author,
-  blog,
   category,
   changelog,
   docs,

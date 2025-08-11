@@ -109,30 +109,33 @@ export const authorSource = {
       return null;
     }
 
+    // Cast to any to bypass TypeScript strict typing for runtime structure
+    const authorArray = author as any[];
+
     // Try to find with locale suffix first if locale is provided
     if (locale) {
       const localizedSlug = `${slug}.${locale}`;
-      const localizedAuthor = author.find((a) => {
-        const filePath = a._file?.path?.replace('.mdx', '') || '';
+      const localizedAuthor = authorArray.find((a) => {
+        const filePath = a.info?.path?.replace('.mdx', '') || '';
         return filePath === localizedSlug;
       });
       if (localizedAuthor) {
         return {
-          slugs: [localizedAuthor._file?.path?.replace('.mdx', '') || ''],
+          slugs: [localizedAuthor.info?.path?.replace('.mdx', '') || ''],
           data: {
-            name: localizedAuthor.name,
-            avatar: localizedAuthor.avatar,
-            description: localizedAuthor.description,
-            body: localizedAuthor.body,
+            name: localizedAuthor.data.name,
+            avatar: localizedAuthor.data.avatar,
+            description: localizedAuthor.data.description,
+            body: localizedAuthor.data.body,
           },
-          url: `/author/${localizedAuthor._file?.path?.replace('.mdx', '').replace('.zh', '')}`,
+          url: `/author/${localizedAuthor.info?.path?.replace('.mdx', '').replace('.zh', '')}`,
         };
       }
     }
 
     // Fallback to non-localized version
-    const foundAuthor = author.find((a) => {
-      const filePath = a._file?.path?.replace('.mdx', '') || '';
+    const foundAuthor = authorArray.find((a) => {
+      const filePath = a.info?.path?.replace('.mdx', '') || '';
       return filePath === slug;
     });
 
@@ -141,14 +144,14 @@ export const authorSource = {
     }
 
     return {
-      slugs: [foundAuthor._file?.path?.replace('.mdx', '') || ''],
+      slugs: [foundAuthor.info?.path?.replace('.mdx', '') || ''],
       data: {
-        name: foundAuthor.name,
-        avatar: foundAuthor.avatar,
-        description: foundAuthor.description,
-        body: foundAuthor.body,
+        name: foundAuthor.data.name,
+        avatar: foundAuthor.data.avatar,
+        description: foundAuthor.data.description,
+        body: foundAuthor.data.body,
       },
-      url: `/author/${foundAuthor._file?.path?.replace('.mdx', '').replace('.zh', '')}`,
+      url: `/author/${foundAuthor.info?.path?.replace('.mdx', '').replace('.zh', '')}`,
     };
   },
 
@@ -157,15 +160,18 @@ export const authorSource = {
       return [];
     }
 
-    return author.map((a) => ({
-      slugs: [a._file?.path?.replace('.mdx', '') || ''],
+    // Cast to any to bypass TypeScript strict typing for runtime structure
+    const authorArray = author as any[];
+
+    return authorArray.map((a) => ({
+      slugs: [a.info?.path?.replace('.mdx', '') || ''],
       data: {
-        name: a.name,
-        avatar: a.avatar,
-        description: a.description,
-        body: a.body,
+        name: a.data.name,
+        avatar: a.data.avatar,
+        description: a.data.description,
+        body: a.data.body,
       },
-      url: `/author/${a._file?.path?.replace('.mdx', '').replace('.zh', '')}`,
+      url: `/author/${a.info?.path?.replace('.mdx', '').replace('.zh', '')}`,
     }));
   },
 };
@@ -180,29 +186,32 @@ export const categorySource = {
       return null;
     }
 
+    // Cast to any to bypass TypeScript strict typing for runtime structure
+    const categoryArray = category as any[];
+
     // Try to find with locale suffix first if locale is provided
     if (locale) {
       const localizedSlug = `${slug}.${locale}`;
-      const localizedCategory = category.find((c) => {
-        const filePath = c._file?.path?.replace('.mdx', '') || '';
+      const localizedCategory = categoryArray.find((c) => {
+        const filePath = c.info?.path?.replace('.mdx', '') || '';
         return filePath === localizedSlug;
       });
       if (localizedCategory) {
         return {
-          slugs: [localizedCategory._file?.path?.replace('.mdx', '') || ''],
+          slugs: [localizedCategory.info?.path?.replace('.mdx', '') || ''],
           data: {
-            name: localizedCategory.name,
-            description: localizedCategory.description,
-            body: localizedCategory.body,
+            name: localizedCategory.data.name,
+            description: localizedCategory.data.description,
+            body: localizedCategory.data.body,
           },
-          url: `/category/${localizedCategory._file?.path?.replace('.mdx', '').replace('.zh', '')}`,
+          url: `/category/${localizedCategory.info?.path?.replace('.mdx', '').replace('.zh', '')}`,
         };
       }
     }
 
     // Fallback to non-localized version
-    const foundCategory = category.find((c) => {
-      const filePath = c._file?.path?.replace('.mdx', '') || '';
+    const foundCategory = categoryArray.find((c) => {
+      const filePath = c.info?.path?.replace('.mdx', '') || '';
       return filePath === slug;
     });
 
@@ -211,13 +220,13 @@ export const categorySource = {
     }
 
     return {
-      slugs: [foundCategory._file?.path?.replace('.mdx', '') || ''],
+      slugs: [foundCategory.info?.path?.replace('.mdx', '') || ''],
       data: {
-        name: foundCategory.name,
-        description: foundCategory.description,
-        body: foundCategory.body,
+        name: foundCategory.data.name,
+        description: foundCategory.data.description,
+        body: foundCategory.data.body,
       },
-      url: `/category/${foundCategory._file?.path?.replace('.mdx', '').replace('.zh', '')}`,
+      url: `/category/${foundCategory.info?.path?.replace('.mdx', '').replace('.zh', '')}`,
     };
   },
 
@@ -226,10 +235,13 @@ export const categorySource = {
       return [];
     }
 
-    return category
+    // Cast to any to bypass TypeScript strict typing for runtime structure
+    const categoryArray = category as any[];
+
+    return categoryArray
       .filter((c) => {
         if (!locale) return true;
-        const filePath = c._file?.path || '';
+        const filePath = c.info?.path || '';
         const isLocalized =
           locale === 'zh'
             ? filePath.includes('.zh')
@@ -237,13 +249,13 @@ export const categorySource = {
         return isLocalized;
       })
       .map((c) => ({
-        slugs: [c._file?.path?.replace('.mdx', '').replace('.zh', '') || ''],
+        slugs: [c.info?.path?.replace('.mdx', '').replace('.zh', '') || ''],
         data: {
-          name: c.name,
-          description: c.description,
-          body: c.body,
+          name: c.data.name,
+          description: c.data.description,
+          body: c.data.body,
         },
-        url: `/category/${c._file?.path?.replace('.mdx', '').replace('.zh', '')}`,
+        url: `/category/${c.info?.path?.replace('.mdx', '').replace('.zh', '')}`,
       }));
   },
 };

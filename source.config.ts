@@ -81,18 +81,17 @@ export const category = defineCollections({
 });
 
 /**
- * Blog posts
- *
- * dtitle is required, but description is optional in frontmatter
+ * Blog posts - DISABLED to avoid fumadocs flatMap error
+ * Blog functionality is handled by src/lib/blog-data.ts instead
  */
-export const blog = defineCollections({
-  type: 'doc',
-  dir: 'content/blog',
-  schema: frontmatterSchema.extend({
-    image: z.string(),
-    date: z.string().date(),
-    published: z.boolean().default(true),
-    categories: z.array(z.string()),
-    author: z.string(),
-  }),
-});
+// export const blog = defineCollections({
+//   type: 'doc',
+//   dir: 'content/blog',
+//   schema: frontmatterSchema.extend({
+//     image: z.string(),
+//     date: z.string().date(),
+//     published: z.boolean().default(true),
+//     categories: z.array(z.string()),
+//     author: z.string(),
+//   }),
+// });
